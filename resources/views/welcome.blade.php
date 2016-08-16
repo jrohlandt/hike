@@ -41,5 +41,7 @@
                 <div class="title">Laravel 5</div>
             </div>
         </div>
+        <app></app>
+        <script src="/js/build.js"></script>
     </body>
 </html>
