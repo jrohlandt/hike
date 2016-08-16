@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/hikes', function() {
+    return view('backend.hikes.index');
+});
+Route::get('/trails', function() {
+    return view('backend.trails.index');
+});
