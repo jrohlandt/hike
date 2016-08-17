@@ -11,13 +11,20 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/hikes', function() {
-    return view('backend.hikes.index');
-});
-Route::get('/trails', function() {
-    return view('backend.trails.index');
+Route::group(['prefix' => 'admin'], function() {
+
+    Route::get('/', function () {
+        return view('admin.index');
+    });
+
+    Route::get('/hikes', function() {
+        return view('admin.index');
+    });
+
+    Route::get('/trails', function() {
+        return view('admin.index');
+    });
+
+    Route::resource('/severities', 'SeveritiesController');
 });
