@@ -64,7 +64,7 @@
 	var Dashboard = __webpack_require__(243);
 	var HikesList = __webpack_require__(245);
 	// var HikeEdit = require('./components/hikes/edit.js');
-	var TrailsList = __webpack_require__(247);
+	var TrailsList = __webpack_require__(249);
 	// var TrailEdit = require('./components/trails/edit.js');
 
 	var routes = React.createElement(
@@ -27269,15 +27269,36 @@
 
 	var _style2 = _interopRequireDefault(_style);
 
+	var _index = __webpack_require__(247);
+
+	var _index2 = _interopRequireDefault(_index);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	module.exports = _react2.default.createClass({
 	    displayName: 'exports',
+	    getInitialState: function getInitialState() {
+	        return {
+	            items: [],
+	            columnsToDisplay: ['title', 'grade']
+	        };
+	    },
+	    componentDidMount: function componentDidMount() {
+	        this.setState({ items: [{ id: 1, title: 'hike 1', grade: '4b' }, { id: 55, title: 'hike 2', grade: '1a' }] });
+	    },
 	    render: function render() {
 	        return _react2.default.createElement(
-	            'p',
+	            'div',
 	            null,
-	            'Hikes react'
+	            _react2.default.createElement(
+	                'p',
+	                null,
+	                'Trails react'
+	            ),
+	            _react2.default.createElement(_index2.default, {
+	                items: this.state.items,
+	                columnsToDisplay: this.state.columnsToDisplay
+	            })
 	        );
 	    }
 	});
@@ -27304,19 +27325,155 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var ListHead = _react2.default.createClass({
+	    displayName: 'ListHead',
+	    render: function render() {
+	        var headings = [];
+
+	        this.props.columnsToDisplay.forEach(function (heading) {
+	            headings.push(_react2.default.createElement(
+	                'th',
+	                { key: heading + Date.now() },
+	                heading
+	            ));
+	        });
+
+	        return _react2.default.createElement(
+	            'thead',
+	            null,
+	            _react2.default.createElement(
+	                'tr',
+	                null,
+	                headings
+	            )
+	        );
+	    }
+	});
+
+	var ItemRow = _react2.default.createClass({
+	    displayName: 'ItemRow',
+	    render: function render() {
+	        var _this = this;
+
+	        var columns = [];
+
+	        this.props.columnsToDisplay.forEach(function (column) {
+	            var item = _this.props.item;
+	            columns.push(_react2.default.createElement(
+	                'td',
+	                { key: column + item.id },
+	                item[column]
+	            ));
+	        });
+
+	        return _react2.default.createElement(
+	            'tr',
+	            null,
+	            columns
+	        );
+	    }
+	});
+
+	var ItemsTable = _react2.default.createClass({
+	    displayName: 'ItemsTable',
+	    render: function render() {
+	        var _this2 = this;
+
+	        var rows = [];
+	        this.props.items.forEach(function (item) {
+	            rows.push(_react2.default.createElement(ItemRow, {
+	                item: item,
+	                columnsToDisplay: _this2.props.columnsToDisplay,
+	                key: item.id
+	            }));
+	        });
+
+	        return _react2.default.createElement(
+	            'table',
+	            null,
+	            _react2.default.createElement(ListHead, { columnsToDisplay: this.props.columnsToDisplay }),
+	            _react2.default.createElement(
+	                'tbody',
+	                null,
+	                rows
+	            )
+	        );
+	    }
+	});
+
+	module.exports = ItemsTable;
+
+/***/ },
+/* 248 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 249 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(170);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _style = __webpack_require__(250);
+
+	var _style2 = _interopRequireDefault(_style);
+
+	var _index = __webpack_require__(247);
+
+	var _index2 = _interopRequireDefault(_index);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	module.exports = _react2.default.createClass({
 	    displayName: 'exports',
+	    getInitialState: function getInitialState() {
+	        return {
+	            items: [],
+	            columnsToDisplay: ['name', 'grading']
+	        };
+	    },
+	    componentDidMount: function componentDidMount() {
+	        $.ajax({
+	            url: '/admin/trails',
+	            dataType: 'json',
+	            cache: false,
+	            success: function (res) {
+	                this.setState({ items: res.items });
+	            }.bind(this),
+	            error: function (xhr, status, err) {
+	                console.error('/trails', status, err.toString());
+	            }.bind(this)
+	        });
+	        // this.setState({items: [
+	        //     {id: 1, title: 'trail 1', grade: '4b'},
+	        //     {id: 45, title: 'trail 2', grade: '1a'}
+	        // ]});
+	    },
 	    render: function render() {
+	        console.log(this.state);
 	        return _react2.default.createElement(
-	            'p',
+	            'div',
 	            null,
-	            'Trails react'
+	            _react2.default.createElement(
+	                'p',
+	                null,
+	                'Trails react'
+	            ),
+	            _react2.default.createElement(_index2.default, {
+	                items: this.state.items,
+	                columnsToDisplay: this.state.columnsToDisplay
+	            })
 	        );
 	    }
 	});
 
 /***/ },
-/* 248 */
+/* 250 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
