@@ -13,6 +13,13 @@ class DatabaseSeeder extends Seeder
     {
 
         // $this->call(UserTableSeeder::class);
+
+        App\User::create([
+            'name'=>'tester',
+            'email'=>'test@example.com',
+            'password'=>bcrypt('secret')
+        ]);
+
         $severities = [
             [
                 'rating' => 1,
