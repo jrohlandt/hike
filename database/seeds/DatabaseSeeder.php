@@ -41,19 +41,19 @@ class DatabaseSeeder extends Seeder
 
         $exposures = [
             [
-                'rating' => 'a',
+                'rating' => '1',
                 'description' => 'no exposure to heights',
             ],
             [
-                'rating' => 'b',
+                'rating' => '2',
                 'description' => 'mild exposure to heights',
             ],
             [
-                'rating' => 'c',
+                'rating' => '3',
                 'description' => 'moderate exposure to heights',
             ],
             [
-                'rating' => 'd',
+                'rating' => '4',
                 'description' => 'extreme exposure to heights',
             ]
         ];
