@@ -8,7 +8,7 @@ var Component = React.createClass({
   render() {
     return (
       <div id="side-nav">
-          <div id="logo_container"></div>
+          <div id="logo-container">HIKE</div>
           <ul>
               <li>
                   <IndexLink to="/admin">dashboard</IndexLink>

@@ -64,7 +64,7 @@
 	var Dashboard = __webpack_require__(243);
 	var HikesList = __webpack_require__(245);
 	// var HikeEdit = require('./components/hikes/edit.js');
-	var TrailsList = __webpack_require__(249);
+	var TrailsList = __webpack_require__(251);
 	// var TrailEdit = require('./components/trails/edit.js');
 
 	var routes = React.createElement(
@@ -27138,7 +27138,7 @@
 	      React.createElement(SideNav, null),
 	      React.createElement(
 	        'div',
-	        { id: 'content' },
+	        { className: 'content' },
 	        this.props.children
 	      )
 	    );
@@ -27178,7 +27178,11 @@
 	        return React.createElement(
 	            'div',
 	            { id: 'side-nav' },
-	            React.createElement('div', { id: 'logo_container' }),
+	            React.createElement(
+	                'div',
+	                { id: 'logo-container' },
+	                'HIKE'
+	            ),
 	            React.createElement(
 	                'ul',
 	                null,
@@ -27273,6 +27277,10 @@
 
 	var _index2 = _interopRequireDefault(_index);
 
+	var _index3 = __webpack_require__(249);
+
+	var _index4 = _interopRequireDefault(_index3);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	module.exports = _react2.default.createClass({
@@ -27290,12 +27298,8 @@
 	        return _react2.default.createElement(
 	            'div',
 	            null,
-	            _react2.default.createElement(
-	                'p',
-	                null,
-	                'Trails react'
-	            ),
-	            _react2.default.createElement(_index2.default, {
+	            _react2.default.createElement(_index2.default, null),
+	            _react2.default.createElement(_index4.default, {
 	                items: this.state.items,
 	                columnsToDisplay: this.state.columnsToDisplay
 	            })
@@ -27320,6 +27324,45 @@
 	var _react2 = _interopRequireDefault(_react);
 
 	var _style = __webpack_require__(248);
+
+	var _style2 = _interopRequireDefault(_style);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Component = _react2.default.createClass({
+	    displayName: 'Component',
+	    render: function render() {
+	        return _react2.default.createElement(
+	            'div',
+	            { className: 'breadcrumbs-component' },
+	            _react2.default.createElement(
+	                'a',
+	                { href: '#' },
+	                'Bread - Crumbs'
+	            )
+	        );
+	    }
+	});
+
+	module.exports = Component;
+
+/***/ },
+/* 248 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 249 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(170);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _style = __webpack_require__(250);
 
 	var _style2 = _interopRequireDefault(_style);
 
@@ -27390,7 +27433,7 @@
 
 	        return _react2.default.createElement(
 	            'table',
-	            null,
+	            { className: 'listing-component' },
 	            _react2.default.createElement(ListHead, { columnsToDisplay: this.props.columnsToDisplay }),
 	            _react2.default.createElement(
 	                'tbody',
@@ -27404,13 +27447,13 @@
 	module.exports = ItemsTable;
 
 /***/ },
-/* 248 */
+/* 250 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 249 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27419,13 +27462,17 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _style = __webpack_require__(250);
+	var _style = __webpack_require__(252);
 
 	var _style2 = _interopRequireDefault(_style);
 
 	var _index = __webpack_require__(247);
 
 	var _index2 = _interopRequireDefault(_index);
+
+	var _index3 = __webpack_require__(249);
+
+	var _index4 = _interopRequireDefault(_index3);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27455,16 +27502,11 @@
 	        // ]});
 	    },
 	    render: function render() {
-	        console.log(this.state);
 	        return _react2.default.createElement(
 	            'div',
 	            null,
-	            _react2.default.createElement(
-	                'p',
-	                null,
-	                'Trails react'
-	            ),
-	            _react2.default.createElement(_index2.default, {
+	            _react2.default.createElement(_index2.default, null),
+	            _react2.default.createElement(_index4.default, {
 	                items: this.state.items,
 	                columnsToDisplay: this.state.columnsToDisplay
 	            })
@@ -27473,7 +27515,7 @@
 	});
 
 /***/ },
-/* 250 */
+/* 252 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
