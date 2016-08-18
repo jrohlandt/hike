@@ -50,7 +50,7 @@ var ItemsTable = React.createClass({
         });
 
         return (
-            <table>
+            <table className="listing-component">
                 <ListHead columnsToDisplay={this.props.columnsToDisplay} />
                 <tbody>
                     {rows}

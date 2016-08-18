@@ -1,0 +1,16 @@
+table.listing-component {
+    width: 95%;
+    margin: auto;
+    border: thin solid black;
+    border-collapse: collapse;
+}
+
+.listing-component th {
+    padding: 1em;
+    text-align: left;
+    border-bottom: thick solid black;
+}
+
+.listing-component td {
+    padding: .5em;
+}
