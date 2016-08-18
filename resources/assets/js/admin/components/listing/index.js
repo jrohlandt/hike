@@ -1,9 +1,6 @@
 import React from 'react';
 import style from './style.scss';
-
-// import { isMysqlDate, mysqlToSeconds } from '../../../helpers/date.js';
-
-import moment from 'moment';
+import { sortItems } from '../../../helpers/sorting.js';
 
 var ListHead = React.createClass({
     render() {
@@ -48,71 +45,8 @@ var ItemRow = React.createClass({
 });
 
 var ItemsTable = React.createClass({
-    isNumber(val) {
-        console.log(val, parseFloat(val), Number(val), Number.isNaN(Number(val)));
-        return Number.isNaN(Number(val)) === false;
-    },
-    isNotNumber(val) {
-        return this.isNumber(val) === false;
-    },
-    isDate(val) {
-        return moment(val).isValid() !== false;
-    },
-    handleSorting(items, arg) {
-        return items.sort((a,b) => {
-            var A = a[arg];
-            var B = b[arg];
-
-            // Priorities:
-            // falsey values first
-            // then numbers
-            // then dates
-            // then alphabetical
-
-            if (!A) {
-                return -1;
-            }
-
-            if (!B) {
-                return 1;
-            }
-
-            if (this.isNumber(A) && this.isNumber(B)) {
-                return Number(A) - Number(B);
-            } else if (this.isNotNumber(A) && this.isNotNumber(B)) {
-                A = A.toUpperCase();
-                B = B.toUpperCase();
-
-                if (A < B) {
-                    return -1;
-                }
-
-                if (A > B) {
-                    return 1;
-                }
-
-                // equal
-                return 0;
-
-            } else if (this.isNumber(A) && this.isNotNumber(B)) {
-                return -1;
-            } else if (this.isNotNumber(A) && this.isNumber(B)) {
-                return 1;
-            } else if (this.isNumber(A) && this.isDate(B)) {
-                return -1;
-            } else if (this.isDate(A) && this.isNumber(B)) {
-                return 1;
-            } else if (this.isDate(A) && this.isNotNumber(B)) {
-                return -1;
-            } else if (this.isNotNumber(A) && this.isDate(B)) {
-                return 1;
-            }
-
-        });
-    },
     orderBy(arg) {
-        var items = this.handleSorting(this.props.items, arg);
-
+        var items = sortItems(this.props.items, arg);
         this.props.updateParentState({items});
     },
     render() {
