@@ -1,6 +1,7 @@
 import React from 'react';
 import style from './style.scss';
 
+import BreadCrumbs from '../breadcrumbs/index.js';
 import ItemsTable from '../listing/index.js';
 
 module.exports = React.createClass({
@@ -19,7 +20,7 @@ module.exports = React.createClass({
     render() {
         return (
             <div>
-                <p>Trails react</p>
+                <BreadCrumbs />
                 <ItemsTable
                     items={this.state.items}
                     columnsToDisplay={this.state.columnsToDisplay}
