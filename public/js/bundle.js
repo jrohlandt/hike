@@ -27371,12 +27371,17 @@
 	var ListHead = _react2.default.createClass({
 	    displayName: 'ListHead',
 	    render: function render() {
+	        var _this = this;
+
 	        var headings = [];
 
 	        this.props.columnsToDisplay.forEach(function (heading) {
 	            headings.push(_react2.default.createElement(
 	                'th',
-	                { key: heading + Date.now() },
+	                {
+	                    key: heading + Date.now(),
+	                    onClick: _this.props.orderBy.bind(null, heading)
+	                },
 	                heading
 	            ));
 	        });
@@ -27396,12 +27401,12 @@
 	var ItemRow = _react2.default.createClass({
 	    displayName: 'ItemRow',
 	    render: function render() {
-	        var _this = this;
+	        var _this2 = this;
 
 	        var columns = [];
 
 	        this.props.columnsToDisplay.forEach(function (column) {
-	            var item = _this.props.item;
+	            var item = _this2.props.item;
 	            columns.push(_react2.default.createElement(
 	                'td',
 	                { key: column + item.id },
@@ -27419,14 +27424,57 @@
 
 	var ItemsTable = _react2.default.createClass({
 	    displayName: 'ItemsTable',
+	    isNumber: function isNumber(val) {
+	        console.log(val, parseFloat(val), Number(val), Number.isNaN(Number(val)));
+
+	        return Number.isNaN(Number(val)) === false;
+	    },
+	    isNotNumber: function isNotNumber(val) {
+	        return this.isNumber(val) === false;
+	    },
+	    handleSorting: function handleSorting(items, arg) {
+	        var _this3 = this;
+
+	        return items.sort(function (a, b) {
+	            var A = a[arg];
+	            var B = b[arg];
+
+	            if (_this3.isNotNumber(A) && _this3.isNotNumber(B)) {
+	                A = A.toUpperCase();
+	                B = B.toUpperCase();
+
+	                if (A < B) {
+	                    return -1;
+	                }
+
+	                if (A > B) {
+	                    return 1;
+	                }
+
+	                // equal
+	                return 0;
+	            } else if (_this3.isNumber(A) && _this3.isNumber(B)) {
+	                return Number(A) - Number(B);
+	            } else if (_this3.isNumber(A) && _this3.isNotNumber(B)) {
+	                return -1;
+	            } else if (_this3.isNotNumber(A) && _this3.isNumber(B)) {
+	                return 1;
+	            }
+	        });
+	    },
+	    orderBy: function orderBy(arg) {
+	        var items = this.handleSorting(this.props.items, arg);
+
+	        this.props.updateParentState({ items: items });
+	    },
 	    render: function render() {
-	        var _this2 = this;
+	        var _this4 = this;
 
 	        var rows = [];
 	        this.props.items.forEach(function (item) {
 	            rows.push(_react2.default.createElement(ItemRow, {
 	                item: item,
-	                columnsToDisplay: _this2.props.columnsToDisplay,
+	                columnsToDisplay: _this4.props.columnsToDisplay,
 	                key: item.id
 	            }));
 	        });
@@ -27434,7 +27482,10 @@
 	        return _react2.default.createElement(
 	            'table',
 	            { className: 'listing-component' },
-	            _react2.default.createElement(ListHead, { columnsToDisplay: this.props.columnsToDisplay }),
+	            _react2.default.createElement(ListHead, {
+	                columnsToDisplay: this.props.columnsToDisplay,
+	                orderBy: this.orderBy
+	            }),
 	            _react2.default.createElement(
 	                'tbody',
 	                null,
@@ -27481,25 +27532,26 @@
 	    getInitialState: function getInitialState() {
 	        return {
 	            items: [],
-	            columnsToDisplay: ['name', 'grading']
+	            columnsToDisplay: ['name', 'grade', 'number']
 	        };
 	    },
+	    updateState: function updateState(data) {
+	        // @param data {items: {name: 'john smith'}}
+	        this.setState(data);
+	    },
 	    componentDidMount: function componentDidMount() {
-	        $.ajax({
-	            url: '/admin/trails',
-	            dataType: 'json',
-	            cache: false,
-	            success: function (res) {
-	                this.setState({ items: res.items });
-	            }.bind(this),
-	            error: function (xhr, status, err) {
-	                console.error('/trails', status, err.toString());
-	            }.bind(this)
-	        });
-	        // this.setState({items: [
-	        //     {id: 1, title: 'trail 1', grade: '4b'},
-	        //     {id: 45, title: 'trail 2', grade: '1a'}
-	        // ]});
+	        //  $.ajax({
+	        //     url: '/admin/trails',
+	        //     dataType: 'json',
+	        //     cache: false,
+	        //     success: function(res) {
+	        //         this.setState({items: res.items});
+	        //     }.bind(this),
+	        //     error: function(xhr, status, err) {
+	        //         console.error('/trails', status, err.toString());
+	        //     }.bind(this)
+	        // });
+	        this.setState({ items: [{ id: 6, name: 'Bzba', grade: '4c', number: 7 }, { id: 893, name: 'Baba', grade: '2b', number: 2 }, { id: 867, name: 'Zzba', grade: '2a', number: 6 }, { id: 332, name: 'trail 4', grade: '4b', number: 10 }, { id: 32, name: 'trail 3', grade: '3b', number: 1 }, { id: 4324, name: '200', grade: '3d', number: 11 }, { id: 78, name: '10000000000', grade: '3a', number: 20 }, { id: 45, name: 'zAba', grade: '1a', number: 3 }] });
 	    },
 	    render: function render() {
 	        return _react2.default.createElement(
@@ -27508,7 +27560,8 @@
 	            _react2.default.createElement(_index2.default, null),
 	            _react2.default.createElement(_index4.default, {
 	                items: this.state.items,
-	                columnsToDisplay: this.state.columnsToDisplay
+	                columnsToDisplay: this.state.columnsToDisplay,
+	                updateParentState: this.updateState
 	            })
 	        );
 	    }
