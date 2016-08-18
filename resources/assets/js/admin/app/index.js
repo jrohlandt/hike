@@ -9,7 +9,7 @@ var Component = React.createClass({
     return (
       <div>
         <SideNav />
-        <div id='content'>{this.props.children}</div>
+        <div className='content'>{this.props.children}</div>
       </div>
     );
   }
