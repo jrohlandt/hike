@@ -10,3 +10,12 @@ table.pagination-component {
     list-style: none;
     cursor: pointer;
 }
+
+.pagination-component .current {
+    font-weight: bold;
+}
+
+.pagination-component .inactive {
+    color: gray;
+    cursor: default;
+}

@@ -41785,23 +41785,52 @@
 	    render: function render() {
 	        var _this = this;
 
-	        var lastPageNum = this.props.data.last_page;
+	        var props = this.props.data;
+	        var lastPageNum = props.last_page;
 	        var maxButtons = 10;
 	        var numberOfButtons = lastPageNum <= maxButtons ? lastPageNum : maxButtons;
 	        var range = [].concat(_toConsumableArray(Array(numberOfButtons).keys()));
 
-	        var buttons = [];;
-	        range.forEach(function (key) {
-	            var pageNum = key + 1;
+	        var buttonsData = [];
+	        range.forEach(function (i) {
+	            var i = i + 1;
+	            buttonsData.push({
+	                name: i,
+	                pageNum: i,
+	                text: i,
+	                class: i == props.current_page ? 'current' : ''
+	            });
+	        });
+	        // add prev button data
+	        buttonsData.unshift({
+	            name: 'previous',
+	            text: 'prev',
+	            pageNum: props.current_page - 1,
+	            class: props.current_page > 1 ? '' : 'inactive'
+	        });
 
-	            buttons.push(_react2.default.createElement(
+	        // add next button data
+	        buttonsData.push({
+	            name: 'next',
+	            text: 'next',
+	            pageNum: props.current_page + 1,
+	            class: props.current_page < props.last_page ? '' : 'inactive'
+	        });
+
+	        var buttons = buttonsData.map(function (button) {
+	            var active = true;
+	            if (button.class === 'inactive' || button.class === 'current') {
+	                active = false;
+	            }
+	            return _react2.default.createElement(
 	                'li',
 	                {
-	                    onClick: _this.props.updateParentPage.bind(null, pageNum),
-	                    key: "paginate" + pageNum
+	                    className: button.class,
+	                    onClick: active ? _this.props.updateParentPage.bind(null, button.pageNum) : null,
+	                    key: "paginate" + button.name
 	                },
-	                pageNum
-	            ));
+	                button.text
+	            );
 	        });
 
 	        console.log(buttons);
