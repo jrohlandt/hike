@@ -1,0 +1,12 @@
+table.pagination-component {
+    width: 95%;
+    margin: auto;
+    border: thin solid black;
+}
+
+.pagination-component li {
+    float: left;
+    padding: .5em;
+    list-style: none;
+    cursor: pointer;
+}

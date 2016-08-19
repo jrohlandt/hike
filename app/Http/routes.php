@@ -30,4 +30,5 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     });
 
     Route::resource('/trails', 'Admin\TrailsController');
+
 });

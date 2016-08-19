@@ -24,13 +24,11 @@ class TrailsController extends Controller
      */
     public function index(Request $request)
     {
-        $items = $this->model->all();
-
         if ($request->ajax()) {
-            return response()->json(compact('items'));
+            return $this->model->paginate(2);
         }
 
-        return view('admin.index', compact('items'));
+        return view('admin.index');
     }
 
     /**

@@ -27428,7 +27428,7 @@
 	    displayName: 'ItemsTable',
 	    sortBy: function sortBy(arg) {
 	        var items = _sort.Sort.by(this.props.items, arg);
-	        this.props.updateParentState({ items: items });
+	        this.props.updateParentState(items);
 	    },
 	    render: function render() {
 	        var _this3 = this;
@@ -27486,24 +27486,6 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Sort = {
-	    //
-	    // isFalsey(val) {
-	    //     return !val ? true : false;
-	    // },
-	    //
-	    // isNumber(val) {
-	    //     // console.log(val, parseFloat(val), Number(val), Number.isNaN(Number(val)));
-	    //     return Number.isNaN(Number(val)) === false;
-	    // },
-	    //
-	    // isNotNumber(val) {
-	    //     return this.isNumber(val) === false;
-	    // },
-	    //
-	    // isDate(val) {
-	    //     return moment(val, "YYYY-MM-DD HH:mm:ss").isValid() !== false;
-	    // },
-
 	    sortAsc: function sortAsc(a, b) {
 	        if (a < b) return -1;
 	        if (a > b) return 1;
@@ -41704,42 +41686,55 @@
 
 	var _index4 = _interopRequireDefault(_index3);
 
+	var _index5 = __webpack_require__(359);
+
+	var _index6 = _interopRequireDefault(_index5);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	module.exports = _react2.default.createClass({
-	    displayName: 'exports',
+	var TrailsContent = _react2.default.createClass({
+	    displayName: 'TrailsContent',
 	    getInitialState: function getInitialState() {
+	        var baseUrl = '/admin/trails';
 	        return {
+	            baseUrl: baseUrl,
+	            url: baseUrl,
 	            items: [],
-	            columnsToDisplay: ['name', 'grade', 'created_at']
+	            columnsToDisplay: ['name', 'grade', 'created_at'],
+	            paginate: {}
 	        };
 	    },
-	    updateState: function updateState(data) {
-	        // @param data {items: {name: 'john smith'}}
-	        this.setState(data);
+
+	    // updatePage
+	    updatePage: function updatePage(pageNum) {
+	        var url = this.state.baseUrl + '?page=' + pageNum;
+	        this.getItems(url);
 	    },
-	    componentDidMount: function componentDidMount() {
+
+	    // updateState
+	    // @param data {items: {name: 'john smith'}}
+	    updateState: function updateState(data) {
+	        this.setState({ items: data });
+	    },
+	    getItems: function getItems(url) {
 	        $.ajax({
-	            url: '/admin/trails',
+	            url: url,
 	            dataType: 'json',
 	            cache: false,
 	            success: function (res) {
-	                this.setState({ items: res.items });
+	                console.log(res);
+	                // res is returned from Laravel ->paginate()
+	                var items = res.data;
+	                delete res.data;
+	                this.setState({ items: items, paginate: res });
 	            }.bind(this),
 	            error: function (xhr, status, err) {
 	                console.error('/trails', status, err.toString());
 	            }.bind(this)
 	        });
-	        // this.setState({items: [
-	        //     {id: 6, name: 'Bzba', grade: '4c', number: 7},
-	        //     {id: 893, name: 'Baba', grade: '2b', number: 2},
-	        //     {id: 867, name: 'Zzba', grade: '2a', number: 6},
-	        //     {id: 332, name: 'trail 4', grade: '4b', number: 10},
-	        //     {id: 32, name: 'trail 3', grade: '3b', number: 1},
-	        //     {id: 4324, name: '200', grade: '3d', number: 11},
-	        //     {id: 78, name: '10000000000', grade: '3a', number: 20},
-	        //     {id: 45, name: 'zAba', grade: '1a', number: 3}
-	        // ]});
+	    },
+	    componentDidMount: function componentDidMount() {
+	        this.getItems(this.state.url);
 	    },
 	    render: function render() {
 	        return _react2.default.createElement(
@@ -41750,13 +41745,100 @@
 	                items: this.state.items,
 	                columnsToDisplay: this.state.columnsToDisplay,
 	                updateParentState: this.updateState
+	            }),
+	            _react2.default.createElement(_index6.default, {
+	                data: this.state.paginate,
+	                updateParentPage: this.updatePage
 	            })
 	        );
 	    }
 	});
 
+	module.exports = TrailsContent;
+
 /***/ },
 /* 358 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 359 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(170);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _style = __webpack_require__(360);
+
+	var _style2 = _interopRequireDefault(_style);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+	var PaginationButtons = _react2.default.createClass({
+	    displayName: 'PaginationButtons',
+	    render: function render() {
+	        var _this = this;
+
+	        var lastPageNum = this.props.data.last_page;
+	        var maxButtons = 10;
+	        var numberOfButtons = lastPageNum <= maxButtons ? lastPageNum : maxButtons;
+	        var range = [].concat(_toConsumableArray(Array(numberOfButtons).keys()));
+
+	        var buttons = [];;
+	        range.forEach(function (key) {
+	            var pageNum = key + 1;
+
+	            buttons.push(_react2.default.createElement(
+	                'li',
+	                {
+	                    onClick: _this.props.updateParentPage.bind(null, pageNum),
+	                    key: "paginate" + pageNum
+	                },
+	                pageNum
+	            ));
+	        });
+
+	        console.log(buttons);
+	        return _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(
+	                'ul',
+	                null,
+	                buttons
+	            )
+	        );
+	    }
+	});
+
+	var PaginationComponent = _react2.default.createClass({
+	    displayName: 'PaginationComponent',
+	    render: function render() {
+	        if (Object.keys(this.props.data).length < 1) {
+	            return _react2.default.createElement('div', { className: 'pagination-component' });
+	        }
+
+	        return _react2.default.createElement(
+	            'div',
+	            { className: 'pagination-component' },
+	            _react2.default.createElement(PaginationButtons, {
+	                data: this.props.data,
+	                updateParentPage: this.props.updateParentPage
+	            })
+	        );
+	    }
+	});
+
+	module.exports = PaginationComponent;
+
+/***/ },
+/* 360 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

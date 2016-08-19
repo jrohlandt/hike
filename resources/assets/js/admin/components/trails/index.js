@@ -3,40 +3,48 @@ import style from './style.scss';
 
 import BreadCrumbs from '../breadcrumbs/index.js';
 import ItemsTable from '../listing/index.js';
+import PaginationComponent from '../pagination/index.js';
 
-module.exports = React.createClass({
+var TrailsContent = React.createClass({
     getInitialState() {
+        var baseUrl = '/admin/trails';
         return {
+            baseUrl: baseUrl,
+            url: baseUrl,
             items: [],
-            columnsToDisplay: ['name', 'grade', 'created_at']
+            columnsToDisplay: ['name', 'grade', 'created_at'],
+            paginate: {}
         };
     },
+    // updatePage
+    updatePage(pageNum) {
+        var url = this.state.baseUrl + '?page=' + pageNum;
+        this.getItems(url);
+    },
+    // updateState
+    // @param data {items: {name: 'john smith'}}
     updateState(data) {
-        // @param data {items: {name: 'john smith'}}
-        this.setState(data);
+        this.setState({items: data});
+    },
+    getItems(url) {
+        $.ajax({
+           url: url,
+           dataType: 'json',
+           cache: false,
+           success: function(res) {
+               console.log(res);
+               // res is returned from Laravel ->paginate()
+               var items = res.data;
+               delete res.data;
+               this.setState({items: items, paginate: res});
+           }.bind(this),
+           error: function(xhr, status, err) {
+               console.error('/trails', status, err.toString());
+           }.bind(this)
+       });
     },
     componentDidMount() {
-         $.ajax({
-            url: '/admin/trails',
-            dataType: 'json',
-            cache: false,
-            success: function(res) {
-                this.setState({items: res.items});
-            }.bind(this),
-            error: function(xhr, status, err) {
-                console.error('/trails', status, err.toString());
-            }.bind(this)
-        });
-        // this.setState({items: [
-        //     {id: 6, name: 'Bzba', grade: '4c', number: 7},
-        //     {id: 893, name: 'Baba', grade: '2b', number: 2},
-        //     {id: 867, name: 'Zzba', grade: '2a', number: 6},
-        //     {id: 332, name: 'trail 4', grade: '4b', number: 10},
-        //     {id: 32, name: 'trail 3', grade: '3b', number: 1},
-        //     {id: 4324, name: '200', grade: '3d', number: 11},
-        //     {id: 78, name: '10000000000', grade: '3a', number: 20},
-        //     {id: 45, name: 'zAba', grade: '1a', number: 3}
-        // ]});
+        this.getItems(this.state.url);
     },
     render() {
         return (
@@ -47,7 +55,13 @@ module.exports = React.createClass({
                     columnsToDisplay={this.state.columnsToDisplay}
                     updateParentState={this.updateState}
                 />
+                <PaginationComponent
+                    data={this.state.paginate}
+                    updateParentPage={this.updatePage}
+                />
             </div>
         );
     }
 });
+
+module.exports = TrailsContent;

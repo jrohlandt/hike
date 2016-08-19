@@ -47,9 +47,9 @@ var ItemRow = React.createClass({
 var ItemsTable = React.createClass({
     sortBy(arg) {
         var items = Sort.by(this.props.items, arg);
-        this.props.updateParentState({items});
+        this.props.updateParentState(items);
     },
-    
+
     render() {
         var rows = [];
         this.props.items.forEach((item) => {
