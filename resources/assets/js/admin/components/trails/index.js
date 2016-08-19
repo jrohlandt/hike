@@ -32,7 +32,6 @@ var TrailsContent = React.createClass({
            dataType: 'json',
            cache: false,
            success: function(res) {
-               console.log(res);
                // res is returned from Laravel ->paginate()
                var items = res.data;
                delete res.data;
