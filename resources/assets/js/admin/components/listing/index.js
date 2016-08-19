@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './style.scss';
-import { sortItems } from '../../../helpers/sorting.js';
+import { Sort } from '../../../modules/sort.js';
 
 var ListHead = React.createClass({
     render() {
@@ -10,7 +10,7 @@ var ListHead = React.createClass({
             headings.push(
                 <th
                     key={heading + Date.now()}
-                    onClick={this.props.orderBy.bind(null, heading)}
+                    onClick={this.props.sortBy.bind(null, heading)}
                 >
                     {heading}
                 </th>
@@ -45,10 +45,11 @@ var ItemRow = React.createClass({
 });
 
 var ItemsTable = React.createClass({
-    orderBy(arg) {
-        var items = sortItems(this.props.items, arg);
+    sortBy(arg) {
+        var items = Sort.by(this.props.items, arg);
         this.props.updateParentState({items});
     },
+    
     render() {
         var rows = [];
         this.props.items.forEach((item) => {
@@ -65,7 +66,7 @@ var ItemsTable = React.createClass({
             <table className="listing-component">
                 <ListHead
                     columnsToDisplay={this.props.columnsToDisplay}
-                    orderBy={this.orderBy}
+                    sortBy={this.sortBy}
                 />
                 <tbody>
                     {rows}
