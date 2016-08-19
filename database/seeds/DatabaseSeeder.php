@@ -123,6 +123,66 @@ class DatabaseSeeder extends Seeder
                 'severity_id' => $severity_ids[rand(0, 3)],
                 'exposure_id' => $exposure_ids[rand(0, 3)],
             ],
+            [
+                'name' => 'tokai forest',
+                'description' => 'walk under the trees',
+                'severity_id' => $severity_ids[rand(0, 3)],
+                'exposure_id' => $exposure_ids[rand(0, 3)],
+            ],
+            [
+                'name' => 'muizenberg peak',
+                'description' => 'ajofda owerij pasofk ewfjolefakfdj oa fej, asldfj',
+                'severity_id' => $severity_ids[rand(0, 3)],
+                'exposure_id' => $exposure_ids[rand(0, 3)],
+            ],
+            [
+                'name' => 'sIlvermines',
+                'description' => 'o accessused t  plowerf the mountain by carts oar',
+                'severity_id' => $severity_ids[rand(0, 3)],
+                'exposure_id' => $exposure_ids[rand(0, 3)],
+            ],
+            [
+                'name' => 'newlands Ravine',
+                'description' => 'used to access lower parts of the mountain by car',
+                'severity_id' => $severity_ids[rand(0, 3)],
+                'exposure_id' => $exposure_ids[rand(0, 3)],
+            ],
+            [
+                'name' => 'the saddle',
+                'description' => 'used to access lower parts of the mountain by car',
+                'severity_id' => $severity_ids[rand(0, 3)],
+                'exposure_id' => $exposure_ids[rand(0, 3)],
+            ],
+            [
+                'name' => 'cable car',
+                'description' => 'fsadofewm fpaofk epwfkpwef  faehg kuylo ',
+                'severity_id' => $severity_ids[rand(0, 3)],
+                'exposure_id' => $exposure_ids[rand(0, 3)],
+            ],
+            [
+                'name' => 'hely hutchinson dam',
+                'description' => 'used to access lower parts of the mountain by car',
+                'severity_id' => $severity_ids[rand(0, 3)],
+                'exposure_id' => $exposure_ids[rand(0, 3)],
+            ],
+            [
+                'name' => 'old dogs trail',
+                'description' => 'used to access lower parts of the mountain by car',
+                'severity_id' => $severity_ids[rand(0, 3)],
+                'exposure_id' => $exposure_ids[rand(0, 3)],
+            ],
+            [
+                'name' => '1234 32432 afasdfsa',
+                'description' => 'used to access lower parts of the mountain by car',
+                'severity_id' => $severity_ids[rand(0, 3)],
+                'exposure_id' => $exposure_ids[rand(0, 3)],
+            ],
+            [
+                'name' => 'pfasdf 99',
+                'description' => 'used to access lower parts of the mountain by car',
+                'severity_id' => $severity_ids[rand(0, 3)],
+                'exposure_id' => $exposure_ids[rand(0, 3)],
+            ],
         ];
 
         DB::table('trails')->delete();
