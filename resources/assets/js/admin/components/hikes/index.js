@@ -5,27 +5,34 @@ import BreadCrumbs from '../breadcrumbs/index.js';
 import ItemsTable from '../listing/index.js';
 import PaginationComponent from '../pagination/index.js';
 
-var HikesListing = React.createClass({
-    getInitialState() {
+export default class ListingPage extends React.Component {
+    constructor(props) {
+        super(props);
         var baseUrl = '/admin/hikes';
-        return {
+        this.state = {
             baseUrl: baseUrl,
             url: baseUrl,
             items: [],
             columnsToDisplay: ['title', 'created_at'],
             paginate: {}
         };
-    },
+        this.updateState = this.updateState.bind(this);
+        this.updatePage = this.updatePage.bind(this);
+    }
+
     // updatePage
+    // get items for paginated page
     updatePage(pageNum) {
         var url = this.state.baseUrl + '?page=' + pageNum;
         this.getItems(url);
-    },
+    }
+
     // updateState
     // @param data {items: {name: 'john smith'}}
     updateState(data) {
         this.setState({items: data});
-    },
+    }
+
     getItems(url) {
         $.ajax({
            url: url,
@@ -41,10 +48,12 @@ var HikesListing = React.createClass({
                console.error(this.state.url, status, err.toString());
            }.bind(this)
        });
-    },
+    }
+
     componentDidMount() {
         this.getItems(this.state.url);
-    },
+    }
+
     render() {
         return (
             <div>
@@ -61,6 +70,4 @@ var HikesListing = React.createClass({
             </div>
         );
     }
-});
-
-module.exports = HikesListing;
+}
