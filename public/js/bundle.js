@@ -27645,16 +27645,20 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var ListHead = function (_React$Component) {
-	    _inherits(ListHead, _React$Component);
+	var HeadItem = function HeadItem(props) {
+	    return props.children;
+	};
 
-	    function ListHead(props) {
-	        _classCallCheck(this, ListHead);
+	var TableHead = function (_React$Component) {
+	    _inherits(TableHead, _React$Component);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(ListHead).call(this, props));
+	    function TableHead(props) {
+	        _classCallCheck(this, TableHead);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(TableHead).call(this, props));
 	    }
 
-	    _createClass(ListHead, [{
+	    _createClass(TableHead, [{
 	        key: 'render',
 	        value: function render() {
 	            var _this2 = this;
@@ -27663,12 +27667,13 @@
 
 	            this.props.columnsToDisplay.forEach(function (heading) {
 	                headings.push(_react2.default.createElement(
-	                    'th',
-	                    {
-	                        key: heading + Date.now(),
-	                        onClick: _this2.props.sortBy.bind(null, heading)
-	                    },
-	                    heading
+	                    HeadItem,
+	                    { key: heading },
+	                    _react2.default.createElement(
+	                        'th',
+	                        { onClick: _this2.props.sortBy.bind(null, heading) },
+	                        heading
+	                    )
 	                ));
 	            });
 
@@ -27684,11 +27689,34 @@
 	        }
 	    }]);
 
-	    return ListHead;
+	    return TableHead;
 	}(_react2.default.Component);
 
-	var ItemRow = function (_React$Component2) {
-	    _inherits(ItemRow, _React$Component2);
+	var Column = function (_React$Component2) {
+	    _inherits(Column, _React$Component2);
+
+	    function Column(props) {
+	        _classCallCheck(this, Column);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Column).call(this, props));
+	    }
+
+	    _createClass(Column, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'td',
+	                null,
+	                this.props.children
+	            );
+	        }
+	    }]);
+
+	    return Column;
+	}(_react2.default.Component);
+
+	var ItemRow = function (_React$Component3) {
+	    _inherits(ItemRow, _React$Component3);
 
 	    function ItemRow(props) {
 	        _classCallCheck(this, ItemRow);
@@ -27699,14 +27727,14 @@
 	    _createClass(ItemRow, [{
 	        key: 'render',
 	        value: function render() {
-	            var _this4 = this;
+	            var _this5 = this;
 
 	            var columns = [];
 
 	            this.props.columnsToDisplay.forEach(function (column) {
-	                var item = _this4.props.item;
+	                var item = _this5.props.item;
 	                columns.push(_react2.default.createElement(
-	                    'td',
+	                    Column,
 	                    { key: column + item.id },
 	                    item[column]
 	                ));
@@ -27723,16 +27751,16 @@
 	    return ItemRow;
 	}(_react2.default.Component);
 
-	var ItemsTable = function (_React$Component3) {
-	    _inherits(ItemsTable, _React$Component3);
+	var ItemsTable = function (_React$Component4) {
+	    _inherits(ItemsTable, _React$Component4);
 
 	    function ItemsTable(props) {
 	        _classCallCheck(this, ItemsTable);
 
-	        var _this5 = _possibleConstructorReturn(this, Object.getPrototypeOf(ItemsTable).call(this, props));
+	        var _this6 = _possibleConstructorReturn(this, Object.getPrototypeOf(ItemsTable).call(this, props));
 
-	        _this5.sortBy = _this5.sortBy.bind(_this5);
-	        return _this5;
+	        _this6.sortBy = _this6.sortBy.bind(_this6);
+	        return _this6;
 	    }
 
 	    _createClass(ItemsTable, [{
@@ -27744,21 +27772,21 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _this6 = this;
+	            var _this7 = this;
 
 	            var rows = [];
 	            this.props.items.forEach(function (item) {
 	                rows.push(_react2.default.createElement(ItemRow, {
+	                    key: item.id,
 	                    item: item,
-	                    columnsToDisplay: _this6.props.columnsToDisplay,
-	                    key: item.id
+	                    columnsToDisplay: _this7.props.columnsToDisplay
 	                }));
 	            });
 
 	            return _react2.default.createElement(
 	                'table',
 	                { className: 'listing-component' },
-	                _react2.default.createElement(ListHead, {
+	                _react2.default.createElement(TableHead, {
 	                    columnsToDisplay: this.props.columnsToDisplay,
 	                    sortBy: this.sortBy
 	                }),

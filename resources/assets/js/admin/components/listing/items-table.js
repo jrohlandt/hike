@@ -2,7 +2,9 @@ import React from 'react';
 import style from './style.scss';
 import { Sort } from '../../../modules/sort.js';
 
-class ListHead extends React.Component {
+const HeadItem = (props) => props.children;
+
+class TableHead extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -12,22 +14,25 @@ class ListHead extends React.Component {
 
         this.props.columnsToDisplay.forEach((heading) => {
             headings.push(
-                <th
-                    key={heading + Date.now()}
-                    onClick={this.props.sortBy.bind(null, heading)}
-                >
-                    {heading}
-                </th>
+                <HeadItem key={heading} >
+                    <th onClick={this.props.sortBy.bind(null, heading)} >
+                        {heading}
+                    </th>
+                </HeadItem>
             );
         });
 
-        return (
-            <thead>
-                <tr>
-                    {headings}
-                </tr>
-            </thead>
-        );
+        return (<thead><tr>{headings}</tr></thead>);
+    }
+}
+
+class Column extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (<td>{this.props.children}</td>);
     }
 }
 
@@ -41,14 +46,10 @@ class ItemRow extends React.Component {
 
         this.props.columnsToDisplay.forEach((column) => {
             var item = this.props.item;
-            columns.push(<td key={column+item.id}>{item[column]}</td>);
+            columns.push(<Column key={column+item.id}>{item[column]}</Column>);
         });
 
-        return (
-            <tr>
-                {columns}
-            </tr>
-        );
+        return (<tr>{columns}</tr>);
     }
 }
 
@@ -68,16 +69,16 @@ export default class ItemsTable extends React.Component {
         this.props.items.forEach((item) => {
             rows.push(
                 <ItemRow
+                    key={item.id}
                     item={item}
                     columnsToDisplay={this.props.columnsToDisplay}
-                    key={item.id}
                 />
             );
         });
 
         return (
             <table className="listing-component">
-                <ListHead
+                <TableHead
                     columnsToDisplay={this.props.columnsToDisplay}
                     sortBy={this.sortBy}
                 />
