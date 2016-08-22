@@ -2,7 +2,11 @@ import React from 'react';
 import style from './style.scss';
 import { Sort } from '../../../modules/sort.js';
 
-var ListHead = React.createClass({
+class ListHead extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         var headings = [];
 
@@ -25,9 +29,13 @@ var ListHead = React.createClass({
             </thead>
         );
     }
-});
+}
 
-var ItemRow = React.createClass({
+class ItemRow extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         var columns = [];
 
@@ -42,13 +50,18 @@ var ItemRow = React.createClass({
             </tr>
         );
     }
-});
+}
 
-var ItemsTable = React.createClass({
+export default class ItemsTable extends React.Component {
+    constructor(props) {
+        super(props);
+        this.sortBy = this.sortBy.bind(this);
+    }
+
     sortBy(arg) {
         var items = Sort.by(this.props.items, arg);
         this.props.updateParentState(items);
-    },
+    }
 
     render() {
         var rows = [];
@@ -74,6 +87,4 @@ var ItemsTable = React.createClass({
             </table>
         );
     }
-});
-
-module.exports = ItemsTable;
+}

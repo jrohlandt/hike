@@ -1,10 +1,10 @@
-var React = require('react');
+import React from 'react';
 var Router = require('react-router');
 var RouteHandler = Router.RouteHandler;
 import { Link, IndexLink } from 'react-router';
 import style from './style.scss';
 
-var Component = React.createClass({
+export default class SideNav extends React.Component {
   render() {
     return (
       <div id="side-nav">
@@ -23,6 +23,4 @@ var Component = React.createClass({
       </div>
     );
   }
-});
-
-module.exports = Component;
+}

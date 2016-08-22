@@ -1,11 +1,11 @@
-var React = require('react');
+import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute, Link, browserHistory} from 'react-router';
 import style from './sass/all.scss';
 
 // Components to use in routes
-var App = require('./app');
-var Dashboard = require('./components/dashboard/index.js');
+import App from './app';
+import Dashboard from './components/dashboard/index.js';
 import HikesListing from './components/hikes/index.js';
 import TrailsListing from './components/trails/index.js';
 

@@ -2,8 +2,8 @@ import React from 'react';
 import style from './style.scss';
 
 import BreadCrumbs from '../breadcrumbs/index.js';
-import ItemsTable from '../listing/index.js';
-import PaginationComponent from '../pagination/index.js';
+import ItemsTable from './items-table.js';
+import Pagination from '../pagination/index.js';
 
 export default class ListingPage extends React.Component {
     constructor(props) {
@@ -62,7 +62,7 @@ export default class ListingPage extends React.Component {
                     columnsToDisplay={this.state.columnsToDisplay}
                     updateParentState={this.updateState}
                 />
-                <PaginationComponent
+                <Pagination
                     data={this.state.paginate}
                     updateParentPage={this.updatePage}
                 />

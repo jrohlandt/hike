@@ -1,7 +1,11 @@
 import React from 'react';
 import style from './style.scss';
 
-var PaginationButtons = React.createClass({
+class PaginationButtons extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    
     addPrevAndNextButtons(props, buttonsData) {
         buttonsData.unshift({
             name: 'previous',
@@ -18,7 +22,8 @@ var PaginationButtons = React.createClass({
         });
 
         return buttonsData;
-    },
+    }
+
     addButtons() {
         var props = this.props.data;
         var maxButtons = 3;
@@ -57,7 +62,8 @@ var PaginationButtons = React.createClass({
         });
 
         return buttons;
-    },
+    }
+
     render() {
         return (
             <div>
@@ -67,9 +73,12 @@ var PaginationButtons = React.createClass({
             </div>
         );
     }
-});
+}
 
-var PaginationComponent = React.createClass({
+export default class Pagination extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
         if (Object.keys(this.props.data).length < 1) {
             return (<div className="pagination-component"></div>);
@@ -84,6 +93,4 @@ var PaginationComponent = React.createClass({
             </div>
         );
     }
-});
-
-module.exports = PaginationComponent;
+}

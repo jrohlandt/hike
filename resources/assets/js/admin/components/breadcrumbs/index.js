@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './style.scss';
 
-var Component = React.createClass({
+export default class BreadCrumbs extends React.Component {
     render() {
         return (
             <div className="breadcrumbs-component">
@@ -9,6 +9,4 @@ var Component = React.createClass({
             </div>
         );
     }
-});
-
-module.exports = Component;
+}

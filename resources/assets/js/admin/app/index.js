@@ -1,10 +1,10 @@
-var React = require('react');
-var Router = require('react-router');
+import React from 'react';
+import { Router } from 'react-router';
 var RouteHandler = Router.RouteHandler;
-var SideNav = require('../components/side-nav/index.js');
+import SideNav from '../components/side-nav/index.js';
 import style from './style.scss';
 
-var Component = React.createClass({
+export default class App extends React.Component {
   render() {
     return (
       <div>
@@ -13,6 +13,4 @@ var Component = React.createClass({
       </div>
     );
   }
-});
-
-module.exports = Component;
+}

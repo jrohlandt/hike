@@ -426,6 +426,14 @@ body * {
 .content {
   float: right;
   width: 80%; }
+#side-nav {
+  float: left;
+  width: 20%;
+  background: #ccc; }
+
+#logo-container {
+  text-align: center;
+  padding: 1.5em; }
 table.listing-component {
   width: 95%;
   margin: auto;
@@ -459,11 +467,3 @@ table.pagination-component {
 .pagination-component .inactive {
   color: gray;
   cursor: default; }
-#side-nav {
-  float: left;
-  width: 20%;
-  background: #ccc; }
-
-#logo-container {
-  text-align: center;
-  padding: 1.5em; }
