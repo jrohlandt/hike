@@ -38,7 +38,7 @@ var TrailsContent = React.createClass({
                this.setState({items: items, paginate: res});
            }.bind(this),
            error: function(xhr, status, err) {
-               console.error('/trails', status, err.toString());
+               console.error(this.state.url, status, err.toString());
            }.bind(this)
        });
     },
