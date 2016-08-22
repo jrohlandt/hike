@@ -1,73 +1,23 @@
 import React from 'react';
 import style from './style.scss';
 
-import BreadCrumbs from '../breadcrumbs/index.js';
-import ItemsTable from '../listing/index.js';
-import PaginationComponent from '../pagination/index.js';
+import ListingPage from '../listing/page.js';
 
-export default class ListingPage extends React.Component {
+export default class HikesListing extends React.Component {
     constructor(props) {
         super(props);
-        var baseUrl = '/admin/hikes';
         this.state = {
-            baseUrl: baseUrl,
-            url: baseUrl,
-            items: [],
             columnsToDisplay: ['title', 'created_at'],
-            paginate: {}
         };
-        this.updateState = this.updateState.bind(this);
-        this.updatePage = this.updatePage.bind(this);
-    }
-
-    // updatePage
-    // get items for paginated page
-    updatePage(pageNum) {
-        var url = this.state.baseUrl + '?page=' + pageNum;
-        this.getItems(url);
-    }
-
-    // updateState
-    // @param data {items: {name: 'john smith'}}
-    updateState(data) {
-        this.setState({items: data});
-    }
-
-    getItems(url) {
-        $.ajax({
-           url: url,
-           dataType: 'json',
-           cache: false,
-           success: function(res) {
-               // res is returned from Laravel ->paginate()
-               var items = res.data;
-               delete res.data;
-               this.setState({items: items, paginate: res});
-           }.bind(this),
-           error: function(xhr, status, err) {
-               console.error(this.state.url, status, err.toString());
-           }.bind(this)
-       });
-    }
-
-    componentDidMount() {
-        this.getItems(this.state.url);
     }
 
     render() {
+        var props = {
+            columnsToDisplay: this.state.columnsToDisplay,
+            baseUrl: this.props.location.pathname
+        }
         return (
-            <div>
-                <BreadCrumbs />
-                <ItemsTable
-                    items={this.state.items}
-                    columnsToDisplay={this.state.columnsToDisplay}
-                    updateParentState={this.updateState}
-                />
-                <PaginationComponent
-                    data={this.state.paginate}
-                    updateParentPage={this.updatePage}
-                />
-            </div>
+            <ListingPage {...props} />
         );
     }
 }
