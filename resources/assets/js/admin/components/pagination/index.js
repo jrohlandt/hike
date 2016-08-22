@@ -23,6 +23,8 @@ var PaginationButtons = React.createClass({
         var props = this.props.data;
         var maxButtons = 3;
         var numberOfButtons = (props.last_page <= maxButtons ? props.last_page : maxButtons);
+
+        // TODO fix pagination will only start from 1 not for example from 2
         var range = [...Array(numberOfButtons).keys()];
         var buttonsData = [];
 
