@@ -42305,6 +42305,7 @@
 	                columnsToDisplay: ['name', 'created_at'],
 	                baseUrl: this.props.location.pathname
 	            };
+
 	            return _react2.default.createElement(_Page2.default, props);
 	        }
 	    }]);
@@ -42355,13 +42356,50 @@
 	var TrailCreate = function (_React$Component) {
 	    _inherits(TrailCreate, _React$Component);
 
-	    function TrailCreate() {
+	    function TrailCreate(props) {
 	        _classCallCheck(this, TrailCreate);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(TrailCreate).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TrailCreate).call(this, props));
+
+	        _this.state = {
+	            name: '',
+	            description: ''
+	        };
+	        _this.handleChange = _this.handleChange.bind(_this);
+	        _this.submitForm = _this.submitForm.bind(_this);
+	        return _this;
 	    }
 
 	    _createClass(TrailCreate, [{
+	        key: 'handleChange',
+	        value: function handleChange(event) {
+	            // console.log(event.target.name);
+	            var inputName = event.target.name;
+	            var inputValue = event.target.value;
+	            if (this.state.hasOwnProperty(inputName)) {
+	                var state = {};
+	                state[inputName] = inputValue;
+	                this.setState(state);
+	            }
+	        }
+	    }, {
+	        key: 'submitForm',
+	        value: function submitForm() {
+	            $.ajax({
+	                url: '/admin/trails',
+	                type: "POST",
+	                dataType: 'json',
+	                data: this.state,
+	                cache: false,
+	                success: function (res) {
+	                    console.log(res);
+	                }.bind(this),
+	                error: function (xhr, status, err) {
+	                    console.error(status, xhr);
+	                }.bind(this)
+	            });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
@@ -42369,9 +42407,51 @@
 	                null,
 	                _react2.default.createElement(_breadcrumbs2.default, null),
 	                _react2.default.createElement(
-	                    'p',
+	                    'form',
 	                    null,
-	                    'trail create'
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'input-group' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { htmlFor: 'trail-name' },
+	                            'Name '
+	                        ),
+	                        _react2.default.createElement('input', {
+	                            name: 'name',
+	                            id: 'trail-name',
+	                            className: 'form-control',
+	                            value: this.state.name,
+	                            onChange: this.handleChange
+	                        })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'input-group' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { htmlFor: 'trail-description' },
+	                            'Description '
+	                        ),
+	                        _react2.default.createElement('textarea', {
+	                            name: 'description',
+	                            id: 'trail-description',
+	                            value: this.state.description,
+	                            onChange: this.handleChange
+	                        })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'input-group' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            {
+	                                className: 'submit-button',
+	                                onClick: this.submitForm
+	                            },
+	                            'Submit'
+	                        )
+	                    )
 	                )
 	            );
 	        }

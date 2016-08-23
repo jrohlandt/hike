@@ -49,7 +49,12 @@ class TrailsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|max:100',
+            'description' => 'max:10'
+        ]);
+
+        return response()->json(['status' => 200]);
     }
 
     /**
