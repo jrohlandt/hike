@@ -8,14 +8,14 @@ export default class TrailCreate extends React.Component {
         super(props);
         this.state = {
             name: '',
-            description: ''
+            description: '',
+            validationErrors: {}
         };
         this.handleChange = this.handleChange.bind(this);
         this.submitForm = this.submitForm.bind(this);
     }
 
     handleChange(event) {
-        // console.log(event.target.name);
         var inputName = event.target.name;
         var inputValue = event.target.value;
         if (this.state.hasOwnProperty(inputName)) {
@@ -33,15 +33,23 @@ export default class TrailCreate extends React.Component {
            data: this.state,
            cache: false,
            success: function(res) {
-               console.log(res);
+               location.pathName = '/admin/trails';
            }.bind(this),
            error: function(xhr, status, err) {
-               console.error( status, xhr);
+               var errors = $.parseJSON(xhr.responseText);
+               var validationErrors = {};
+               for (var key in errors) {
+                   if (errors.hasOwnProperty(key)) {
+                       validationErrors[key] = errors[key][0];
+                   }
+               }
+               this.setState({validationErrors});
            }.bind(this)
        });
     }
 
     render() {
+        var errors = this.state.validationErrors;
         return (
             <div>
                 <BreadCrumbs />
@@ -55,6 +63,9 @@ export default class TrailCreate extends React.Component {
                             value={this.state.name}
                             onChange={this.handleChange}
                         />
+                        <div className="validation-error" >
+                            { errors.name ? errors.name : '' }
+                        </div>
                     </div>
 
                     <div className="input-group">
@@ -66,6 +77,10 @@ export default class TrailCreate extends React.Component {
                             onChange={this.handleChange}
                         >
                         </textarea>
+                        <div className="validation-error" >
+                            { errors.description ? errors.description : '' }
+                        </div>
+
                     </div>
                     <div className="input-group">
                         <div

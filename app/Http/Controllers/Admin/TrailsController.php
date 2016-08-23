@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use App\Http\Requests\TrailDefaultRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Trail as Model;
 
@@ -47,13 +47,12 @@ class TrailsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TrailDefaultRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required|max:100',
-            'description' => 'max:10'
+        $this->model->create([
+            'name' => $request->name,
+            'description' => $request->description,
         ]);
-
         return response()->json(['status' => 200]);
     }
 

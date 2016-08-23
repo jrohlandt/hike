@@ -42363,7 +42363,8 @@
 
 	        _this.state = {
 	            name: '',
-	            description: ''
+	            description: '',
+	            validationErrors: {}
 	        };
 	        _this.handleChange = _this.handleChange.bind(_this);
 	        _this.submitForm = _this.submitForm.bind(_this);
@@ -42373,7 +42374,6 @@
 	    _createClass(TrailCreate, [{
 	        key: 'handleChange',
 	        value: function handleChange(event) {
-	            // console.log(event.target.name);
 	            var inputName = event.target.name;
 	            var inputValue = event.target.value;
 	            if (this.state.hasOwnProperty(inputName)) {
@@ -42392,16 +42392,24 @@
 	                data: this.state,
 	                cache: false,
 	                success: function (res) {
-	                    console.log(res);
+	                    location.pathName = '/admin/trails';
 	                }.bind(this),
 	                error: function (xhr, status, err) {
-	                    console.error(status, xhr);
+	                    var errors = $.parseJSON(xhr.responseText);
+	                    var validationErrors = {};
+	                    for (var key in errors) {
+	                        if (errors.hasOwnProperty(key)) {
+	                            validationErrors[key] = errors[key][0];
+	                        }
+	                    }
+	                    this.setState({ validationErrors: validationErrors });
 	                }.bind(this)
 	            });
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var errors = this.state.validationErrors;
 	            return _react2.default.createElement(
 	                'div',
 	                null,
@@ -42423,7 +42431,12 @@
 	                            className: 'form-control',
 	                            value: this.state.name,
 	                            onChange: this.handleChange
-	                        })
+	                        }),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'validation-error' },
+	                            errors.name ? errors.name : ''
+	                        )
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
@@ -42438,7 +42451,12 @@
 	                            id: 'trail-description',
 	                            value: this.state.description,
 	                            onChange: this.handleChange
-	                        })
+	                        }),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'validation-error' },
+	                            errors.description ? errors.description : ''
+	                        )
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
