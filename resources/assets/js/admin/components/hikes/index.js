@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './style.scss';
 
-import ListingPage from '../listing/page.js';
+import ListingPage from '../listing/Page';
 
 export default class HikesListing extends React.Component {
     constructor(props) {

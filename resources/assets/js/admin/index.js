@@ -8,6 +8,7 @@ import App from './app';
 import Dashboard from './components/dashboard/index.js';
 import HikesListing from './components/hikes/index.js';
 import TrailsListing from './components/trails/index.js';
+import TrailCreate from './components/trails/create.js';
 
 var routes = (
   <Router history={browserHistory} >
@@ -15,6 +16,7 @@ var routes = (
       <IndexRoute component={Dashboard} />
       <Route path="hikes" component={HikesListing} />
       <Route path="trails" component={TrailsListing} />
+      <Route path="trails/create" component={TrailCreate} />
     </Route>
   </Router>
 );

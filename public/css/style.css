@@ -434,6 +434,8 @@ body * {
 #logo-container {
   text-align: center;
   padding: 1.5em; }
+.breadcrumbs-component {
+  padding: 1em; }
 table.listing-component {
   width: 95%;
   margin: auto;
@@ -447,8 +449,6 @@ table.listing-component {
 
 .listing-component td {
   padding: .5em; }
-.breadcrumbs-component {
-  padding: 1em; }
 table.pagination-component {
   width: 95%;
   margin: auto;

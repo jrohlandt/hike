@@ -38,7 +38,7 @@ class TrailsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.index');
     }
 
     /**

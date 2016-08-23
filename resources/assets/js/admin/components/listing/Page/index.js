@@ -1,14 +1,16 @@
 import React from 'react';
 import style from './style.scss';
 
-import BreadCrumbs from '../breadcrumbs/index.js';
-import ItemsTable from './items-table.js';
-import Pagination from '../pagination/index.js';
+import BreadCrumbs from '../../breadcrumbs/index.js';
+import ItemsTable from '../ItemsTable';
+import ActionsRow from '../ActionsRow';
+import Pagination from '../../pagination/index.js';
 
 export default class ListingPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            itemType: props.itemType || 'item',
             baseUrl: props.baseUrl,
             url: props.baseUrl,
             items: [],
@@ -61,6 +63,10 @@ export default class ListingPage extends React.Component {
                     items={this.state.items}
                     columnsToDisplay={this.state.columnsToDisplay}
                     updateParentState={this.updateState}
+                />
+                <ActionsRow
+                    itemType={this.state.itemType}
+                    baseUrl={this.state.baseUrl}
                 />
                 <Pagination
                     data={this.state.paginate}

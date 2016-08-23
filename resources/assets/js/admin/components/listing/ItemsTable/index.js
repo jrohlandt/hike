@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './style.scss';
-import { Sort } from '../../../modules/sort.js';
+import { Sort } from '../../../../modules/sort.js';
 
 const HeadItem = (props) => props.children;
 
@@ -46,7 +46,11 @@ class ItemRow extends React.Component {
 
         this.props.columnsToDisplay.forEach((column) => {
             var item = this.props.item;
-            columns.push(<Column key={column+item.id}>{item[column]}</Column>);
+            columns.push(
+                <Column key={column+item.id}>
+                        {item[column]}
+                </Column>
+            );
         });
 
         return (<tr>{columns}</tr>);
