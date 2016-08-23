@@ -92,24 +92,28 @@ class DatabaseSeeder extends Seeder
                 'description' => 'strenuous shady trail, that leads to a dam',
                 'severity_id' => $severity_ids[rand(0, 3)],
                 'exposure_id' => $exposure_ids[rand(0, 3)],
+                'created_at' => '2015-01-09 22:14:06',
             ],
             [
                 'name' => 'Contour Path',
                 'description' => 'very long level path that goes almost around the table mountain.',
                 'severity_id' => $severity_ids[rand(0, 3)],
                 'exposure_id' => $exposure_ids[rand(0, 3)],
+                'created_at' => '2016-07-10 10:16:11',
             ],
             [
                 'name' => 'Pipe Track',
                 'description' => 'easy trail with historical water pipes.',
                 'severity_id' => $severity_ids[rand(0, 3)],
                 'exposure_id' => $exposure_ids[rand(0, 3)],
+                'created_at' => '2015-01-06 13:04:06',
             ],
             [
                 'name' => 'platteklip gorge',
                 'description' => 'steep trail up the face of table mountain.',
                 'severity_id' => $severity_ids[rand(0, 3)],
                 'exposure_id' => $exposure_ids[rand(0, 3)],
+                'created_at' => '2016-02-28 16:10:06',
             ],
             [
                 'name' => 'kasteels poort',
@@ -134,6 +138,7 @@ class DatabaseSeeder extends Seeder
                 'description' => 'ajofda owerij pasofk ewfjolefakfdj oa fej, asldfj',
                 'severity_id' => $severity_ids[rand(0, 3)],
                 'exposure_id' => $exposure_ids[rand(0, 3)],
+                'created_at' => '2015-05-22 19:01:38',
             ],
             [
                 'name' => 'sIlvermines',
@@ -146,12 +151,14 @@ class DatabaseSeeder extends Seeder
                 'description' => 'used to access lower parts of the mountain by car',
                 'severity_id' => $severity_ids[rand(0, 3)],
                 'exposure_id' => $exposure_ids[rand(0, 3)],
+                'created_at' => '2014-12-31 23:59:59',
             ],
             [
                 'name' => 'the saddle',
                 'description' => 'used to access lower parts of the mountain by car',
                 'severity_id' => $severity_ids[rand(0, 3)],
                 'exposure_id' => $exposure_ids[rand(0, 3)],
+                'created_at' => '2015-06-10 00:14:06',
             ],
             [
                 'name' => 'cable car',
@@ -170,12 +177,14 @@ class DatabaseSeeder extends Seeder
                 'description' => 'used to access lower parts of the mountain by car',
                 'severity_id' => $severity_ids[rand(0, 3)],
                 'exposure_id' => $exposure_ids[rand(0, 3)],
+                'created_at' => '2016-10-16 15:14:06',
             ],
             [
                 'name' => '1234 32432 afasdfsa',
                 'description' => 'used to access lower parts of the mountain by car',
                 'severity_id' => $severity_ids[rand(0, 3)],
                 'exposure_id' => $exposure_ids[rand(0, 3)],
+                'created_at' => '2015-08-19 22:14:06',
             ],
             [
                 'name' => 'pfasdf 99',
