@@ -427,6 +427,9 @@ body * {
   float: right;
   width: 80%; }
 
+a {
+  cursor: pointer; }
+
 .submit-button {
   min-height: 30px;
   max-width: 100px;
@@ -456,7 +459,8 @@ table.listing-component {
 .listing-component th {
   padding: 1em;
   text-align: left;
-  border-bottom: thick solid black; }
+  border-bottom: thick solid black;
+  cursor: pointer; }
 
 .listing-component td {
   padding: .5em; }

@@ -1,6 +1,7 @@
 import React from 'react';
 import style from './style.scss';
 import { Sort } from '../../../../modules/sort.js';
+import { Link } from 'react-router';
 
 const HeadItem = (props) => props.children;
 
@@ -32,7 +33,7 @@ class Column extends React.Component {
     }
 
     render() {
-        return (<td>{this.props.children}</td>);
+        return (this.props.children);
     }
 }
 
@@ -48,7 +49,11 @@ class ItemRow extends React.Component {
             var item = this.props.item;
             columns.push(
                 <Column key={column+item.id}>
-                        {item[column]}
+                    <td>
+                        <Link to={this.props.baseUrl + '/' + item.id + '/edit'}>
+                            {item[column]}
+                        </Link>
+                    </td>
                 </Column>
             );
         });
@@ -76,6 +81,7 @@ export default class ItemsTable extends React.Component {
                     key={item.id}
                     item={item}
                     columnsToDisplay={this.props.columnsToDisplay}
+                    baseUrl={this.props.baseUrl}
                 />
             );
         });

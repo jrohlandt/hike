@@ -78,8 +78,13 @@
 
 	var _create2 = _interopRequireDefault(_create);
 
+	var _edit = __webpack_require__(368);
+
+	var _edit2 = _interopRequireDefault(_edit);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	// Components to use in routes
 	var routes = _react2.default.createElement(
 	  _reactRouter.Router,
 	  { history: _reactRouter.browserHistory },
@@ -89,12 +94,10 @@
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _index2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'hikes', component: _index4.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'trails', component: _index6.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: 'trails/create', component: _create2.default })
+	    _react2.default.createElement(_reactRouter.Route, { path: 'trails/create', component: _create2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: 'trails/:id/edit', component: _edit2.default })
 	  )
 	);
-
-	// Components to use in routes
-
 
 	(0, _reactDom.render)(routes, document.getElementById('app'));
 
@@ -27548,7 +27551,8 @@
 	                _react2.default.createElement(_ItemsTable2.default, {
 	                    items: this.state.items,
 	                    columnsToDisplay: this.state.columnsToDisplay,
-	                    updateParentState: this.updateState
+	                    updateParentState: this.updateState,
+	                    baseUrl: this.state.baseUrl
 	                }),
 	                _react2.default.createElement(_ActionsRow2.default, {
 	                    itemType: this.state.itemType,
@@ -27757,6 +27761,8 @@
 
 	var _sort = __webpack_require__(255);
 
+	var _reactRouter = __webpack_require__(175);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27824,11 +27830,7 @@
 	    _createClass(Column, [{
 	        key: 'render',
 	        value: function render() {
-	            return _react2.default.createElement(
-	                'td',
-	                null,
-	                this.props.children
-	            );
+	            return this.props.children;
 	        }
 	    }]);
 
@@ -27856,7 +27858,15 @@
 	                columns.push(_react2.default.createElement(
 	                    Column,
 	                    { key: column + item.id },
-	                    item[column]
+	                    _react2.default.createElement(
+	                        'td',
+	                        null,
+	                        _react2.default.createElement(
+	                            _reactRouter.Link,
+	                            { to: _this5.props.baseUrl + '/' + item.id + '/edit' },
+	                            item[column]
+	                        )
+	                    )
 	                ));
 	            });
 
@@ -27899,7 +27909,8 @@
 	                rows.push(_react2.default.createElement(ItemRow, {
 	                    key: item.id,
 	                    item: item,
-	                    columnsToDisplay: _this7.props.columnsToDisplay
+	                    columnsToDisplay: _this7.props.columnsToDisplay,
+	                    baseUrl: _this7.props.baseUrl
 	                }));
 	            });
 
@@ -42427,6 +42438,185 @@
 
 /***/ },
 /* 367 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _style = __webpack_require__(366);
+
+	var _style2 = _interopRequireDefault(_style);
+
+	var _reactRouter = __webpack_require__(175);
+
+	var _alert = __webpack_require__(249);
+
+	var _alert2 = _interopRequireDefault(_alert);
+
+	var _breadcrumbs = __webpack_require__(251);
+
+	var _breadcrumbs2 = _interopRequireDefault(_breadcrumbs);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var TrailCreate = function (_React$Component) {
+	    _inherits(TrailCreate, _React$Component);
+
+	    function TrailCreate(props) {
+	        _classCallCheck(this, TrailCreate);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TrailCreate).call(this, props));
+
+	        _this.state = {
+	            name: '',
+	            description: '',
+	            validationErrors: {}
+	        };
+
+	        _this.handleChange = _this.handleChange.bind(_this);
+	        _this.submitForm = _this.submitForm.bind(_this);
+	        _this.clearValidationError = _this.clearValidationError.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(TrailCreate, [{
+	        key: 'handleChange',
+	        value: function handleChange(event) {
+	            var inputName = event.target.name;
+	            var inputValue = event.target.value;
+	            if (this.state.hasOwnProperty(inputName)) {
+	                var state = {};
+	                state[inputName] = inputValue;
+	                this.setState(state);
+	                this.clearValidationError(inputName);
+	            }
+	        }
+	    }, {
+	        key: 'clearValidationError',
+	        value: function clearValidationError(inputName) {
+	            var validationErrors = this.state.validationErrors;
+	            if (validationErrors.hasOwnProperty(inputName)) {
+	                delete validationErrors[inputName];
+	                this.setState({ validationErrors: validationErrors });
+	            }
+	        }
+	    }, {
+	        key: 'submitForm',
+	        value: function submitForm() {
+	            $.ajax({
+	                url: '/admin/trails',
+	                type: "POST",
+	                dataType: 'json',
+	                data: this.state,
+	                cache: false,
+	                success: function (res) {
+	                    localStorage.setItem('flash-success', 'Trail has been successfully added!');
+	                    _reactRouter.browserHistory.push('/admin/trails');
+	                }.bind(this),
+	                error: function (xhr, status, err) {
+	                    var errors = $.parseJSON(xhr.responseText);
+	                    var validationErrors = {};
+	                    for (var key in errors) {
+	                        if (errors.hasOwnProperty(key)) {
+	                            validationErrors[key] = errors[key][0];
+	                        }
+	                    }
+	                    this.setState({ validationErrors: validationErrors });
+	                }.bind(this)
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var errors = this.state.validationErrors;
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(_alert2.default, null),
+	                _react2.default.createElement(_breadcrumbs2.default, null),
+	                _react2.default.createElement(
+	                    'form',
+	                    null,
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'input-group' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { htmlFor: 'trail-name' },
+	                            'Name '
+	                        ),
+	                        _react2.default.createElement('input', {
+	                            name: 'name',
+	                            id: 'trail-name',
+	                            className: 'form-control',
+	                            value: this.state.name,
+	                            onChange: this.handleChange
+	                        }),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'validation-error' },
+	                            errors.name ? errors.name : ''
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'input-group' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { htmlFor: 'trail-description' },
+	                            'Description '
+	                        ),
+	                        _react2.default.createElement('textarea', {
+	                            name: 'description',
+	                            id: 'trail-description',
+	                            value: this.state.description,
+	                            onChange: this.handleChange
+	                        }),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'validation-error' },
+	                            errors.description ? errors.description : ''
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'input-group' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            {
+	                                className: 'submit-button',
+	                                onClick: this.submitForm
+	                            },
+	                            'Submit'
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return TrailCreate;
+	}(_react2.default.Component);
+
+	exports.default = TrailCreate;
+
+/***/ },
+/* 368 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

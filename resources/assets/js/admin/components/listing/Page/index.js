@@ -65,6 +65,7 @@ export default class ListingPage extends React.Component {
                     items={this.state.items}
                     columnsToDisplay={this.state.columnsToDisplay}
                     updateParentState={this.updateState}
+                    baseUrl={this.state.baseUrl}
                 />
                 <ActionsRow
                     itemType={this.state.itemType}
