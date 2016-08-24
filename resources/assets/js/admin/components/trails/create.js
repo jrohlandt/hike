@@ -1,5 +1,6 @@
 import React from 'react';
 import style from './style.scss';
+import { browserHistory } from 'react-router';
 
 import BreadCrumbs from '../breadcrumbs';
 
@@ -11,8 +12,10 @@ export default class TrailCreate extends React.Component {
             description: '',
             validationErrors: {}
         };
+
         this.handleChange = this.handleChange.bind(this);
         this.submitForm = this.submitForm.bind(this);
+        this.clearValidationError = this.clearValidationError.bind(this);
     }
 
     handleChange(event) {
@@ -22,6 +25,15 @@ export default class TrailCreate extends React.Component {
             var state = {};
             state[inputName] = inputValue;
             this.setState(state);
+            this.clearValidationError(inputName);
+        }
+    }
+
+    clearValidationError(inputName) {
+        var validationErrors = this.state.validationErrors;
+        if (validationErrors.hasOwnProperty(inputName)) {
+            delete validationErrors[inputName];
+            this.setState({validationErrors});
         }
     }
 
@@ -33,7 +45,8 @@ export default class TrailCreate extends React.Component {
            data: this.state,
            cache: false,
            success: function(res) {
-               location.pathName = '/admin/trails';
+               localStorage.setItem('flash-success', 'Trail has been successfully added!');
+               browserHistory.push('/admin/trails');
            }.bind(this),
            error: function(xhr, status, err) {
                var errors = $.parseJSON(xhr.responseText);

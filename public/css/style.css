@@ -435,7 +435,8 @@ body * {
   cursor: pointer; }
 
 .validation-error {
-  color: red; }
+  color: red;
+  min-height: 2em; }
 #side-nav {
   float: left;
   width: 20%;

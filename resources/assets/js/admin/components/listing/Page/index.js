@@ -1,10 +1,11 @@
 import React from 'react';
 import style from './style.scss';
 
-import BreadCrumbs from '../../breadcrumbs/index.js';
+import Alert from '../../alert';
+import BreadCrumbs from '../../breadcrumbs';
 import ItemsTable from '../ItemsTable';
 import ActionsRow from '../ActionsRow';
-import Pagination from '../../pagination/index.js';
+import Pagination from '../../pagination';
 
 export default class ListingPage extends React.Component {
     constructor(props) {
@@ -58,6 +59,7 @@ export default class ListingPage extends React.Component {
     render() {
         return (
             <div>
+                <Alert />
                 <BreadCrumbs />
                 <ItemsTable
                     items={this.state.items}
