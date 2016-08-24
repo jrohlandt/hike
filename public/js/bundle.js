@@ -27146,9 +27146,9 @@
 
 	var _reactRouter = __webpack_require__(175);
 
-	var _index = __webpack_require__(240);
+	var _sideNav = __webpack_require__(240);
 
-	var _index2 = _interopRequireDefault(_index);
+	var _sideNav2 = _interopRequireDefault(_sideNav);
 
 	var _style = __webpack_require__(242);
 
@@ -27179,7 +27179,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_index2.default, null),
+	        _react2.default.createElement(_sideNav2.default, null),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'content' },
@@ -42447,6 +42447,10 @@
 
 	var _reactRouter = __webpack_require__(175);
 
+	var _alert = __webpack_require__(249);
+
+	var _alert2 = _interopRequireDefault(_alert);
+
 	var _breadcrumbs = __webpack_require__(251);
 
 	var _breadcrumbs2 = _interopRequireDefault(_breadcrumbs);
@@ -42532,6 +42536,7 @@
 	            return _react2.default.createElement(
 	                'div',
 	                null,
+	                _react2.default.createElement(_alert2.default, null),
 	                _react2.default.createElement(_breadcrumbs2.default, null),
 	                _react2.default.createElement(
 	                    'form',

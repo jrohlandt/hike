@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router } from 'react-router';
 var RouteHandler = Router.RouteHandler;
-import SideNav from '../components/side-nav/index.js';
+import SideNav from '../components/side-nav';
 import style from './style.scss';
 
 export default class App extends React.Component {
@@ -9,7 +9,9 @@ export default class App extends React.Component {
     return (
       <div>
         <SideNav />
-        <div className='content'>{this.props.children}</div>
+        <div className='content'>
+            {this.props.children}
+        </div>
       </div>
     );
   }

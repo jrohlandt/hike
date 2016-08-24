@@ -2,6 +2,7 @@ import React from 'react';
 import style from './style.scss';
 import { browserHistory } from 'react-router';
 
+import Alert from '../alert';
 import BreadCrumbs from '../breadcrumbs';
 
 export default class TrailCreate extends React.Component {
@@ -65,6 +66,7 @@ export default class TrailCreate extends React.Component {
         var errors = this.state.validationErrors;
         return (
             <div>
+                <Alert />
                 <BreadCrumbs />
                 <form>
                     <div className="input-group">
