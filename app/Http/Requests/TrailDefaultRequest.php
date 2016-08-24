@@ -26,7 +26,7 @@ class TrailDefaultRequest extends Request
     {
         return [
             'name' => 'required|max:100',
-            'description' => 'max:10'
+            'description' => 'max:1000'
         ];
     }
 }

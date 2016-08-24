@@ -42653,17 +42653,19 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var TrailCreate = function (_React$Component) {
-	    _inherits(TrailCreate, _React$Component);
+	var TrailEdit = function (_React$Component) {
+	    _inherits(TrailEdit, _React$Component);
 
-	    function TrailCreate(props) {
-	        _classCallCheck(this, TrailCreate);
+	    function TrailEdit(props) {
+	        _classCallCheck(this, TrailEdit);
 
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TrailCreate).call(this, props));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TrailEdit).call(this, props));
 
 	        _this.state = {
+	            id: props.params.id,
 	            name: '',
 	            description: '',
+	            _method: 'PATCH',
 	            validationErrors: {}
 	        };
 
@@ -42673,7 +42675,7 @@
 	        return _this;
 	    }
 
-	    _createClass(TrailCreate, [{
+	    _createClass(TrailEdit, [{
 	        key: 'handleChange',
 	        value: function handleChange(event) {
 	            var inputName = event.target.name;
@@ -42698,13 +42700,13 @@
 	        key: 'submitForm',
 	        value: function submitForm() {
 	            $.ajax({
-	                url: '/admin/trails',
+	                url: '/admin/trails/' + this.state.id,
 	                type: "POST",
 	                dataType: 'json',
 	                data: this.state,
 	                cache: false,
 	                success: function (res) {
-	                    localStorage.setItem('flash-success', 'Trail has been successfully added!');
+	                    localStorage.setItem('flash-success', 'Trail has been saved.');
 	                    _reactRouter.browserHistory.push('/admin/trails');
 	                }.bind(this),
 	                error: function (xhr, status, err) {
@@ -42720,13 +42722,36 @@
 	            });
 	        }
 	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            $.ajax({
+	                url: '/admin/trails/' + this.state.id,
+	                type: "GET",
+	                dataType: 'json',
+	                cache: false,
+	                success: function (res) {
+	                    console.log(res);
+	                    this.setState({
+	                        name: res.name,
+	                        description: res.description
+	                    });
+	                }.bind(this),
+	                error: function (xhr, status, err) {
+	                    console.log(xhr);
+	                }.bind(this)
+	            });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var errors = this.state.validationErrors;
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(_alert2.default, null),
+	                _react2.default.createElement(_alert2.default, {
+	                    message: this.state.message,
+	                    'class': this.state.class
+	                }),
 	                _react2.default.createElement(_breadcrumbs2.default, null),
 	                _react2.default.createElement(
 	                    'form',
@@ -42789,10 +42814,10 @@
 	        }
 	    }]);
 
-	    return TrailCreate;
+	    return TrailEdit;
 	}(_react2.default.Component);
 
-	exports.default = TrailCreate;
+	exports.default = TrailEdit;
 
 /***/ }
 /******/ ]);

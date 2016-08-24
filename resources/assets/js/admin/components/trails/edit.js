@@ -5,13 +5,15 @@ import { browserHistory } from 'react-router';
 import Alert from '../alert';
 import BreadCrumbs from '../breadcrumbs';
 
-export default class TrailCreate extends React.Component {
+export default class TrailEdit extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: props.params.id,
             name: '',
             description: '',
-            validationErrors: {}
+            _method: 'PATCH',
+            validationErrors: {},
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -40,13 +42,13 @@ export default class TrailCreate extends React.Component {
 
     submitForm() {
         $.ajax({
-           url: '/admin/trails',
+           url: '/admin/trails/' + this.state.id,
            type: "POST",
            dataType: 'json',
            data: this.state,
            cache: false,
            success: function(res) {
-               localStorage.setItem('flash-success', 'Trail has been successfully added!');
+               localStorage.setItem('flash-success', 'Trail has been saved.');
                browserHistory.push('/admin/trails');
            }.bind(this),
            error: function(xhr, status, err) {
@@ -62,11 +64,33 @@ export default class TrailCreate extends React.Component {
        });
     }
 
+    componentDidMount() {
+        $.ajax({
+           url: '/admin/trails/' + this.state.id,
+           type: "GET",
+           dataType: 'json',
+           cache: false,
+           success: function(res) {
+               console.log(res);
+              this.setState({
+                name: res.name,
+                description: res.description
+              });
+           }.bind(this),
+           error: function(xhr, status, err) {
+               console.log(xhr);
+           }.bind(this)
+       });
+    }
+
     render() {
         var errors = this.state.validationErrors;
         return (
             <div>
-                <Alert />
+                <Alert
+                    message={this.state.message}
+                    class={this.state.class}
+                />
                 <BreadCrumbs />
                 <form>
                     <div className="input-group">

@@ -25,7 +25,7 @@ class TrailsController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            return $this->model->paginate(2);
+            return $this->model->paginate(10);
         }
 
         return view('admin.index');
@@ -62,9 +62,13 @@ class TrailsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-        //
+        if ($request->ajax()) {
+            return $this->model->find($id);
+        }
+
+        return view('admin.index');
     }
 
     /**
@@ -75,7 +79,7 @@ class TrailsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.index');
     }
 
     /**
@@ -85,9 +89,20 @@ class TrailsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TrailDefaultRequest $request, $id)
     {
-        //
+        if ($item = $this->model->find($id)) {
+            $input = $request->input();
+            $item->name = $input['name'];
+            $item->description = $input['description'];
+
+            // return response()->json($input);
+            $item->save();
+
+            return response()->json(['status' => 200]);
+        }
+
+        return response()->json(['status' => 404]);
     }
 
     /**

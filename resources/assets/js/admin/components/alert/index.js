@@ -28,8 +28,8 @@ export default class Alert extends React.Component {
                 this.setState(alerts[0]);
             }
         }
-
     }
+
 
     storageAvailable(type) {
         try {
