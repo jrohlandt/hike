@@ -5,6 +5,7 @@ import { browserHistory } from 'react-router';
 import Alert from '../alert';
 import BreadCrumbs from '../breadcrumbs';
 import FormInput from '../forms/Input';
+import FormSelect from '../forms/Select';
 
 export default class TrailEdit extends React.Component {
     constructor(props) {
@@ -13,14 +14,19 @@ export default class TrailEdit extends React.Component {
             id: props.params.id,
             name: '',
             distance: '',
+            severity_id: '',
+            exposure_id: '',
             elevation_min: '',
             elevation_max: '',
             description: '',
+            severities: [],
+            exposures: [],
             _method: 'PATCH',
             validationErrors: {},
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
         this.submitForm = this.submitForm.bind(this);
         this.clearValidationError = this.clearValidationError.bind(this);
     }
@@ -28,6 +34,15 @@ export default class TrailEdit extends React.Component {
     handleChange(event) {
         var inputName = event.target.name;
         var inputValue = event.target.value;
+        if (this.state.hasOwnProperty(inputName)) {
+            var state = {};
+            state[inputName] = inputValue;
+            this.setState(state);
+            this.clearValidationError(inputName);
+        }
+    }
+
+    handleSelect(inputName, inputValue) {
         if (this.state.hasOwnProperty(inputName)) {
             var state = {};
             state[inputName] = inputValue;
@@ -77,11 +92,16 @@ export default class TrailEdit extends React.Component {
            success: function(res) {
                console.log(res);
               this.setState({
-                name: res.name,
-                distance: res.distance,
-                elevation_min: res.elevation_min,
-                elevation_max: res.elevation_max,
-                description: res.description
+                name: res.items.name,
+                distance: res.items.distance,
+                severity_id: res.items.severity_id,
+                exposure_id: res.items.exposure_id,
+                elevation_min: res.items.elevation_min,
+                elevation_max: res.items.elevation_max,
+                description: res.items.description,
+                severities: res.severities,
+                exposures: res.exposures
+
               });
            }.bind(this),
            error: function(xhr, status, err) {
@@ -110,7 +130,28 @@ export default class TrailEdit extends React.Component {
                             value={this.state.name}
                             error={errors.name}
                             handleChange={this.handleChange}
-                            />
+                        />
+                    </div>
+
+                    <div className="form-row">
+                        <FormSelect
+                            id="trail-severity"
+                            labelText="Severity"
+                            name="severity_id"
+                            options={this.state.severities}
+                            selected={this.state.severity_id}
+                            error={errors.severity_id}
+                            handleSelect={this.handleSelect}
+                        />
+                        <FormSelect
+                            id="trail-exposure"
+                            labelText="Exposure"
+                            name="exposure_id"
+                            options={this.state.exposures}
+                            selected={this.state.exposure_id}
+                            error={errors.exposure_id}
+                            handleSelect={this.handleSelect}
+                        />
                     </div>
 
                     <div className="form-row">

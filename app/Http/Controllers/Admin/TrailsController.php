@@ -8,6 +8,8 @@ use App\Http\Requests\TrailDefaultRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Trail as Model;
 
+use DB;
+
 class TrailsController extends Controller
 {
     protected $model;
@@ -68,7 +70,10 @@ class TrailsController extends Controller
     public function show($id, Request $request)
     {
         if ($request->ajax()) {
-            return $this->model->find($id);
+            $items = $this->model->find($id);
+            $severities = DB::table('severities')->get();
+            $exposures = DB::table('exposures')->get();
+            return response()->json(compact('items', 'severities', 'exposures'));
         }
 
         return view('admin.index');
@@ -97,11 +102,12 @@ class TrailsController extends Controller
         if ($item = $this->model->find($id)) {
             $item->name = $request->name;
             $item->distance = $request->distance;
+            $item->severity_id = $request->severity_id;
+            $item->exposure_id = $request->exposure_id;
             $item->elevation_min = $request->elevation_min;
             $item->elevation_max = $request->elevation_max;
             $item->description = $request->description;
 
-            // return response()->json($input);
             $item->save();
 
             return response()->json(['status' => 200]);

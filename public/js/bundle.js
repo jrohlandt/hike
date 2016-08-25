@@ -42646,6 +42646,10 @@
 
 	var _Input2 = _interopRequireDefault(_Input);
 
+	var _Select = __webpack_require__(375);
+
+	var _Select2 = _interopRequireDefault(_Select);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -42666,14 +42670,19 @@
 	            id: props.params.id,
 	            name: '',
 	            distance: '',
+	            severity_id: '',
+	            exposure_id: '',
 	            elevation_min: '',
 	            elevation_max: '',
 	            description: '',
+	            severities: [],
+	            exposures: [],
 	            _method: 'PATCH',
 	            validationErrors: {}
 	        };
 
 	        _this.handleChange = _this.handleChange.bind(_this);
+	        _this.handleSelect = _this.handleSelect.bind(_this);
 	        _this.submitForm = _this.submitForm.bind(_this);
 	        _this.clearValidationError = _this.clearValidationError.bind(_this);
 	        return _this;
@@ -42684,6 +42693,16 @@
 	        value: function handleChange(event) {
 	            var inputName = event.target.name;
 	            var inputValue = event.target.value;
+	            if (this.state.hasOwnProperty(inputName)) {
+	                var state = {};
+	                state[inputName] = inputValue;
+	                this.setState(state);
+	                this.clearValidationError(inputName);
+	            }
+	        }
+	    }, {
+	        key: 'handleSelect',
+	        value: function handleSelect(inputName, inputValue) {
 	            if (this.state.hasOwnProperty(inputName)) {
 	                var state = {};
 	                state[inputName] = inputValue;
@@ -42736,11 +42755,16 @@
 	                success: function (res) {
 	                    console.log(res);
 	                    this.setState({
-	                        name: res.name,
-	                        distance: res.distance,
-	                        elevation_min: res.elevation_min,
-	                        elevation_max: res.elevation_max,
-	                        description: res.description
+	                        name: res.items.name,
+	                        distance: res.items.distance,
+	                        severity_id: res.items.severity_id,
+	                        exposure_id: res.items.exposure_id,
+	                        elevation_min: res.items.elevation_min,
+	                        elevation_max: res.items.elevation_max,
+	                        description: res.items.description,
+	                        severities: res.severities,
+	                        exposures: res.exposures
+
 	                    });
 	                }.bind(this),
 	                error: function (xhr, status, err) {
@@ -42773,6 +42797,28 @@
 	                            value: this.state.name,
 	                            error: errors.name,
 	                            handleChange: this.handleChange
+	                        })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-row' },
+	                        _react2.default.createElement(_Select2.default, {
+	                            id: 'trail-severity',
+	                            labelText: 'Severity',
+	                            name: 'severity_id',
+	                            options: this.state.severities,
+	                            selected: this.state.severity_id,
+	                            error: errors.severity_id,
+	                            handleSelect: this.handleSelect
+	                        }),
+	                        _react2.default.createElement(_Select2.default, {
+	                            id: 'trail-exposure',
+	                            labelText: 'Exposure',
+	                            name: 'exposure_id',
+	                            options: this.state.exposures,
+	                            selected: this.state.exposure_id,
+	                            error: errors.exposure_id,
+	                            handleSelect: this.handleSelect
 	                        })
 	                    ),
 	                    _react2.default.createElement(
@@ -43056,6 +43102,140 @@
 
 /***/ },
 /* 374 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 375 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _style = __webpack_require__(376);
+
+	var _style2 = _interopRequireDefault(_style);
+
+	var _ValidationError = __webpack_require__(371);
+
+	var _ValidationError2 = _interopRequireDefault(_ValidationError);
+
+	var _Label = __webpack_require__(373);
+
+	var _Label2 = _interopRequireDefault(_Label);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Option = function Option(props) {
+	    return props.children;
+	};
+
+	var FormSelect = function (_React$Component) {
+	    _inherits(FormSelect, _React$Component);
+
+	    function FormSelect(props) {
+	        _classCallCheck(this, FormSelect);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(FormSelect).call(this, props));
+
+	        _this.state = { show: false };
+
+	        _this.toggleShowHide = _this.toggleShowHide.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(FormSelect, [{
+	        key: 'handleClick',
+	        value: function handleClick(inputName, inputValue) {
+	            this.props.handleSelect(inputName, inputValue);
+	            this.toggleShowHide();
+	        }
+	    }, {
+	        key: 'toggleShowHide',
+	        value: function toggleShowHide() {
+	            console.log('open close');
+	            this.setState({ show: !this.state.show });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this2 = this;
+
+	            var props = this.props;
+	            var options = props.options.map(function (option) {
+	                return _react2.default.createElement(
+	                    Option,
+	                    { key: props.name + option.id },
+	                    _react2.default.createElement(
+	                        'li',
+	                        {
+	                            className: props.selected == option.id ? 'selected' : '',
+	                            onClick: _this2.handleClick.bind(_this2, props.name, option.id)
+	                        },
+	                        option.description
+	                    )
+	                );
+	            });
+
+	            var selectedValue = props.options.filter(function (option) {
+	                return option.id == props.selected;
+	            });
+	            selectedValue = selectedValue[0] != undefined ? selectedValue[0].description : '-- select --';
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'input-group' },
+	                _react2.default.createElement(_Label2.default, { 'for': props.id, text: props.labelText }),
+	                _react2.default.createElement(
+	                    'div',
+	                    { id: props.id, className: 'form-select-component' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        {
+	                            onClick: this.toggleShowHide,
+	                            className: 'selected-value'
+	                        },
+	                        selectedValue
+	                    ),
+	                    _react2.default.createElement(
+	                        'ul',
+	                        { style: !this.state.show ? { display: 'none' } : { display: 'block' } },
+	                        options
+	                    )
+	                ),
+	                _react2.default.createElement(_ValidationError2.default, { error: props.error })
+	            );
+	        }
+	    }]);
+
+	    return FormSelect;
+	}(_react2.default.Component);
+
+	FormSelect.propTypes = {
+	    id: _react2.default.PropTypes.string.isRequired,
+	    name: _react2.default.PropTypes.string.isRequired,
+	    options: _react2.default.PropTypes.array.isRequired,
+	    handleSelect: _react2.default.PropTypes.func.isRequired
+	};
+	exports.default = FormSelect;
+
+/***/ },
+/* 376 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

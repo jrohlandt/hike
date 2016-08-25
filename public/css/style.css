@@ -503,3 +503,5 @@ table.pagination-component {
 .pagination-component .inactive {
   color: gray;
   cursor: default; }
+.form-select-component .selected {
+  background: gray; }
