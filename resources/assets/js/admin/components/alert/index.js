@@ -14,16 +14,13 @@ export default class Alert extends React.Component {
         if (this.storageAvailable('localStorage')) {
             var alertTypes = ['flash-success', 'flash-error'];
             var alerts = alertTypes.map((alertType) => {
-                console.log(alertType);
                 var alertMessage = localStorage.getItem(alertType);
-                console.log(alertMessage);
 
                 if (alertMessage) {
                     localStorage.removeItem(alertType);
                     return {message: alertMessage, class: alertType};
                 }
             });
-            console.log(alerts);
             if (typeof alerts[0] != 'undefined') {
                 this.setState(alerts[0]);
             }

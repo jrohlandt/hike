@@ -26,6 +26,9 @@ class TrailDefaultRequest extends Request
     {
         return [
             'name' => 'required|max:100',
+            'distance' => 'numeric|max:10000000', // 10 million meters
+            'elevation_min' => 'numeric|max:10000', // 10 thousand meters
+            'elevation_max' => 'numeric|max:10000', // 10 thousand meters
             'description' => 'max:1000'
         ];
     }

@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router';
 
 import Alert from '../alert';
 import BreadCrumbs from '../breadcrumbs';
+import FormInput from '../forms/Input';
 
 export default class TrailEdit extends React.Component {
     constructor(props) {
@@ -11,6 +12,9 @@ export default class TrailEdit extends React.Component {
         this.state = {
             id: props.params.id,
             name: '',
+            distance: '',
+            elevation_min: '',
+            elevation_max: '',
             description: '',
             _method: 'PATCH',
             validationErrors: {},
@@ -74,6 +78,9 @@ export default class TrailEdit extends React.Component {
                console.log(res);
               this.setState({
                 name: res.name,
+                distance: res.distance,
+                elevation_min: res.elevation_min,
+                elevation_max: res.elevation_max,
                 description: res.description
               });
            }.bind(this),
@@ -92,43 +99,75 @@ export default class TrailEdit extends React.Component {
                     class={this.state.class}
                 />
                 <BreadCrumbs />
+
                 <form>
-                    <div className="input-group">
-                        <label htmlFor="trail-name">Name </label>
-                        <input
-                            name="name"
+
+                    <div className="form-row">
+                        <FormInput
                             id="trail-name"
-                            className="form-control"
+                            labelText="Nddame"
+                            name="name"
                             value={this.state.name}
-                            onChange={this.handleChange}
+                            error={errors.name}
+                            handleChange={this.handleChange}
+                            />
+                    </div>
+
+                    <div className="form-row">
+                        <FormInput
+                            id="trail-distance"
+                            labelText="Distance (meters)"
+                            name="distance"
+                            value={this.state.distance}
+                            error={errors.distance}
+                            handleChange={this.handleChange}
                         />
-                        <div className="validation-error" >
-                            { errors.name ? errors.name : '' }
+                        <FormInput
+                            id="trail-elevation_min"
+                            labelText="Min Elevation (meters)"
+                            name="elevation_min"
+                            value={this.state.elevation_min}
+                            error={errors.elevation_min}
+                            handleChange={this.handleChange}
+                        />
+                        <FormInput
+                            id="trail-elevation_max"
+                            labelText="Max Elevation (meters)"
+                            name="elevation_max"
+                            value={this.state.elevation_max}
+                            error={errors.elevation_max}
+                            handleChange={this.handleChange}
+                        />
+                    </div>
+
+                    <div className="form-row">
+                        <div className="input-group">
+                            <label htmlFor="trail-description">Description </label>
+                            <textarea
+                                name="description"
+                                id="trail-description"
+                                value={this.state.description}
+                                onChange={this.handleChange}
+                            >
+                            </textarea>
+                            <div className="validation-error" >
+                                { errors.description ? errors.description : '' }
+                            </div>
+
                         </div>
                     </div>
 
-                    <div className="input-group">
-                        <label htmlFor="trail-description">Description </label>
-                        <textarea
-                            name="description"
-                            id="trail-description"
-                            value={this.state.description}
-                            onChange={this.handleChange}
-                        >
-                        </textarea>
-                        <div className="validation-error" >
-                            { errors.description ? errors.description : '' }
+                    <div className="input-row">
+                        <div className="input-group">
+                            <div
+                                className="submit-button"
+                                onClick={this.submitForm}
+                            >
+                                Submit
+                            </div>
                         </div>
+                    </div>
 
-                    </div>
-                    <div className="input-group">
-                        <div
-                            className="submit-button"
-                            onClick={this.submitForm}
-                        >
-                            Submit
-                        </div>
-                    </div>
                 </form>
             </div>
         );

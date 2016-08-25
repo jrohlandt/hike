@@ -430,6 +430,14 @@ body * {
 a {
   cursor: pointer; }
 
+.form-row {
+  height: 100px;
+  padding: .5em 1em; }
+
+.input-group {
+  float: left;
+  width: 30%; }
+
 .submit-button {
   min-height: 30px;
   max-width: 100px;
@@ -439,7 +447,7 @@ a {
 
 .validation-error {
   color: red;
-  min-height: 2em; }
+  min-height: 1.5em; }
 #side-nav {
   float: left;
   width: 20%;
@@ -448,6 +456,19 @@ a {
 #logo-container {
   text-align: center;
   padding: 1.5em; }
+.alert {
+  padding: 1em;
+  border-radius: .5em; }
+
+.flash-success {
+  background: #9CBA7F;
+  color: #488214;
+  border: thin solid #659D32; }
+
+.flash-error {
+  background: #EEB4B4;
+  color: #FF4040;
+  border: thin solid #DB2929; }
 .breadcrumbs-component {
   padding: 1em; }
 table.listing-component {

@@ -27626,16 +27626,13 @@
 	            if (this.storageAvailable('localStorage')) {
 	                var alertTypes = ['flash-success', 'flash-error'];
 	                var alerts = alertTypes.map(function (alertType) {
-	                    console.log(alertType);
 	                    var alertMessage = localStorage.getItem(alertType);
-	                    console.log(alertMessage);
 
 	                    if (alertMessage) {
 	                        localStorage.removeItem(alertType);
 	                        return { message: alertMessage, class: alertType };
 	                    }
 	                });
-	                console.log(alerts);
 	                if (typeof alerts[0] != 'undefined') {
 	                    this.setState(alerts[0]);
 	                }
@@ -42645,6 +42642,10 @@
 
 	var _breadcrumbs2 = _interopRequireDefault(_breadcrumbs);
 
+	var _Input = __webpack_require__(369);
+
+	var _Input2 = _interopRequireDefault(_Input);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -42664,6 +42665,9 @@
 	        _this.state = {
 	            id: props.params.id,
 	            name: '',
+	            distance: '',
+	            elevation_min: '',
+	            elevation_max: '',
 	            description: '',
 	            _method: 'PATCH',
 	            validationErrors: {}
@@ -42733,6 +42737,9 @@
 	                    console.log(res);
 	                    this.setState({
 	                        name: res.name,
+	                        distance: res.distance,
+	                        elevation_min: res.elevation_min,
+	                        elevation_max: res.elevation_max,
 	                        description: res.description
 	                    });
 	                }.bind(this),
@@ -42758,55 +42765,82 @@
 	                    null,
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'input-group' },
-	                        _react2.default.createElement(
-	                            'label',
-	                            { htmlFor: 'trail-name' },
-	                            'Name '
-	                        ),
-	                        _react2.default.createElement('input', {
-	                            name: 'name',
+	                        { className: 'form-row' },
+	                        _react2.default.createElement(_Input2.default, {
 	                            id: 'trail-name',
-	                            className: 'form-control',
+	                            labelText: 'Nddame',
+	                            name: 'name',
 	                            value: this.state.name,
-	                            onChange: this.handleChange
+	                            error: errors.name,
+	                            handleChange: this.handleChange
+	                        })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-row' },
+	                        _react2.default.createElement(_Input2.default, {
+	                            id: 'trail-distance',
+	                            labelText: 'Distance (meters)',
+	                            name: 'distance',
+	                            value: this.state.distance,
+	                            error: errors.distance,
+	                            handleChange: this.handleChange
 	                        }),
+	                        _react2.default.createElement(_Input2.default, {
+	                            id: 'trail-elevation_min',
+	                            labelText: 'Min Elevation (meters)',
+	                            name: 'elevation_min',
+	                            value: this.state.elevation_min,
+	                            error: errors.elevation_min,
+	                            handleChange: this.handleChange
+	                        }),
+	                        _react2.default.createElement(_Input2.default, {
+	                            id: 'trail-elevation_max',
+	                            labelText: 'Max Elevation (meters)',
+	                            name: 'elevation_max',
+	                            value: this.state.elevation_max,
+	                            error: errors.elevation_max,
+	                            handleChange: this.handleChange
+	                        })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-row' },
 	                        _react2.default.createElement(
 	                            'div',
-	                            { className: 'validation-error' },
-	                            errors.name ? errors.name : ''
+	                            { className: 'input-group' },
+	                            _react2.default.createElement(
+	                                'label',
+	                                { htmlFor: 'trail-description' },
+	                                'Description '
+	                            ),
+	                            _react2.default.createElement('textarea', {
+	                                name: 'description',
+	                                id: 'trail-description',
+	                                value: this.state.description,
+	                                onChange: this.handleChange
+	                            }),
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'validation-error' },
+	                                errors.description ? errors.description : ''
+	                            )
 	                        )
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'input-group' },
-	                        _react2.default.createElement(
-	                            'label',
-	                            { htmlFor: 'trail-description' },
-	                            'Description '
-	                        ),
-	                        _react2.default.createElement('textarea', {
-	                            name: 'description',
-	                            id: 'trail-description',
-	                            value: this.state.description,
-	                            onChange: this.handleChange
-	                        }),
+	                        { className: 'input-row' },
 	                        _react2.default.createElement(
 	                            'div',
-	                            { className: 'validation-error' },
-	                            errors.description ? errors.description : ''
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'input-group' },
-	                        _react2.default.createElement(
-	                            'div',
-	                            {
-	                                className: 'submit-button',
-	                                onClick: this.submitForm
-	                            },
-	                            'Submit'
+	                            { className: 'input-group' },
+	                            _react2.default.createElement(
+	                                'div',
+	                                {
+	                                    className: 'submit-button',
+	                                    onClick: this.submitForm
+	                                },
+	                                'Submit'
+	                            )
 	                        )
 	                    )
 	                )
@@ -42818,6 +42852,213 @@
 	}(_react2.default.Component);
 
 	exports.default = TrailEdit;
+
+/***/ },
+/* 369 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _style = __webpack_require__(370);
+
+	var _style2 = _interopRequireDefault(_style);
+
+	var _ValidationError = __webpack_require__(371);
+
+	var _ValidationError2 = _interopRequireDefault(_ValidationError);
+
+	var _Label = __webpack_require__(373);
+
+	var _Label2 = _interopRequireDefault(_Label);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var FormInput = function (_React$Component) {
+	    _inherits(FormInput, _React$Component);
+
+	    function FormInput(props) {
+	        _classCallCheck(this, FormInput);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(FormInput).call(this, props));
+	    }
+
+	    _createClass(FormInput, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'input-group' },
+	                _react2.default.createElement(_Label2.default, { 'for': this.props.id, text: this.props.labelText }),
+	                _react2.default.createElement('input', {
+	                    name: this.props.name,
+	                    id: this.props.id,
+	                    className: 'form-control',
+	                    value: this.props.value,
+	                    onChange: this.props.handleChange
+	                }),
+	                _react2.default.createElement(_ValidationError2.default, { error: this.props.error })
+	            );
+	        }
+	    }]);
+
+	    return FormInput;
+	}(_react2.default.Component);
+
+	FormInput.propTypes = {
+	    name: _react2.default.PropTypes.string.isRequired
+	};
+	exports.default = FormInput;
+
+/***/ },
+/* 370 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 371 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _style = __webpack_require__(372);
+
+	var _style2 = _interopRequireDefault(_style);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var FormInput = function (_React$Component) {
+	    _inherits(FormInput, _React$Component);
+
+	    function FormInput(props) {
+	        _classCallCheck(this, FormInput);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(FormInput).call(this, props));
+	    }
+
+	    _createClass(FormInput, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'validation-error' },
+	                this.props.error ? this.props.error : ''
+	            );
+	        }
+	    }]);
+
+	    return FormInput;
+	}(_react2.default.Component);
+
+	FormInput.propTypes = {
+	    error: _react2.default.PropTypes.string
+	};
+	exports.default = FormInput;
+
+/***/ },
+/* 372 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 373 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _style = __webpack_require__(374);
+
+	var _style2 = _interopRequireDefault(_style);
+
+	var _ValidationError = __webpack_require__(371);
+
+	var _ValidationError2 = _interopRequireDefault(_ValidationError);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var FormInput = function (_React$Component) {
+	    _inherits(FormInput, _React$Component);
+
+	    function FormInput(props) {
+	        _classCallCheck(this, FormInput);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(FormInput).call(this, props));
+	    }
+
+	    _createClass(FormInput, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'label',
+	                { htmlFor: this.props.for },
+	                this.props.text
+	            );
+	        }
+	    }]);
+
+	    return FormInput;
+	}(_react2.default.Component);
+
+	FormInput.propTypes = {
+	    for: _react2.default.PropTypes.string.isRequired,
+	    text: _react2.default.PropTypes.string.isRequired
+	};
+	exports.default = FormInput;
+
+/***/ },
+/* 374 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
 
 /***/ }
 /******/ ]);

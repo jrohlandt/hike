@@ -25,7 +25,9 @@ class TrailsController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            return $this->model->paginate(10);
+            return $this->model
+                        ->orderBy('name', 'asc')
+                        ->paginate(10);
         }
 
         return view('admin.index');
@@ -51,6 +53,7 @@ class TrailsController extends Controller
     {
         $this->model->create([
             'name' => $request->name,
+            'distance' => $request->distance,
             'description' => $request->description,
         ]);
         return response()->json(['status' => 200]);
@@ -92,9 +95,11 @@ class TrailsController extends Controller
     public function update(TrailDefaultRequest $request, $id)
     {
         if ($item = $this->model->find($id)) {
-            $input = $request->input();
-            $item->name = $input['name'];
-            $item->description = $input['description'];
+            $item->name = $request->name;
+            $item->distance = $request->distance;
+            $item->elevation_min = $request->elevation_min;
+            $item->elevation_max = $request->elevation_max;
+            $item->description = $request->description;
 
             // return response()->json($input);
             $item->save();
