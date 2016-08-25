@@ -42622,6 +42622,8 @@
 	    value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
@@ -42642,13 +42644,9 @@
 
 	var _breadcrumbs2 = _interopRequireDefault(_breadcrumbs);
 
-	var _Input = __webpack_require__(369);
+	var _form = __webpack_require__(369);
 
-	var _Input2 = _interopRequireDefault(_Input);
-
-	var _Select = __webpack_require__(375);
-
-	var _Select2 = _interopRequireDefault(_Select);
+	var _form2 = _interopRequireDefault(_form);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -42784,112 +42782,11 @@
 	                    'class': this.state.class
 	                }),
 	                _react2.default.createElement(_breadcrumbs2.default, null),
-	                _react2.default.createElement(
-	                    'form',
-	                    null,
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'form-row' },
-	                        _react2.default.createElement(_Input2.default, {
-	                            id: 'trail-name',
-	                            labelText: 'Nddame',
-	                            name: 'name',
-	                            value: this.state.name,
-	                            error: errors.name,
-	                            handleChange: this.handleChange
-	                        })
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'form-row' },
-	                        _react2.default.createElement(_Select2.default, {
-	                            id: 'trail-severity',
-	                            labelText: 'Severity',
-	                            name: 'severity_id',
-	                            options: this.state.severities,
-	                            selected: this.state.severity_id,
-	                            error: errors.severity_id,
-	                            handleSelect: this.handleSelect
-	                        }),
-	                        _react2.default.createElement(_Select2.default, {
-	                            id: 'trail-exposure',
-	                            labelText: 'Exposure',
-	                            name: 'exposure_id',
-	                            options: this.state.exposures,
-	                            selected: this.state.exposure_id,
-	                            error: errors.exposure_id,
-	                            handleSelect: this.handleSelect
-	                        })
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'form-row' },
-	                        _react2.default.createElement(_Input2.default, {
-	                            id: 'trail-distance',
-	                            labelText: 'Distance (meters)',
-	                            name: 'distance',
-	                            value: this.state.distance,
-	                            error: errors.distance,
-	                            handleChange: this.handleChange
-	                        }),
-	                        _react2.default.createElement(_Input2.default, {
-	                            id: 'trail-elevation_min',
-	                            labelText: 'Min Elevation (meters)',
-	                            name: 'elevation_min',
-	                            value: this.state.elevation_min,
-	                            error: errors.elevation_min,
-	                            handleChange: this.handleChange
-	                        }),
-	                        _react2.default.createElement(_Input2.default, {
-	                            id: 'trail-elevation_max',
-	                            labelText: 'Max Elevation (meters)',
-	                            name: 'elevation_max',
-	                            value: this.state.elevation_max,
-	                            error: errors.elevation_max,
-	                            handleChange: this.handleChange
-	                        })
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'form-row' },
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'input-group' },
-	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'trail-description' },
-	                                'Description '
-	                            ),
-	                            _react2.default.createElement('textarea', {
-	                                name: 'description',
-	                                id: 'trail-description',
-	                                value: this.state.description,
-	                                onChange: this.handleChange
-	                            }),
-	                            _react2.default.createElement(
-	                                'div',
-	                                { className: 'validation-error' },
-	                                errors.description ? errors.description : ''
-	                            )
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'input-row' },
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'input-group' },
-	                            _react2.default.createElement(
-	                                'div',
-	                                {
-	                                    className: 'submit-button',
-	                                    onClick: this.submitForm
-	                                },
-	                                'Submit'
-	                            )
-	                        )
-	                    )
-	                )
+	                _react2.default.createElement(_form2.default, _extends({}, this.state, {
+	                    handleChange: this.handleChange,
+	                    handleSelect: this.handleSelect,
+	                    submitForm: this.submitForm
+	                }))
 	            );
 	        }
 	    }]);
@@ -42915,15 +42812,176 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _style = __webpack_require__(370);
+	var _Input = __webpack_require__(370);
+
+	var _Input2 = _interopRequireDefault(_Input);
+
+	var _Select = __webpack_require__(376);
+
+	var _Select2 = _interopRequireDefault(_Select);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var TrailForm = function (_React$Component) {
+	    _inherits(TrailForm, _React$Component);
+
+	    function TrailForm(props) {
+	        _classCallCheck(this, TrailForm);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(TrailForm).call(this, props));
+	    }
+
+	    _createClass(TrailForm, [{
+	        key: 'render',
+	        value: function render() {
+	            var props = this.props;
+	            var errors = props.validationErrors;
+
+	            return _react2.default.createElement(
+	                'form',
+	                null,
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-row' },
+	                    _react2.default.createElement(_Input2.default, {
+	                        id: 'trail-name',
+	                        labelText: 'Nddame',
+	                        name: 'name',
+	                        value: props.name,
+	                        error: errors.name,
+	                        handleChange: props.handleChange
+	                    })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-row' },
+	                    _react2.default.createElement(_Select2.default, {
+	                        id: 'trail-severity',
+	                        labelText: 'Severity',
+	                        name: 'severity_id',
+	                        options: props.severities,
+	                        selected: props.severity_id,
+	                        error: errors.severity_id,
+	                        handleSelect: props.handleSelect
+	                    }),
+	                    _react2.default.createElement(_Select2.default, {
+	                        id: 'trail-exposure',
+	                        labelText: 'Exposure',
+	                        name: 'exposure_id',
+	                        options: props.exposures,
+	                        selected: props.exposure_id,
+	                        error: errors.exposure_id,
+	                        handleSelect: props.handleSelect
+	                    })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-row' },
+	                    _react2.default.createElement(_Input2.default, {
+	                        id: 'trail-distance',
+	                        labelText: 'Distance (meters)',
+	                        name: 'distance',
+	                        value: props.distance,
+	                        error: errors.distance,
+	                        handleChange: props.handleChange
+	                    }),
+	                    _react2.default.createElement(_Input2.default, {
+	                        id: 'trail-elevation_min',
+	                        labelText: 'Min Elevation (meters)',
+	                        name: 'elevation_min',
+	                        value: props.elevation_min,
+	                        error: errors.elevation_min,
+	                        handleChange: props.handleChange
+	                    }),
+	                    _react2.default.createElement(_Input2.default, {
+	                        id: 'trail-elevation_max',
+	                        labelText: 'Max Elevation (meters)',
+	                        name: 'elevation_max',
+	                        value: props.elevation_max,
+	                        error: errors.elevation_max,
+	                        handleChange: props.handleChange
+	                    })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-row' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'input-group' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { htmlFor: 'trail-description' },
+	                            'Description '
+	                        ),
+	                        _react2.default.createElement('textarea', {
+	                            name: 'description',
+	                            id: 'trail-description',
+	                            value: props.description,
+	                            onChange: props.handleChange
+	                        }),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'validation-error' },
+	                            errors.description ? errors.description : ''
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'input-row' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'input-group' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            {
+	                                className: 'submit-button',
+	                                onClick: props.submitForm
+	                            },
+	                            'Submit'
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return TrailForm;
+	}(_react2.default.Component);
+
+	exports.default = TrailForm;
+
+/***/ },
+/* 370 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _style = __webpack_require__(371);
 
 	var _style2 = _interopRequireDefault(_style);
 
-	var _ValidationError = __webpack_require__(371);
+	var _ValidationError = __webpack_require__(372);
 
 	var _ValidationError2 = _interopRequireDefault(_ValidationError);
 
-	var _Label = __webpack_require__(373);
+	var _Label = __webpack_require__(374);
 
 	var _Label2 = _interopRequireDefault(_Label);
 
@@ -42972,13 +43030,13 @@
 	exports.default = FormInput;
 
 /***/ },
-/* 370 */
+/* 371 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 371 */
+/* 372 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42993,7 +43051,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _style = __webpack_require__(372);
+	var _style = __webpack_require__(373);
 
 	var _style2 = _interopRequireDefault(_style);
 
@@ -43034,13 +43092,13 @@
 	exports.default = FormInput;
 
 /***/ },
-/* 372 */
+/* 373 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 373 */
+/* 374 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43055,11 +43113,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _style = __webpack_require__(374);
+	var _style = __webpack_require__(375);
 
 	var _style2 = _interopRequireDefault(_style);
 
-	var _ValidationError = __webpack_require__(371);
+	var _ValidationError = __webpack_require__(372);
 
 	var _ValidationError2 = _interopRequireDefault(_ValidationError);
 
@@ -43101,13 +43159,13 @@
 	exports.default = FormInput;
 
 /***/ },
-/* 374 */
+/* 375 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 375 */
+/* 376 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43122,15 +43180,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _style = __webpack_require__(376);
+	var _style = __webpack_require__(377);
 
 	var _style2 = _interopRequireDefault(_style);
 
-	var _ValidationError = __webpack_require__(371);
+	var _ValidationError = __webpack_require__(372);
 
 	var _ValidationError2 = _interopRequireDefault(_ValidationError);
 
-	var _Label = __webpack_require__(373);
+	var _Label = __webpack_require__(374);
 
 	var _Label2 = _interopRequireDefault(_Label);
 
@@ -43235,7 +43293,7 @@
 	exports.default = FormSelect;
 
 /***/ },
-/* 376 */
+/* 377 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
