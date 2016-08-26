@@ -29,12 +29,36 @@ export default class FormSelect extends React.Component {
         this.toggleShowHide();
     }
 
-    handleBlur() {
+    focusInCurrentTarget = ({ relatedTarget, currentTarget }) => {
+
+        if (relatedTarget === null)
+            return false;
+
+        var node = relatedTarget.parentNode;
+
+        while (node !== null) {
+            if (node === currentTarget)
+                return true;
+
+            node = node.parentNode;
+        }
+
+      return false;
+    }
+
+    handleBlur(e) {
+
+        // persist event in order to keep access to e.relatedTarget
+        e.persist();
+
         // make sure <ul> is not shown after blur
         // setTimeout: allows this.handleClick to run first
         setTimeout(() => {
-            this.setState({show: false});
-        }, 200);
+            if (!this.focusInCurrentTarget(e)) {
+                console.log('blur');
+                this.setState({show: false});
+            }
+        }, 0);
     }
 
     toggleShowHide(e) {
@@ -65,15 +89,16 @@ export default class FormSelect extends React.Component {
                 <div id={props.id} className="form-select-component">
                     <div
                         onClick={this.toggleShowHide}
-                        className="selected-value"
                         tabIndex="-1"
                         onBlur={this.handleBlur}
                     >
-                        {selectedValue}
-                    </div>
+                        <div className="selected-value">
+                            {selectedValue}
+                        </div>
                         <ul style={this.state.show === false ? {display: 'none'} : {display: 'block'}} >
                             { options }
                         </ul>
+                    </div>
                 </div>
                 <ValidationError error={props.error} />
             </div>
