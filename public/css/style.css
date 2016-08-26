@@ -503,5 +503,15 @@ table.pagination-component {
 .pagination-component .inactive {
   color: gray;
   cursor: default; }
+.form-select-component {
+  position: relative; }
+
+.form-select-component ul {
+  position: absolute;
+  background: white; }
+
+.form-select-component li {
+  padding: .5em; }
+
 .form-select-component .selected {
   background: gray; }

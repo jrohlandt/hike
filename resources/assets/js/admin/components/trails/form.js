@@ -6,7 +6,17 @@ import FormSelect from '../forms/Select';
 export default class TrailForm extends React.Component {
     constructor(props) {
         super(props);
+
+        // this.state = {
+        //     show: false
+        // }
     }
+
+    // toggleShowHide() {
+    //     console.log('open close');
+    //     this.setState({show: !this.state.show});
+    //
+    // }
 
     render() {
         var props = this.props;

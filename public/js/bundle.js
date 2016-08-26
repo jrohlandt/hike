@@ -42835,7 +42835,17 @@
 	        _classCallCheck(this, TrailForm);
 
 	        return _possibleConstructorReturn(this, Object.getPrototypeOf(TrailForm).call(this, props));
+
+	        // this.state = {
+	        //     show: false
+	        // }
 	    }
+
+	    // toggleShowHide() {
+	    //     console.log('open close');
+	    //     this.setState({show: !this.state.show});
+	    //
+	    // }
 
 	    _createClass(TrailForm, [{
 	        key: 'render',
@@ -43180,6 +43190,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactDom = __webpack_require__(35);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
 	var _style = __webpack_require__(377);
 
 	var _style2 = _interopRequireDefault(_style);
@@ -43215,6 +43229,7 @@
 	        _this.state = { show: false };
 
 	        _this.toggleShowHide = _this.toggleShowHide.bind(_this);
+	        _this.handleBlur = _this.handleBlur.bind(_this);
 	        return _this;
 	    }
 
@@ -43225,15 +43240,25 @@
 	            this.toggleShowHide();
 	        }
 	    }, {
+	        key: 'handleBlur',
+	        value: function handleBlur() {
+	            var _this2 = this;
+
+	            // make sure <ul> is not shown after blur
+	            // setTimeout: allows this.handleClick to run first
+	            setTimeout(function () {
+	                _this2.setState({ show: false });
+	            }, 200);
+	        }
+	    }, {
 	        key: 'toggleShowHide',
-	        value: function toggleShowHide() {
-	            console.log('open close');
+	        value: function toggleShowHide(e) {
 	            this.setState({ show: !this.state.show });
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _this2 = this;
+	            var _this3 = this;
 
 	            var props = this.props;
 	            var options = props.options.map(function (option) {
@@ -43244,7 +43269,7 @@
 	                        'li',
 	                        {
 	                            className: props.selected == option.id ? 'selected' : '',
-	                            onClick: _this2.handleClick.bind(_this2, props.name, option.id)
+	                            onClick: _this3.handleClick.bind(_this3, props.name, option.id)
 	                        },
 	                        option.description
 	                    )
@@ -43266,13 +43291,15 @@
 	                        'div',
 	                        {
 	                            onClick: this.toggleShowHide,
-	                            className: 'selected-value'
+	                            className: 'selected-value',
+	                            tabIndex: '-1',
+	                            onBlur: this.handleBlur
 	                        },
 	                        selectedValue
 	                    ),
 	                    _react2.default.createElement(
 	                        'ul',
-	                        { style: !this.state.show ? { display: 'none' } : { display: 'block' } },
+	                        { style: this.state.show === false ? { display: 'none' } : { display: 'block' } },
 	                        options
 	                    )
 	                ),

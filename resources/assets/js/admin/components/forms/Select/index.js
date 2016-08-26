@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import style from './style.scss';
 
 import ValidationError from '../ValidationError';
@@ -13,6 +14,7 @@ export default class FormSelect extends React.Component {
         this.state = {show: false};
 
         this.toggleShowHide = this.toggleShowHide.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
     }
 
     static propTypes = {
@@ -27,8 +29,15 @@ export default class FormSelect extends React.Component {
         this.toggleShowHide();
     }
 
-    toggleShowHide() {
-        console.log('open close');
+    handleBlur() {
+        // make sure <ul> is not shown after blur
+        // setTimeout: allows this.handleClick to run first
+        setTimeout(() => {
+            this.setState({show: false});
+        }, 200);
+    }
+
+    toggleShowHide(e) {
         this.setState({show: !this.state.show});
 
     }
@@ -57,12 +66,14 @@ export default class FormSelect extends React.Component {
                     <div
                         onClick={this.toggleShowHide}
                         className="selected-value"
+                        tabIndex="-1"
+                        onBlur={this.handleBlur}
                     >
                         {selectedValue}
                     </div>
-                    <ul style={!this.state.show ? {display:'none'} : {display: 'block'}} >
-                        { options }
-                    </ul>
+                        <ul style={this.state.show === false ? {display: 'none'} : {display: 'block'}} >
+                            { options }
+                        </ul>
                 </div>
                 <ValidationError error={props.error} />
             </div>
