@@ -26,38 +26,20 @@ class TrailsController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->ajax()) {
-            return $this->model
-                        ->orderBy('name', 'asc')
-                        ->paginate(10);
-        }
+        if ($request->ajax())
+            return $this->model->orderBy('name', 'asc')->paginate(10);
 
         return view('admin.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('admin.index');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(TrailDefaultRequest $request)
     {
-        $this->model->create([
-            'name' => $request->name,
-            'distance' => $request->distance,
-            'description' => $request->description,
-        ]);
+        $this->model->create($request->only('name', 'distance', 'description'));
         return response()->json(['status' => 200]);
     }
 
@@ -93,27 +75,50 @@ class TrailsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\TrailDefaultRequest $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(TrailDefaultRequest $request, $id)
     {
-        if ($item = $this->model->find($id)) {
-            $item->name = $request->name;
-            $item->distance = $request->distance;
-            $item->severity_id = $request->severity_id;
-            $item->exposure_id = $request->exposure_id;
-            $item->elevation_min = $request->elevation_min;
-            $item->elevation_max = $request->elevation_max;
-            $item->description = $request->description;
-
-            $item->save();
-
-            return response()->json(['status' => 200]);
+        // Not found
+        if (!$item = $this->model->find($id)) {
+            return response()->json([
+                'response_status' => [
+                    'code' => 404,
+                    'text' => 'not found',
+                    'message' => 'The requested resource was not found',
+                ],
+                'body' => [],
+            ]);
         }
 
-        return response()->json(['status' => 404]);
+        // Update Success
+        $exclude = ['id', 'severities', 'exposures', 'validationErrors'];
+        if ($this->model->where('id', $id)->update($request->except($exclude))) {
+            $item = $this->model->find($id);
+            $response = [
+                'response_status' => [
+                    'code' => 200,
+                    'text' => 'ok',
+                    'message' => 'success',
+                ],
+                'body' => $item,
+            ];
+            return response()->json($response);
+        }
+
+        // Update failed
+        $response = [
+            'response_status' => [
+                'code' => 504,
+                'text' => 'ok',
+                'message' => 'This is not a server error but, the update failed',
+            ],
+            'body' => $item,
+        ];
+
+        return response()->json($response);
     }
 
     /**

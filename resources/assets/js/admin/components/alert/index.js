@@ -13,20 +13,22 @@ export default class Alert extends React.Component {
     componentDidMount() {
         if (this.storageAvailable('localStorage')) {
             var alertTypes = ['flash-success', 'flash-error'];
-            var alerts = alertTypes.map((alertType) => {
-                var alertMessage = localStorage.getItem(alertType);
+            var alerts = [];
+            alertTypes.forEach((name) => {
+                var alertMessage = localStorage.getItem(name);
 
                 if (alertMessage) {
-                    localStorage.removeItem(alertType);
-                    return {message: alertMessage, class: alertType};
+                    localStorage.removeItem(name);
+                    alerts.push({message: alertMessage, class: name});
                 }
             });
+
+            // for now we only display one alert
             if (typeof alerts[0] != 'undefined') {
                 this.setState(alerts[0]);
             }
         }
     }
-
 
     storageAvailable(type) {
         try {

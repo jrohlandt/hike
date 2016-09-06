@@ -20,7 +20,6 @@ export default class TrailEdit extends React.Component {
             description: '',
             severities: [],
             exposures: [],
-            _method: 'PATCH',
             validationErrors: {}
         };
 
@@ -61,12 +60,18 @@ export default class TrailEdit extends React.Component {
     submitForm() {
         $.ajax({
            url: '/admin/trails/' + this.state.id,
-           type: "POST",
+           type: "PATCH",
            dataType: 'json',
            data: this.state,
            cache: false,
            success: function(res) {
-               localStorage.setItem('flash-success', 'Trail has been saved.');
+               if (res.response_status.code === 200) {
+                   localStorage.setItem('flash-success', 'Trail has been saved.');
+               } else if (res.response_status.code === 404 ){
+                   localStorage.setItem('flash-error', `Trail with id ${this.state.id} could not be found.`);
+               } else {
+                   localStorage.setItem('flash-error', `Trail could not be updated.`);
+               }
                browserHistory.push('/admin/trails');
            }.bind(this),
            error: function(xhr, status, err) {
