@@ -18,6 +18,28 @@ export default class TrailForm extends React.Component {
     //
     // }
 
+    componentDidMount() {
+        window.initMap = function initMap() {
+            var myLatLng = {lat: -25.363, lng: 131.044};
+            var map = new google.maps.Map(document.getElementById('map'), {
+              center: myLatLng,
+              zoom: 8
+            });
+
+
+
+            google.maps.event.addListener(map, 'click', function(event) {
+                var latlng = {lat: event.latLng.lat(), lng: event.latLng.lng()};
+
+                var marker = new google.maps.Marker({
+                    position: latlng,
+                    map: map,
+                    title: 'Hello World!'
+                });
+            })
+        }
+    }
+
     render() {
         var props = this.props;
         var errors = props.validationErrors;
@@ -85,6 +107,17 @@ export default class TrailForm extends React.Component {
                 </div>
 
                 <div className="form-row">
+                    <FormInput
+                        id="trail-starting-coordinate"
+                        labelText="Starting Coordinate"
+                        name="coordinate_start"
+                        value={props.coordinate_start}
+                        error={errors.coordinate_start}
+                        handleChange={props.handleChange}
+                    />
+                </div>
+
+                <div className="form-row">
                     <div className="input-group">
                         <label htmlFor="trail-description">Description </label>
                         <textarea
@@ -99,6 +132,10 @@ export default class TrailForm extends React.Component {
                         </div>
 
                     </div>
+                </div>
+
+                <div className="form-row">
+                    <div id="map"></div>
                 </div>
 
                 <div className="input-row">

@@ -18,6 +18,7 @@ export default class TrailEdit extends React.Component {
             elevation_min: '',
             elevation_max: '',
             description: '',
+            coordinate_start: '',
             severities: [],
             exposures: [],
             validationErrors: {}
@@ -103,6 +104,7 @@ export default class TrailEdit extends React.Component {
                 elevation_min: res.items.elevation_min,
                 elevation_max: res.items.elevation_max,
                 description: res.items.description,
+                coordinate_start: res.items.coordinate_start,
                 severities: res.severities,
                 exposures: res.exposures
 

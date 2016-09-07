@@ -42641,6 +42641,27 @@
 	    // }
 
 	    _createClass(TrailForm, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            window.initMap = function initMap() {
+	                var myLatLng = { lat: -25.363, lng: 131.044 };
+	                var map = new google.maps.Map(document.getElementById('map'), {
+	                    center: myLatLng,
+	                    zoom: 8
+	                });
+
+	                google.maps.event.addListener(map, 'click', function (event) {
+	                    var latlng = { lat: event.latLng.lat(), lng: event.latLng.lng() };
+
+	                    var marker = new google.maps.Marker({
+	                        position: latlng,
+	                        map: map,
+	                        title: 'Hello World!'
+	                    });
+	                });
+	            };
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var props = this.props;
@@ -42714,6 +42735,18 @@
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'form-row' },
+	                    _react2.default.createElement(_Input2.default, {
+	                        id: 'trail-starting-coordinate',
+	                        labelText: 'Starting Coordinate',
+	                        name: 'coordinate_start',
+	                        value: props.coordinate_start,
+	                        error: errors.coordinate_start,
+	                        handleChange: props.handleChange
+	                    })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-row' },
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'input-group' },
@@ -42734,6 +42767,11 @@
 	                            errors.description ? errors.description : ''
 	                        )
 	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-row' },
+	                    _react2.default.createElement('div', { id: 'map' })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
@@ -43206,6 +43244,7 @@
 	            elevation_min: '',
 	            elevation_max: '',
 	            description: '',
+	            coordinate_start: '',
 	            severities: [],
 	            exposures: [],
 	            validationErrors: {}
@@ -43298,6 +43337,7 @@
 	                        elevation_min: res.items.elevation_min,
 	                        elevation_max: res.items.elevation_max,
 	                        description: res.items.description,
+	                        coordinate_start: res.items.coordinate_start,
 	                        severities: res.severities,
 	                        exposures: res.exposures
 
