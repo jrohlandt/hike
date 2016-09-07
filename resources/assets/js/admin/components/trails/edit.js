@@ -26,6 +26,7 @@ export default class TrailEdit extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
+        this.handleCoordinates = this.handleCoordinates.bind(this);
         this.submitForm = this.submitForm.bind(this);
         this.clearValidationError = this.clearValidationError.bind(this);
     }
@@ -48,6 +49,11 @@ export default class TrailEdit extends React.Component {
             this.setState(state);
             this.clearValidationError(inputName);
         }
+    }
+
+    handleCoordinates(something) {
+        console.log(something);
+        this.setState({coordinate_start: something});
     }
 
     clearValidationError(inputName) {
@@ -130,6 +136,7 @@ export default class TrailEdit extends React.Component {
                     {...this.state}
                     handleChange={this.handleChange}
                     handleSelect={this.handleSelect}
+                    handleCoordinates={this.handleCoordinates}
                     submitForm={this.submitForm}
                 />
             </div>

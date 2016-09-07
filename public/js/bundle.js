@@ -42599,6 +42599,8 @@
 	    value: true
 	});
 
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
@@ -42643,16 +42645,20 @@
 	    _createClass(TrailForm, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
+
+	            var props = this.props;
+
+	            // Create callback to initialize Google Map
 	            window.initMap = function initMap() {
-	                var myLatLng = { lat: -25.363, lng: 131.044 };
+	                var myLatLng = { lat: -33.9753693, lng: 18.4000676 };
 	                var map = new google.maps.Map(document.getElementById('map'), {
 	                    center: myLatLng,
-	                    zoom: 8
+	                    zoom: 12
 	                });
 
 	                google.maps.event.addListener(map, 'click', function (event) {
 	                    var latlng = { lat: event.latLng.lat(), lng: event.latLng.lng() };
-
+	                    props.handleCoordinates(event.latLng.lat());
 	                    var marker = new google.maps.Marker({
 	                        position: latlng,
 	                        map: map,
@@ -42660,6 +42666,14 @@
 	                    });
 	                });
 	            };
+
+	            // Google map is initiliazed on page load by <script> in html body
+	            // but this is a SPA and when a user navigates away from the form page and then back to
+	            // the form again the map is not intitialized again automatically
+	            // so I initialize it manually here.
+	            if (_typeof(window.google) === 'object') {
+	                window.initMap();
+	            }
 	        }
 	    }, {
 	        key: 'render',
@@ -43252,6 +43266,7 @@
 
 	        _this.handleChange = _this.handleChange.bind(_this);
 	        _this.handleSelect = _this.handleSelect.bind(_this);
+	        _this.handleCoordinates = _this.handleCoordinates.bind(_this);
 	        _this.submitForm = _this.submitForm.bind(_this);
 	        _this.clearValidationError = _this.clearValidationError.bind(_this);
 	        return _this;
@@ -43278,6 +43293,12 @@
 	                this.setState(state);
 	                this.clearValidationError(inputName);
 	            }
+	        }
+	    }, {
+	        key: 'handleCoordinates',
+	        value: function handleCoordinates(something) {
+	            console.log(something);
+	            this.setState({ coordinate_start: something });
 	        }
 	    }, {
 	        key: 'clearValidationError',
@@ -43363,6 +43384,7 @@
 	                _react2.default.createElement(_form2.default, _extends({}, this.state, {
 	                    handleChange: this.handleChange,
 	                    handleSelect: this.handleSelect,
+	                    handleCoordinates: this.handleCoordinates,
 	                    submitForm: this.submitForm
 	                }))
 	            );
