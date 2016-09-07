@@ -96,14 +96,14 @@ class TrailsController extends Controller
         // Update Success
         $exclude = ['id', 'severities', 'exposures', 'validationErrors'];
         if ($this->model->where('id', $id)->update($request->except($exclude))) {
-            $item = $this->model->find($id);
+            $updatedItem = $this->model->find($id);
             $response = [
                 'response_status' => [
                     'code' => 200,
                     'text' => 'ok',
                     'message' => 'success',
                 ],
-                'body' => $item,
+                'body' => $updatedItem,
             ];
             return response()->json($response);
         }
@@ -113,7 +113,7 @@ class TrailsController extends Controller
             'response_status' => [
                 'code' => 504,
                 'text' => 'ok',
-                'message' => 'This is not a server error but, the update failed',
+                'message' => 'The server is up but, the update failed',
             ],
             'body' => $item,
         ];
