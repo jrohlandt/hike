@@ -11,8 +11,8 @@ class Trail extends Model
 
     protected $fillable = [
     	'name',
-    	'severity',
-    	'exposure',
+    	'severity_id',
+    	'exposure_id',
     	'description',
     	'distance',
     	'elevation_min',

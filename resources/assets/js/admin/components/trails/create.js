@@ -4,17 +4,26 @@ import { browserHistory } from 'react-router';
 
 import Alert from '../alert';
 import BreadCrumbs from '../breadcrumbs';
+import TrailForm from './form.js';
 
 export default class TrailCreate extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             name: '',
+            distance: '',
+            severity_id: '',
+            exposure_id: '',
+            elevation_min: '',
+            elevation_max: '',
             description: '',
+            severities: [],
+            exposures: [],
             validationErrors: {}
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
         this.submitForm = this.submitForm.bind(this);
         this.clearValidationError = this.clearValidationError.bind(this);
     }
@@ -22,6 +31,15 @@ export default class TrailCreate extends React.Component {
     handleChange(event) {
         var inputName = event.target.name;
         var inputValue = event.target.value;
+        if (this.state.hasOwnProperty(inputName)) {
+            var state = {};
+            state[inputName] = inputValue;
+            this.setState(state);
+            this.clearValidationError(inputName);
+        }
+    }
+
+    handleSelect(inputName, inputValue) {
         if (this.state.hasOwnProperty(inputName)) {
             var state = {};
             state[inputName] = inputValue;
@@ -45,8 +63,12 @@ export default class TrailCreate extends React.Component {
            dataType: 'json',
            data: this.state,
            cache: false,
-           success: function(res) {
-               localStorage.setItem('flash-success', 'Trail has been successfully added!');
+            success: function(res) {
+               if (res.response_status.code === 200) {
+                   localStorage.setItem('flash-success', 'Trail has been created.');
+               } else {
+                   localStorage.setItem('flash-error', `Trail could not be created.`);
+               }
                browserHistory.push('/admin/trails');
            }.bind(this),
            error: function(xhr, status, err) {
@@ -62,50 +84,37 @@ export default class TrailCreate extends React.Component {
        });
     }
 
+    componentDidMount() {
+        $.ajax({
+           url: '/admin/trails/create',
+           type: "GET",
+           dataType: 'json',
+           cache: false,
+           success: function(res) {
+               console.log(res);
+              this.setState({
+                severities: res.severities,
+                exposures: res.exposures
+              });
+           }.bind(this),
+           error: function(xhr, status, err) {
+               console.log(xhr);
+           }.bind(this)
+       });
+    }
+
     render() {
         var errors = this.state.validationErrors;
         return (
             <div>
                 <Alert />
                 <BreadCrumbs />
-                <form>
-                    <div className="input-group">
-                        <label htmlFor="trail-name">Name </label>
-                        <input
-                            name="name"
-                            id="trail-name"
-                            className="form-control"
-                            value={this.state.name}
-                            onChange={this.handleChange}
-                        />
-                        <div className="validation-error" >
-                            { errors.name ? errors.name : '' }
-                        </div>
-                    </div>
-
-                    <div className="input-group">
-                        <label htmlFor="trail-description">Description </label>
-                        <textarea
-                            name="description"
-                            id="trail-description"
-                            value={this.state.description}
-                            onChange={this.handleChange}
-                        >
-                        </textarea>
-                        <div className="validation-error" >
-                            { errors.description ? errors.description : '' }
-                        </div>
-
-                    </div>
-                    <div className="input-group">
-                        <div
-                            className="submit-button"
-                            onClick={this.submitForm}
-                        >
-                            Submit
-                        </div>
-                    </div>
-                </form>
+                <TrailForm
+                    {...this.state}
+                    handleChange={this.handleChange}
+                    handleSelect={this.handleSelect}
+                    submitForm={this.submitForm}
+                />
             </div>
         );
     }

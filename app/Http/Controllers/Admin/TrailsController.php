@@ -32,15 +32,48 @@ class TrailsController extends Controller
         return view('admin.index');
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        if ($request->ajax()) {
+            $severities = DB::table('severities')->get();
+            $exposures = DB::table('exposures')->get();
+            return response()->json(compact('severities', 'exposures'));
+        }
+
         return view('admin.index');
     }
 
     public function store(TrailDefaultRequest $request)
     {
-        $this->model->create($request->only('name', 'distance', 'description'));
-        return response()->json(['status' => 200]);
+        // $this->model->create($request->only('name', 'distance', 'description'));
+        // return response()->json(['status' => 200]);
+
+        // Create Success
+        $exclude = ['id', 'severities', 'exposures', 'validationErrors'];
+        // dd($request->except($exclude));
+        if ($item = $this->model->create($request->except($exclude))) {
+            $response = [
+                'response_status' => [
+                    'code' => 200,
+                    'text' => 'ok',
+                    'message' => 'success',
+                ],
+                'body' => $item,
+            ];
+            return response()->json($response);
+        }
+
+        // Create failed
+        $response = [
+            'response_status' => [
+                'code' => 504,
+                'text' => 'ok',
+                'message' => 'The server is up but, the create failed',
+            ],
+            'body' => [],
+        ];
+
+        return response()->json($response);
     }
 
     /**
