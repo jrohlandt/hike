@@ -78,7 +78,7 @@
 
 	var _create2 = _interopRequireDefault(_create);
 
-	var _edit = __webpack_require__(374);
+	var _edit = __webpack_require__(376);
 
 	var _edit2 = _interopRequireDefault(_edit);
 
@@ -42599,8 +42599,6 @@
 	    value: true
 	});
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
@@ -42614,6 +42612,10 @@
 	var _Select = __webpack_require__(372);
 
 	var _Select2 = _interopRequireDefault(_Select);
+
+	var _CoordinatesMap = __webpack_require__(374);
+
+	var _CoordinatesMap2 = _interopRequireDefault(_CoordinatesMap);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -42630,52 +42632,9 @@
 	        _classCallCheck(this, TrailForm);
 
 	        return _possibleConstructorReturn(this, (TrailForm.__proto__ || Object.getPrototypeOf(TrailForm)).call(this, props));
-
-	        // this.state = {
-	        //     show: false
-	        // }
 	    }
 
-	    // toggleShowHide() {
-	    //     console.log('open close');
-	    //     this.setState({show: !this.state.show});
-	    //
-	    // }
-
 	    _createClass(TrailForm, [{
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-
-	            var props = this.props;
-
-	            // Create callback to initialize Google Map
-	            window.initMap = function initMap() {
-	                var myLatLng = { lat: -33.9753693, lng: 18.4000676 };
-	                var map = new google.maps.Map(document.getElementById('map'), {
-	                    center: myLatLng,
-	                    zoom: 12
-	                });
-
-	                google.maps.event.addListener(map, 'click', function (event) {
-	                    var latlng = { lat: event.latLng.lat(), lng: event.latLng.lng() };
-	                    props.handleCoordinates(event.latLng.lat());
-	                    var marker = new google.maps.Marker({
-	                        position: latlng,
-	                        map: map,
-	                        title: 'Hello World!'
-	                    });
-	                });
-	            };
-
-	            // Google map is initiliazed on page load by <script> in html body
-	            // but this is a SPA and when a user navigates away from the form page and then back to
-	            // the form again the map is not intitialized again automatically
-	            // so I initialize it manually here.
-	            if (_typeof(window.google) === 'object') {
-	                window.initMap();
-	            }
-	        }
-	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var props = this.props;
@@ -42785,7 +42744,7 @@
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'form-row' },
-	                    _react2.default.createElement('div', { id: 'map' })
+	                    _react2.default.createElement(_CoordinatesMap2.default, { handleChange: props.handleCoordinates })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
@@ -43199,6 +43158,97 @@
 
 /***/ },
 /* 374 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _style = __webpack_require__(375);
+
+	var _style2 = _interopRequireDefault(_style);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var CoordinatesMap = function (_React$Component) {
+	    _inherits(CoordinatesMap, _React$Component);
+
+	    function CoordinatesMap(props) {
+	        _classCallCheck(this, CoordinatesMap);
+
+	        return _possibleConstructorReturn(this, (CoordinatesMap.__proto__ || Object.getPrototypeOf(CoordinatesMap)).call(this, props));
+	    }
+
+	    _createClass(CoordinatesMap, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+
+	            var props = this.props;
+
+	            // Create callback to initialize Google Map
+	            window.initMap = function initMap() {
+	                var myLatLng = { lat: -33.9753693, lng: 18.4000676 };
+	                var map = new google.maps.Map(document.getElementById('coordinates-map'), {
+	                    center: myLatLng,
+	                    zoom: 12
+	                });
+
+	                google.maps.event.addListener(map, 'click', function (event) {
+	                    var latlng = { lat: event.latLng.lat(), lng: event.latLng.lng() };
+
+	                    props.handleChange(event.latLng.lat());
+	                    var marker = new google.maps.Marker({
+	                        position: latlng,
+	                        map: map,
+	                        title: 'Hello World!'
+	                    });
+	                });
+	            };
+
+	            // Google map is initiliazed on page load by <script> in html body
+	            // but this is a SPA and when a user navigates away from the form page and then back to
+	            // the form again the map is not intitialized again automatically
+	            // so I initialize it manually here.
+	            if (_typeof(window.google) === 'object') {
+	                window.initMap();
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement('div', { id: 'coordinates-map' });
+	        }
+	    }]);
+
+	    return CoordinatesMap;
+	}(_react2.default.Component);
+
+	exports.default = CoordinatesMap;
+
+/***/ },
+/* 375 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 376 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

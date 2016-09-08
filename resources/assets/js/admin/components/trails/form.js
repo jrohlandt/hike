@@ -2,53 +2,11 @@ import React from 'react';
 
 import FormInput from '../forms/Input';
 import FormSelect from '../forms/Select';
+import CoordinatesMap from '../maps/CoordinatesMap';
 
 export default class TrailForm extends React.Component {
     constructor(props) {
         super(props);
-
-        // this.state = {
-        //     show: false
-        // }
-    }
-
-    // toggleShowHide() {
-    //     console.log('open close');
-    //     this.setState({show: !this.state.show});
-    //
-    // }
-
-    componentDidMount() {
-
-        var props = this.props;
-
-        // Create callback to initialize Google Map
-        window.initMap = function initMap() {
-            var myLatLng = {lat: -33.9753693, lng: 18.4000676};
-            var map = new google.maps.Map(document.getElementById('map'), {
-              center: myLatLng,
-              zoom: 12
-            });
-
-            google.maps.event.addListener(map, 'click', (event) => {
-                var latlng = {lat: event.latLng.lat(), lng: event.latLng.lng()};
-                
-                props.handleCoordinates(event.latLng.lat());
-                var marker = new google.maps.Marker({
-                    position: latlng,
-                    map: map,
-                    title: 'Hello World!'
-                });
-            });
-        }
-
-        // Google map is initiliazed on page load by <script> in html body
-        // but this is a SPA and when a user navigates away from the form page and then back to
-        // the form again the map is not intitialized again automatically
-        // so I initialize it manually here.
-        if (typeof window.google === 'object') {
-            window.initMap();
-        }
     }
 
     render() {
@@ -146,7 +104,7 @@ export default class TrailForm extends React.Component {
                 </div>
 
                 <div className="form-row">
-                    <div id="map"></div>
+                    <CoordinatesMap handleChange={props.handleCoordinates} />
                 </div>
 
                 <div className="input-row">

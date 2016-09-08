@@ -515,3 +515,5 @@ table.pagination-component {
 
 .form-select-component .selected {
   background: gray; }
+#coordinates-map {
+  height: 300px; }
