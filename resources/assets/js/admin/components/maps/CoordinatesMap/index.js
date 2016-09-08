@@ -1,32 +1,61 @@
 import React from 'react';
 import style from './style.scss';
+import { Type } from '../../../../modules/types.js';
 
 export default class CoordinatesMap extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            center: {lat: -33.9753693, lng: 18.4000676},
+            marker: false
+        }
     }
 
+    addMarker(map, options) {
+        var marker = new google.maps.Marker({
+            position: options.latLng,
+            map: map,
+            title: 'Hello World!'
+        });
+
+        if (this.state.marker !== false) {
+            this.state.marker.setMap(null);
+        }
+
+        this.setState({marker: marker});
+        marker.setMap(map);
+        map.setCenter(options.latLng);
+    }
     componentDidMount() {
 
-        var props = this.props;
-
         // Create callback to initialize Google Map
-        window.initMap = function initMap() {
-            var myLatLng = {lat: -33.9753693, lng: 18.4000676};
+        var initMap = function initMap() {
             var map = new google.maps.Map(document.getElementById('coordinates-map'), {
-              center: myLatLng,
-              zoom: 12
+              center: this.state.center,
+              zoom: 13
             });
 
-            google.maps.event.addListener(map, 'click', (event) => {
-                var latlng = {lat: event.latLng.lat(), lng: event.latLng.lng()};
+            // TODO research lifecycle methods to see if I can avoid setTimeout
+            setTimeout(() => {
+                if (Type.isNumberNoZero(this.props.lat) && Type.isNumberNoZero(this.props.lng)) {
+                    var options = {
+                        latLng: {lat: parseFloat(this.props.lat), lng: parseFloat(this.props.lng)}
+                    }
+                    console.log(this.props.lat, options);
+                    this.addMarker(map, options);
+                }
 
-                props.handleChange(event.latLng.lat());
-                var marker = new google.maps.Marker({
-                    position: latlng,
-                    map: map,
-                    title: 'Hello World!'
-                });
+            }, 300);
+
+            map.addListener('click', (e) => {
+                var options = {
+                    latLng: {lat: e.latLng.lat(), lng: e.latLng.lng()}
+                };
+
+                this.props.handleChange(e.latLng.lat(), e.latLng.lng());
+
+                this.addMarker(map, options);
             });
         }
 
@@ -34,9 +63,11 @@ export default class CoordinatesMap extends React.Component {
         // but this is a SPA and when a user navigates away from the form page and then back to
         // the form again the map is not intitialized again automatically
         // so I initialize it manually here.
-        if (typeof window.google === 'object') {
-            window.initMap();
-        }
+        // $(document).ready(() => {
+            if (typeof window.google === 'object') {
+                initMap.call(this);
+            }
+        // });
     }
 
     render() {

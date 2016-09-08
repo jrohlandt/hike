@@ -18,7 +18,8 @@ export default class TrailEdit extends React.Component {
             elevation_min: '',
             elevation_max: '',
             description: '',
-            coordinate_start: '',
+            latitude_start: '',
+            longitude_start: '',
             severities: [],
             exposures: [],
             validationErrors: {}
@@ -51,9 +52,8 @@ export default class TrailEdit extends React.Component {
         }
     }
 
-    handleCoordinates(something) {
-        console.log(something);
-        this.setState({coordinate_start: something});
+    handleCoordinates(latitude, longitude) {
+        this.setState({latitude_start: latitude, longitude_start: longitude});
     }
 
     clearValidationError(inputName) {
@@ -101,7 +101,6 @@ export default class TrailEdit extends React.Component {
            dataType: 'json',
            cache: false,
            success: function(res) {
-               console.log(res);
               this.setState({
                 name: res.items.name,
                 distance: res.items.distance,
@@ -110,7 +109,8 @@ export default class TrailEdit extends React.Component {
                 elevation_min: res.items.elevation_min,
                 elevation_max: res.items.elevation_max,
                 description: res.items.description,
-                coordinate_start: res.items.coordinate_start,
+                latitude_start: res.items.latitude_start,
+                longitude_start: res.items.longitude_start,
                 severities: res.severities,
                 exposures: res.exposures
 

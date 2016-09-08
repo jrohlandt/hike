@@ -22,8 +22,10 @@ class CreateTrailsTable extends Migration
             $table->string('elevation_min')->default(0);
             $table->string('elevation_max')->default(0);
             $table->string('elevation_gain')->default(0);
-            $table->string('coordinate_start')->default(0);
-            $table->string('coordinate_end')->default(0);
+            $table->string('latitude_start')->default(0);
+            $table->string('longitude_start')->default(0);
+            $table->string('latitude_end')->default(0);
+            $table->string('longitude_end')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

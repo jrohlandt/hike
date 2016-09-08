@@ -13,6 +13,14 @@ export default class TrailForm extends React.Component {
         var props = this.props;
         var errors = props.validationErrors;
 
+        // var startingCoordinates = {};
+        // if (props.latitude_start && props.longitude_start) {
+        //     startingCoordinates = {
+        //         lat: ,
+        //         lng: props.longitude_start
+        //     }
+        // }
+
         return (
             <form>
 
@@ -77,11 +85,19 @@ export default class TrailForm extends React.Component {
 
                 <div className="form-row">
                     <FormInput
-                        id="trail-starting-coordinate"
-                        labelText="Starting Coordinate"
-                        name="coordinate_start"
-                        value={props.coordinate_start}
-                        error={errors.coordinate_start}
+                        id="trail-latitude-start"
+                        labelText="Latitude"
+                        name="latitude_start"
+                        value={props.latitude_start}
+                        error={errors.latitude_start}
+                        handleChange={props.handleChange}
+                    />
+                    <FormInput
+                        id="trail-longitude-start"
+                        labelText="Longitude"
+                        name="longitude_start"
+                        value={props.longitude_start}
+                        error={errors.longitude_start}
                         handleChange={props.handleChange}
                     />
                 </div>
@@ -104,16 +120,21 @@ export default class TrailForm extends React.Component {
                 </div>
 
                 <div className="form-row">
-                    <CoordinatesMap handleChange={props.handleCoordinates} />
+                    <CoordinatesMap
+                        lat={props.latitude_start}
+                        lng={props.longitude_start}
+                        handleChange={props.handleCoordinates} />
                 </div>
 
-                <div className="input-row">
+                <div className="form-row">
                     <div className="input-group">
-                        <div
-                            className="submit-button"
-                            onClick={props.submitForm}
-                        >
-                            Submit
+                        <div className="input-group">
+                            <div
+                                className="submit-button"
+                                onClick={props.submitForm}
+                                >
+                                Submit
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -18,8 +18,10 @@ class Trail extends Model
     	'elevation_min',
     	'elevation_max',
     	'elevation_gain',
-    	'coordinate_start',
-    	'coordinate_end',
+    	'latitude_start',
+    	'longitude_start',
+    	'latitude_end',
+    	'longitude_end',
     	];
 
     protected $dates = ['deleted_at'];

@@ -42105,7 +42105,14 @@
 	    },
 	    isNumber: function isNumber(val) {
 	        // console.log(val, parseFloat(val), Number(val), Number.isNaN(Number(val)));
+	        if (val === "") return false;
+
 	        return Number.isNaN(Number(val)) === false;
+	    },
+	    isNumberNoZero: function isNumberNoZero(val) {
+	        if (this.isNumber(val) && val !== 0 && val !== "") return true;
+
+	        return false;
 	    },
 	    isNotNumber: function isNotNumber(val) {
 	        return this.isNumber(val) === false;
@@ -42640,6 +42647,14 @@
 	            var props = this.props;
 	            var errors = props.validationErrors;
 
+	            // var startingCoordinates = {};
+	            // if (props.latitude_start && props.longitude_start) {
+	            //     startingCoordinates = {
+	            //         lat: ,
+	            //         lng: props.longitude_start
+	            //     }
+	            // }
+
 	            return _react2.default.createElement(
 	                'form',
 	                null,
@@ -42709,11 +42724,19 @@
 	                    'div',
 	                    { className: 'form-row' },
 	                    _react2.default.createElement(_Input2.default, {
-	                        id: 'trail-starting-coordinate',
-	                        labelText: 'Starting Coordinate',
-	                        name: 'coordinate_start',
-	                        value: props.coordinate_start,
-	                        error: errors.coordinate_start,
+	                        id: 'trail-latitude-start',
+	                        labelText: 'Latitude',
+	                        name: 'latitude_start',
+	                        value: props.latitude_start,
+	                        error: errors.latitude_start,
+	                        handleChange: props.handleChange
+	                    }),
+	                    _react2.default.createElement(_Input2.default, {
+	                        id: 'trail-longitude-start',
+	                        labelText: 'Longitude',
+	                        name: 'longitude_start',
+	                        value: props.longitude_start,
+	                        error: errors.longitude_start,
 	                        handleChange: props.handleChange
 	                    })
 	                ),
@@ -42744,21 +42767,28 @@
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'form-row' },
-	                    _react2.default.createElement(_CoordinatesMap2.default, { handleChange: props.handleCoordinates })
+	                    _react2.default.createElement(_CoordinatesMap2.default, {
+	                        lat: props.latitude_start,
+	                        lng: props.longitude_start,
+	                        handleChange: props.handleCoordinates })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'input-row' },
+	                    { className: 'form-row' },
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'input-group' },
 	                        _react2.default.createElement(
 	                            'div',
-	                            {
-	                                className: 'submit-button',
-	                                onClick: props.submitForm
-	                            },
-	                            'Submit'
+	                            { className: 'input-group' },
+	                            _react2.default.createElement(
+	                                'div',
+	                                {
+	                                    className: 'submit-button',
+	                                    onClick: props.submitForm
+	                                },
+	                                'Submit'
+	                            )
 	                        )
 	                    )
 	                )
@@ -43178,6 +43208,8 @@
 
 	var _style2 = _interopRequireDefault(_style);
 
+	var _types = __webpack_require__(357);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -43192,32 +43224,64 @@
 	    function CoordinatesMap(props) {
 	        _classCallCheck(this, CoordinatesMap);
 
-	        return _possibleConstructorReturn(this, (CoordinatesMap.__proto__ || Object.getPrototypeOf(CoordinatesMap)).call(this, props));
+	        var _this = _possibleConstructorReturn(this, (CoordinatesMap.__proto__ || Object.getPrototypeOf(CoordinatesMap)).call(this, props));
+
+	        _this.state = {
+	            center: { lat: -33.9753693, lng: 18.4000676 },
+	            marker: false
+	        };
+	        return _this;
 	    }
 
 	    _createClass(CoordinatesMap, [{
+	        key: 'addMarker',
+	        value: function addMarker(map, options) {
+	            console.log('add marker');
+	            var marker = new google.maps.Marker({
+	                position: options.latLng,
+	                map: map,
+	                title: 'Hello World!'
+	            });
+
+	            if (this.state.marker !== false) {
+	                this.state.marker.setMap(null);
+	            }
+
+	            this.setState({ marker: marker });
+	            marker.setMap(map);
+	            map.setCenter(options.latLng);
+	        }
+	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 
-	            var props = this.props;
-
 	            // Create callback to initialize Google Map
-	            window.initMap = function initMap() {
-	                var myLatLng = { lat: -33.9753693, lng: 18.4000676 };
+	            var initMap = function initMap() {
+	                var _this2 = this;
+
 	                var map = new google.maps.Map(document.getElementById('coordinates-map'), {
-	                    center: myLatLng,
-	                    zoom: 12
+	                    center: this.state.center,
+	                    zoom: 13
 	                });
 
-	                google.maps.event.addListener(map, 'click', function (event) {
-	                    var latlng = { lat: event.latLng.lat(), lng: event.latLng.lng() };
+	                setTimeout(function () {
+	                    if (_types.Type.isNumberNoZero(_this2.props.lat) && _types.Type.isNumberNoZero(_this2.props.lng)) {
+	                        var options = {
+	                            latLng: { lat: parseFloat(_this2.props.lat), lng: parseFloat(_this2.props.lng) }
+	                        };
+	                        console.log(_this2.props.lat, options);
+	                        _this2.addMarker(map, options);
+	                    }
+	                }, 300);
 
-	                    props.handleChange(event.latLng.lat());
-	                    var marker = new google.maps.Marker({
-	                        position: latlng,
-	                        map: map,
-	                        title: 'Hello World!'
-	                    });
+	                map.addListener('click', function (e) {
+	                    var options = {
+	                        latLng: { lat: e.latLng.lat(), lng: e.latLng.lng() }
+	                    };
+
+	                    _this2.props.handleChange(e.latLng.lat(), e.latLng.lng());
+
+	                    _this2.addMarker(map, options);
 	                });
 	            };
 
@@ -43225,9 +43289,11 @@
 	            // but this is a SPA and when a user navigates away from the form page and then back to
 	            // the form again the map is not intitialized again automatically
 	            // so I initialize it manually here.
+	            // $(document).ready(() => {
 	            if (_typeof(window.google) === 'object') {
-	                window.initMap();
+	                initMap.call(this);
 	            }
+	            // });
 	        }
 	    }, {
 	        key: 'render',
@@ -43308,7 +43374,8 @@
 	            elevation_min: '',
 	            elevation_max: '',
 	            description: '',
-	            coordinate_start: '',
+	            latitude_start: '',
+	            longitude_start: '',
 	            severities: [],
 	            exposures: [],
 	            validationErrors: {}
@@ -43346,9 +43413,8 @@
 	        }
 	    }, {
 	        key: 'handleCoordinates',
-	        value: function handleCoordinates(something) {
-	            console.log(something);
-	            this.setState({ coordinate_start: something });
+	        value: function handleCoordinates(latitude, longitude) {
+	            this.setState({ latitude_start: latitude, longitude_start: longitude });
 	        }
 	    }, {
 	        key: 'clearValidationError',
@@ -43399,7 +43465,6 @@
 	                dataType: 'json',
 	                cache: false,
 	                success: function (res) {
-	                    console.log(res);
 	                    this.setState({
 	                        name: res.items.name,
 	                        distance: res.items.distance,
@@ -43408,7 +43473,8 @@
 	                        elevation_min: res.items.elevation_min,
 	                        elevation_max: res.items.elevation_max,
 	                        description: res.items.description,
-	                        coordinate_start: res.items.coordinate_start,
+	                        latitude_start: res.items.latitude_start,
+	                        longitude_start: res.items.longitude_start,
 	                        severities: res.severities,
 	                        exposures: res.exposures
 

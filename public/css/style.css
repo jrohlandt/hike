@@ -431,8 +431,8 @@ a {
   cursor: pointer; }
 
 .form-row {
-  height: 100px;
-  padding: .5em 1em; }
+  padding: .5em 1em;
+  clear: both; }
 
 .input-group {
   float: left;
@@ -516,4 +516,4 @@ table.pagination-component {
 .form-select-component .selected {
   background: gray; }
 #coordinates-map {
-  height: 300px; }
+  height: 500px; }

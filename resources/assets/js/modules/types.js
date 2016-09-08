@@ -8,7 +8,17 @@ var Type = {
 
     isNumber(val) {
         // console.log(val, parseFloat(val), Number(val), Number.isNaN(Number(val)));
+        if (val === "")
+            return false;
+            
         return Number.isNaN(Number(val)) === false;
+    },
+
+    isNumberNoZero(val) {
+        if (this.isNumber(val) && val !== 0 && val !== "")
+            return true;
+
+        return false;
     },
 
     isNotNumber(val) {
