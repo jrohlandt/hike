@@ -66,6 +66,7 @@ export default class TrailShow extends React.Component {
                     <CoordinatesMap
                         lat={this.state.latitude_start}
                         lng={this.state.longitude_start}
+                        allowAddMarker={false}
                     />
                 </div>
             </div>

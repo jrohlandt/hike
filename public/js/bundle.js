@@ -43282,15 +43282,17 @@
 	                    }
 	                }, 300);
 
-	                map.addListener('click', function (e) {
-	                    var options = {
-	                        latLng: { lat: e.latLng.lat(), lng: e.latLng.lng() }
-	                    };
+	                if (this.props.allowAddMarker !== false) {
+	                    map.addListener('click', function (e) {
+	                        var options = {
+	                            latLng: { lat: e.latLng.lat(), lng: e.latLng.lng() }
+	                        };
 
-	                    _this2.props.handleChange(e.latLng.lat(), e.latLng.lng());
+	                        _this2.props.handleChange(e.latLng.lat(), e.latLng.lng());
 
-	                    _this2.addMarker(map, options);
-	                });
+	                        _this2.addMarker(map, options);
+	                    });
+	                }
 	            };
 
 	            // Google map is initiliazed on page load by <script> in html body
@@ -43437,7 +43439,8 @@
 	                    ),
 	                    _react2.default.createElement(_CoordinatesMap2.default, {
 	                        lat: this.state.latitude_start,
-	                        lng: this.state.longitude_start
+	                        lng: this.state.longitude_start,
+	                        allowAddMarker: false
 	                    })
 	                )
 	            );

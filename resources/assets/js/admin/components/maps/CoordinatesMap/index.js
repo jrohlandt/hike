@@ -35,6 +35,7 @@ export default class CoordinatesMap extends React.Component {
               zoom: 13
             });
 
+
             // TODO research lifecycle methods to see if I can avoid setTimeout
             setTimeout(() => {
                 if (Type.isNumberNoZero(this.props.lat) && Type.isNumberNoZero(this.props.lng)) {
@@ -48,15 +49,18 @@ export default class CoordinatesMap extends React.Component {
 
             }, 300);
 
-            map.addListener('click', (e) => {
-                var options = {
-                    latLng: {lat: e.latLng.lat(), lng: e.latLng.lng()}
-                };
 
-                this.props.handleChange(e.latLng.lat(), e.latLng.lng());
+            if (this.props.allowAddMarker !== false) {
+                map.addListener('click', (e) => {
+                    var options = {
+                        latLng: {lat: e.latLng.lat(), lng: e.latLng.lng()}
+                    };
 
-                this.addMarker(map, options);
-            });
+                    this.props.handleChange(e.latLng.lat(), e.latLng.lng());
+
+                    this.addMarker(map, options);
+                });
+            }
         }
 
         // Google map is initiliazed on page load by <script> in html body
