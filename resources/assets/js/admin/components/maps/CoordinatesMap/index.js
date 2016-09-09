@@ -25,7 +25,6 @@ export default class CoordinatesMap extends React.Component {
 
         this.setState({marker: marker});
         marker.setMap(map);
-        map.setCenter(options.latLng);
     }
     componentDidMount() {
 
@@ -44,6 +43,7 @@ export default class CoordinatesMap extends React.Component {
                     }
                     console.log(this.props.lat, options);
                     this.addMarker(map, options);
+                    map.setCenter(options.latLng);
                 }
 
             }, 300);

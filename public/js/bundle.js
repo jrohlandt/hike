@@ -42481,6 +42481,8 @@
 	            elevation_min: '',
 	            elevation_max: '',
 	            description: '',
+	            latitude_start: '',
+	            longitude_start: '',
 	            severities: [],
 	            exposures: [],
 	            validationErrors: {}
@@ -42488,6 +42490,7 @@
 
 	        _this.handleChange = _this.handleChange.bind(_this);
 	        _this.handleSelect = _this.handleSelect.bind(_this);
+	        _this.handleCoordinates = _this.handleCoordinates.bind(_this);
 	        _this.submitForm = _this.submitForm.bind(_this);
 	        _this.clearValidationError = _this.clearValidationError.bind(_this);
 	        return _this;
@@ -42514,6 +42517,11 @@
 	                this.setState(state);
 	                this.clearValidationError(inputName);
 	            }
+	        }
+	    }, {
+	        key: 'handleCoordinates',
+	        value: function handleCoordinates(latitude, longitude) {
+	            this.setState({ latitude_start: latitude, longitude_start: longitude });
 	        }
 	    }, {
 	        key: 'clearValidationError',
@@ -42585,6 +42593,7 @@
 	                _react2.default.createElement(_form2.default, _extends({}, this.state, {
 	                    handleChange: this.handleChange,
 	                    handleSelect: this.handleSelect,
+	                    handleCoordinates: this.handleCoordinates,
 	                    submitForm: this.submitForm
 	                }))
 	            );
@@ -42646,14 +42655,6 @@
 	        value: function render() {
 	            var props = this.props;
 	            var errors = props.validationErrors;
-
-	            // var startingCoordinates = {};
-	            // if (props.latitude_start && props.longitude_start) {
-	            //     startingCoordinates = {
-	            //         lat: ,
-	            //         lng: props.longitude_start
-	            //     }
-	            // }
 
 	            return _react2.default.createElement(
 	                'form',
@@ -43236,7 +43237,6 @@
 	    _createClass(CoordinatesMap, [{
 	        key: 'addMarker',
 	        value: function addMarker(map, options) {
-	            console.log('add marker');
 	            var marker = new google.maps.Marker({
 	                position: options.latLng,
 	                map: map,
@@ -43249,7 +43249,6 @@
 
 	            this.setState({ marker: marker });
 	            marker.setMap(map);
-	            map.setCenter(options.latLng);
 	        }
 	    }, {
 	        key: 'componentDidMount',
@@ -43264,6 +43263,7 @@
 	                    zoom: 13
 	                });
 
+	                // TODO research lifecycle methods to see if I can avoid setTimeout
 	                setTimeout(function () {
 	                    if (_types.Type.isNumberNoZero(_this2.props.lat) && _types.Type.isNumberNoZero(_this2.props.lng)) {
 	                        var options = {
@@ -43271,6 +43271,7 @@
 	                        };
 	                        console.log(_this2.props.lat, options);
 	                        _this2.addMarker(map, options);
+	                        map.setCenter(options.latLng);
 	                    }
 	                }, 300);
 

@@ -17,6 +17,8 @@ export default class TrailCreate extends React.Component {
             elevation_min: '',
             elevation_max: '',
             description: '',
+            latitude_start: '',
+            longitude_start: '',
             severities: [],
             exposures: [],
             validationErrors: {}
@@ -24,6 +26,7 @@ export default class TrailCreate extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
+        this.handleCoordinates = this.handleCoordinates.bind(this);
         this.submitForm = this.submitForm.bind(this);
         this.clearValidationError = this.clearValidationError.bind(this);
     }
@@ -46,6 +49,10 @@ export default class TrailCreate extends React.Component {
             this.setState(state);
             this.clearValidationError(inputName);
         }
+    }
+
+    handleCoordinates(latitude, longitude) {
+        this.setState({latitude_start: latitude, longitude_start: longitude});
     }
 
     clearValidationError(inputName) {
@@ -113,6 +120,7 @@ export default class TrailCreate extends React.Component {
                     {...this.state}
                     handleChange={this.handleChange}
                     handleSelect={this.handleSelect}
+                    handleCoordinates={this.handleCoordinates}
                     submitForm={this.submitForm}
                 />
             </div>

@@ -13,14 +13,6 @@ export default class TrailForm extends React.Component {
         var props = this.props;
         var errors = props.validationErrors;
 
-        // var startingCoordinates = {};
-        // if (props.latitude_start && props.longitude_start) {
-        //     startingCoordinates = {
-        //         lat: ,
-        //         lng: props.longitude_start
-        //     }
-        // }
-
         return (
             <form>
 
