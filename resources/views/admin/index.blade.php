@@ -16,15 +16,7 @@
                 }
             });
         </script>
-        <script
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCq5NUFKaqLtZ1ex07s16NAcCRxYDil5LE"
-        >
-        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCq5NUFKaqLtZ1ex07s16NAcCRxYDil5LE"></script>
         <script src="/js/bundle.js"></script>
-        <script>
-            // $(document).ready(() => {
-            //     initMap();
-            // });
-        </script>
     </body>
 </html>
