@@ -78,13 +78,16 @@
 
 	var _create2 = _interopRequireDefault(_create);
 
-	var _edit = __webpack_require__(376);
+	var _show = __webpack_require__(376);
+
+	var _show2 = _interopRequireDefault(_show);
+
+	var _edit = __webpack_require__(377);
 
 	var _edit2 = _interopRequireDefault(_edit);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// Components to use in routes
 	var routes = _react2.default.createElement(
 	  _reactRouter.Router,
 	  { history: _reactRouter.browserHistory },
@@ -95,9 +98,13 @@
 	    _react2.default.createElement(_reactRouter.Route, { path: 'hikes', component: _index4.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'trails', component: _index6.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'trails/create', component: _create2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: 'trails/:id', component: _show2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'trails/:id/edit', component: _edit2.default })
 	  )
 	);
+
+	// Components to use in routes
+
 
 	(0, _reactDom.render)(routes, document.getElementById('app'));
 
@@ -43316,6 +43323,134 @@
 
 /***/ },
 /* 376 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _style = __webpack_require__(363);
+
+	var _style2 = _interopRequireDefault(_style);
+
+	var _reactRouter = __webpack_require__(172);
+
+	var _alert = __webpack_require__(246);
+
+	var _alert2 = _interopRequireDefault(_alert);
+
+	var _breadcrumbs = __webpack_require__(248);
+
+	var _breadcrumbs2 = _interopRequireDefault(_breadcrumbs);
+
+	var _CoordinatesMap = __webpack_require__(374);
+
+	var _CoordinatesMap2 = _interopRequireDefault(_CoordinatesMap);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var TrailShow = function (_React$Component) {
+	    _inherits(TrailShow, _React$Component);
+
+	    function TrailShow(props) {
+	        _classCallCheck(this, TrailShow);
+
+	        var _this = _possibleConstructorReturn(this, (TrailShow.__proto__ || Object.getPrototypeOf(TrailShow)).call(this, props));
+
+	        _this.state = {
+	            id: props.params.id,
+	            name: '',
+	            distance: '',
+	            severity_id: '',
+	            exposure_id: '',
+	            elevation_min: '',
+	            elevation_max: '',
+	            description: '',
+	            latitude_start: '',
+	            longitude_start: ''
+	        };
+	        return _this;
+	    }
+
+	    _createClass(TrailShow, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            $.ajax({
+	                url: '/admin/trails/' + this.state.id,
+	                type: "GET",
+	                dataType: 'json',
+	                cache: false,
+	                success: function (res) {
+	                    this.setState({
+	                        name: res.items.name,
+	                        distance: res.items.distance,
+	                        severity_id: res.items.severity_id,
+	                        exposure_id: res.items.exposure_id,
+	                        elevation_min: res.items.elevation_min,
+	                        elevation_max: res.items.elevation_max,
+	                        description: res.items.description,
+	                        latitude_start: res.items.latitude_start,
+	                        longitude_start: res.items.longitude_start,
+	                        severities: res.severities,
+	                        exposures: res.exposures
+
+	                    });
+	                }.bind(this),
+	                error: function (xhr, status, err) {
+	                    console.log(xhr);
+	                }.bind(this)
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var errors = this.state.validationErrors;
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(_alert2.default, {
+	                    message: this.state.message,
+	                    'class': this.state.class
+	                }),
+	                _react2.default.createElement(_breadcrumbs2.default, null),
+	                _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    _react2.default.createElement(
+	                        'h1',
+	                        null,
+	                        this.state.name
+	                    ),
+	                    _react2.default.createElement(_CoordinatesMap2.default, {
+	                        lat: this.state.latitude_start,
+	                        lng: this.state.longitude_start
+	                    })
+	                )
+	            );
+	        }
+	    }]);
+
+	    return TrailShow;
+	}(_react2.default.Component);
+
+	exports.default = TrailShow;
+
+/***/ },
+/* 377 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
