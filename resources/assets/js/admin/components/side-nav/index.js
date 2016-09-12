@@ -11,13 +11,13 @@ export default class SideNav extends React.Component {
           <div id="logo-container">HIKE</div>
           <ul>
               <li>
-                  <IndexLink to="/admin">dashboard</IndexLink>
+                  <IndexLink to="/admin" activeClassName="side-nav-link-active">dashboard</IndexLink>
               </li>
               <li>
-                  <Link to="/admin/hikes">hikes</Link>
+                  <Link to="/admin/hikes" activeClassName="side-nav-link-active">hikes</Link>
               </li>
               <li>
-                  <Link to="/admin/trails">trails</Link>
+                  <Link to="/admin/trails" activeClassName="side-nav-link-active">trails</Link>
               </li>
           </ul>
       </div>

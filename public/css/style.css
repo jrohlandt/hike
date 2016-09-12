@@ -456,6 +456,9 @@ a {
 #logo-container {
   text-align: center;
   padding: 1.5em; }
+
+.side-nav-link-active {
+  color: white; }
 .alert {
   padding: 1em;
   border-radius: .5em; }
