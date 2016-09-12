@@ -50,7 +50,10 @@ class ItemRow extends React.Component {
             columns.push(
                 <Column key={column+item.id}>
                     <td>
-                        <Link to={this.props.baseUrl + '/' + item.id + '/edit'}>
+                        <Link
+                            to={this.props.baseUrl + '/' + item.id + '/edit'}
+                            className={columns.length < 1 ? 'first-link-of-row' : ''}
+                        >
                             {item[column]}
                         </Link>
                     </td>
@@ -58,7 +61,7 @@ class ItemRow extends React.Component {
             );
         });
 
-        return (<tr>{columns}</tr>);
+        return (<tr className="listing-component-body-row">{columns}</tr>);
     }
 }
 

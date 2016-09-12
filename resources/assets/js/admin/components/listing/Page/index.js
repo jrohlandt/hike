@@ -61,14 +61,14 @@ export default class ListingPage extends React.Component {
             <div>
                 <Alert />
                 <BreadCrumbs />
+                <ActionsRow
+                    itemType={this.state.itemType}
+                    baseUrl={this.state.baseUrl}
+                />
                 <ItemsTable
                     items={this.state.items}
                     columnsToDisplay={this.state.columnsToDisplay}
                     updateParentState={this.updateState}
-                    baseUrl={this.state.baseUrl}
-                />
-                <ActionsRow
-                    itemType={this.state.itemType}
                     baseUrl={this.state.baseUrl}
                 />
                 <Pagination

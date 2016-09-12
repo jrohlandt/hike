@@ -27576,14 +27576,14 @@
 	                null,
 	                _react2.default.createElement(_alert2.default, null),
 	                _react2.default.createElement(_breadcrumbs2.default, null),
+	                _react2.default.createElement(_ActionsRow2.default, {
+	                    itemType: this.state.itemType,
+	                    baseUrl: this.state.baseUrl
+	                }),
 	                _react2.default.createElement(_ItemsTable2.default, {
 	                    items: this.state.items,
 	                    columnsToDisplay: this.state.columnsToDisplay,
 	                    updateParentState: this.updateState,
-	                    baseUrl: this.state.baseUrl
-	                }),
-	                _react2.default.createElement(_ActionsRow2.default, {
-	                    itemType: this.state.itemType,
 	                    baseUrl: this.state.baseUrl
 	                }),
 	                _react2.default.createElement(_pagination2.default, {
@@ -27891,7 +27891,10 @@
 	                        null,
 	                        _react2.default.createElement(
 	                            _reactRouter.Link,
-	                            { to: _this5.props.baseUrl + '/' + item.id + '/edit' },
+	                            {
+	                                to: _this5.props.baseUrl + '/' + item.id + '/edit',
+	                                className: columns.length < 1 ? 'first-link-of-row' : ''
+	                            },
 	                            item[column]
 	                        )
 	                    )
@@ -27900,7 +27903,7 @@
 
 	            return _react2.default.createElement(
 	                'tr',
-	                null,
+	                { className: 'listing-component-body-row' },
 	                columns
 	            );
 	        }

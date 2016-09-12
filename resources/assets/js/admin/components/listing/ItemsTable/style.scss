@@ -1,17 +1,39 @@
 table.listing-component {
     width: 95%;
     margin: auto;
-    border: thin solid black;
     border-collapse: collapse;
+    color: rgba(43,47,62, .6);
+}
+
+.listing-component thead {
+    border: thin solid rgba(43,47,62, .05);
 }
 
 .listing-component th {
     padding: 1em;
     text-align: left;
-    border-bottom: thick solid black;
     cursor: pointer;
+    font-size: .8em;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
-.listing-component td {
-    padding: .5em;
+
+.listing-component a {
+    display: inline-block;
+    padding: 1em;
+    width: 100%;
+    text-decoration: none;
+    font-size: .8em;
+    font-weight: 400;
+    color: rgba(43,47,62, .6);
+    text-transform: capitalize;
+}
+
+a.first-link-of-row {
+    color: rgba(43,47,62, .9);
+}
+
+.listing-component-body-row {
+    border-bottom: thin solid rgba(43,47,62, .05);
 }
