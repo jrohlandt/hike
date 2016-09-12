@@ -27440,6 +27440,7 @@
 	        value: function render() {
 	            var props = {
 	                columnsToDisplay: this.state.columnsToDisplay,
+	                heading: 'Hikes',
 	                baseUrl: this.props.location.pathname
 	            };
 	            return _react2.default.createElement(_Page2.default, props);
@@ -27575,7 +27576,7 @@
 	                'div',
 	                null,
 	                _react2.default.createElement(_alert2.default, null),
-	                _react2.default.createElement(_breadcrumbs2.default, null),
+	                _react2.default.createElement(_breadcrumbs2.default, { heading: this.props.heading }),
 	                _react2.default.createElement(_ActionsRow2.default, {
 	                    itemType: this.state.itemType,
 	                    baseUrl: this.state.baseUrl
@@ -27748,9 +27749,9 @@
 	                'div',
 	                { className: 'breadcrumbs-component' },
 	                _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    'Bread - Crumbs'
+	                    'h1',
+	                    null,
+	                    this.props.heading
 	                )
 	            );
 	        }
@@ -42232,7 +42233,10 @@
 	                        null,
 	                        _react2.default.createElement(
 	                            _reactRouter.Link,
-	                            { to: this.props.baseUrl + '/create' },
+	                            {
+	                                to: this.props.baseUrl + '/create',
+	                                className: 'new'
+	                            },
 	                            'New ' + this.props.itemType
 	                        )
 	                    )
@@ -42455,6 +42459,7 @@
 	        value: function render() {
 	            var props = {
 	                itemType: 'trail',
+	                heading: 'Trails',
 	                columnsToDisplay: ['name', 'created_at'],
 	                baseUrl: this.props.location.pathname
 	            };
@@ -42642,7 +42647,7 @@
 	                'div',
 	                null,
 	                _react2.default.createElement(_alert2.default, null),
-	                _react2.default.createElement(_breadcrumbs2.default, null),
+	                _react2.default.createElement(_breadcrumbs2.default, { heading: 'Create Trail' }),
 	                _react2.default.createElement(_form2.default, _extends({}, this.state, {
 	                    handleChange: this.handleChange,
 	                    handleSelect: this.handleSelect,
@@ -43474,7 +43479,7 @@
 	                    message: this.state.message,
 	                    'class': this.state.class
 	                }),
-	                _react2.default.createElement(_breadcrumbs2.default, null),
+	                _react2.default.createElement(_breadcrumbs2.default, { heading: 'Trail Preview - ' + this.state.name }),
 	                _react2.default.createElement(
 	                    'div',
 	                    null,
@@ -43681,7 +43686,7 @@
 	                    message: this.state.message,
 	                    'class': this.state.class
 	                }),
-	                _react2.default.createElement(_breadcrumbs2.default, null),
+	                _react2.default.createElement(_breadcrumbs2.default, { heading: 'Edit Trail - ' + this.state.name }),
 	                _react2.default.createElement(_form2.default, _extends({}, this.state, {
 	                    handleChange: this.handleChange,
 	                    handleSelect: this.handleSelect,

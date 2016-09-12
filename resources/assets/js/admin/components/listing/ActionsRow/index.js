@@ -14,7 +14,10 @@ export default class ActionRow extends React.Component {
             <div className="actions-row-component">
                 <ul>
                     <li>
-                        <Link to={`${this.props.baseUrl}/create`}>
+                        <Link
+                            to={`${this.props.baseUrl}/create`}
+                            className="new"
+                        >
                             {`New ${this.props.itemType}`}
                         </Link>
                     </li>

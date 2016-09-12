@@ -130,7 +130,7 @@ export default class TrailEdit extends React.Component {
                     message={this.state.message}
                     class={this.state.class}
                 />
-                <BreadCrumbs />
+                <BreadCrumbs heading={`Edit Trail - ${this.state.name}`}/>
 
                 <TrailForm
                     {...this.state}

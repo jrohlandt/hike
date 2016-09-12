@@ -5,7 +5,7 @@ export default class BreadCrumbs extends React.Component {
     render() {
         return (
             <div className="breadcrumbs-component">
-                <a href="#">Bread - Crumbs</a>
+                <h1>{this.props.heading}</h1>
             </div>
         );
     }

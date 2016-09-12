@@ -14,6 +14,7 @@ export default class HikesListing extends React.Component {
     render() {
         var props = {
             columnsToDisplay: this.state.columnsToDisplay,
+            heading: 'Hikes',
             baseUrl: this.props.location.pathname
         }
         return (

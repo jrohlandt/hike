@@ -60,7 +60,7 @@ export default class ListingPage extends React.Component {
         return (
             <div>
                 <Alert />
-                <BreadCrumbs />
+                <BreadCrumbs heading={this.props.heading}/>
                 <ActionsRow
                     itemType={this.state.itemType}
                     baseUrl={this.state.baseUrl}

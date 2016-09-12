@@ -6,6 +6,7 @@ table.listing-component {
 }
 
 .listing-component thead {
+    background: rgba(43,47,62, .03);
     border: thin solid rgba(43,47,62, .05);
 }
 
@@ -36,4 +37,12 @@ a.first-link-of-row {
 
 .listing-component-body-row {
     border-bottom: thin solid rgba(43,47,62, .05);
+}
+
+.listing-component-body-row:hover {
+    background: rgba(43,47,62, .03);
+}
+
+.dark {
+    background: rgba(43,47,62, .01);
 }

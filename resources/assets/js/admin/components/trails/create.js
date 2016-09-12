@@ -115,7 +115,7 @@ export default class TrailCreate extends React.Component {
         return (
             <div>
                 <Alert />
-                <BreadCrumbs />
+                <BreadCrumbs heading="Create Trail"/>
                 <TrailForm
                     {...this.state}
                     handleChange={this.handleChange}

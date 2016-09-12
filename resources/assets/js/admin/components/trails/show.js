@@ -59,7 +59,7 @@ export default class TrailShow extends React.Component {
                     message={this.state.message}
                     class={this.state.class}
                 />
-                <BreadCrumbs />
+            <BreadCrumbs heading={`Trail Preview - ${this.state.name}`}/>
 
                 <div>
                     <h1>{this.state.name}</h1>

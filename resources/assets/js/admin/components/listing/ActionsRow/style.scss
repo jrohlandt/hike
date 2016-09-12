@@ -1,0 +1,26 @@
+.actions-row-component {
+    width: 95%;
+    margin: auto;
+    padding-bottom: .5em;
+}
+.actions-row-component ul {
+    padding: 0;
+}
+
+.actions-row-component li {
+    list-style: none;
+}
+
+.actions-row-component a {
+    padding: .5em 1em;
+    text-decoration: none;
+    color: white;
+    font-size: .8em;
+    font-weight: 700;
+    background: #70DBDB;
+    border-radius: 2px;
+}
+
+.actions-row-component a:hover {
+    background: #66CCCC;
+}

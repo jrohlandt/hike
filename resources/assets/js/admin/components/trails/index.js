@@ -11,10 +11,11 @@ export default class TrailsListing extends React.Component {
     render() {
         var props = {
             itemType: 'trail',
+            heading: 'Trails',
             columnsToDisplay: ['name', 'created_at'],
             baseUrl: this.props.location.pathname
         }
-        
+
         return (
             <ListingPage {...props} />
         );
