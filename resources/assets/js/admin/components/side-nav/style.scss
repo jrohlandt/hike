@@ -2,7 +2,7 @@
     height: 650px;
     float: left;
     width: 20%;
-    background: #2B2F3E;
+    background: rgb(43,47,62);
 }
 
 #side-nav ul {
@@ -38,7 +38,12 @@
     text-transform: uppercase;
 }
 
+.side-nav-links a:hover {
+    color: rgb(167,171,186);
+}
 
-.side-nav-link-active {
-    color: white;
+
+a.side-nav-link-active {
+    color: rgb(167,171,186);
+    background: rgb(39,43,58);
 }

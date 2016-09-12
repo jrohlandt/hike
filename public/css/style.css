@@ -455,7 +455,7 @@ a {
   height: 650px;
   float: left;
   width: 20%;
-  background: #2B2F3E; }
+  background: #2b2f3e; }
 
 #side-nav ul {
   padding: 0; }
@@ -484,8 +484,12 @@ a {
   text-decoration: none;
   text-transform: uppercase; }
 
-.side-nav-link-active {
-  color: white; }
+.side-nav-links a:hover {
+  color: #a7abba; }
+
+a.side-nav-link-active {
+  color: #a7abba;
+  background: #272b3a; }
 .alert {
   padding: 1em;
   border-radius: .5em; }
