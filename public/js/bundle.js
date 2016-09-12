@@ -42767,7 +42767,12 @@
 	                            _react2.default.createElement(
 	                                'h4',
 	                                null,
-	                                'Coordinates'
+	                                'Coordinates',
+	                                _react2.default.createElement(
+	                                    'small',
+	                                    null,
+	                                    ' (click map below to get coordinates)'
+	                                )
 	                            )
 	                        ),
 	                        _react2.default.createElement(_Input2.default, {

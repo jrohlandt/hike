@@ -18,6 +18,11 @@
     color: rgba(43,47,62, .5);
 }
 
+.form-row-heading small {
+    color: rgba(43,47,62, .3);
+    margin-left: .5em;
+}
+
 .input-group {
     float: left;
     width: 30%;
@@ -64,13 +69,13 @@ textarea.form-control {
     font-weight: 700;
     padding: 0 .5em;
     text-align: center;
-    background: teal;
+    background: #00CDCD;
     cursor: pointer;
     border-radius: .1em;
 }
 
 .submit-button:hover {
-
+    background: #8DEEEE;
 }
 
 .validation-error {

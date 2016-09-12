@@ -450,6 +450,10 @@ a {
 .form-row-heading {
   color: rgba(43, 47, 62, 0.5); }
 
+.form-row-heading small {
+  color: rgba(43, 47, 62, 0.3);
+  margin-left: .5em; }
+
 .input-group {
   float: left;
   width: 30%;
@@ -489,9 +493,12 @@ textarea.form-control {
   font-weight: 700;
   padding: 0 .5em;
   text-align: center;
-  background: teal;
+  background: #00CDCD;
   cursor: pointer;
   border-radius: .1em; }
+
+.submit-button:hover {
+  background: #8DEEEE; }
 
 .validation-error {
   color: red;
@@ -648,5 +655,14 @@ table.pagination-component {
 
 .form-select-component .selected {
   background: gray; }
+
+.selected-value {
+  border-bottom: thin solid rgba(43, 47, 62, 0.3);
+  color: rgba(43, 47, 62, 0.6);
+  font-size: .9em;
+  padding: .5em; }
+
+div[tabindex="-1"]:focus {
+  outline: none; }
 #coordinates-map {
   height: 500px; }

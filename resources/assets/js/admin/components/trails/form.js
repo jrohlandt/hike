@@ -32,8 +32,12 @@ export default class TrailForm extends React.Component {
 
                     <div className="form-row">
                         <div className="form-row-heading">
-                            <h4>Coordinates</h4>
+                                <h4>
+                                    Coordinates
+                                    <small> (click map below to get coordinates)</small>
+                                </h4>
                         </div>
+
                         <FormInput
                             id="trail-latitude-start"
                             labelText="Latitude"

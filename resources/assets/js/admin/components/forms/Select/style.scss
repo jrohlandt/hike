@@ -14,3 +14,14 @@
 .form-select-component .selected {
     background: gray;
 }
+
+.selected-value {
+    border-bottom: thin solid rgba(43,47,62, .3);
+    color: rgba(43,47,62, .6);
+    font-size: .9em;
+    padding: .5em;
+}
+
+div[tabindex="-1"]:focus {
+    outline: none;
+}
