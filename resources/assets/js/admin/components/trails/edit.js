@@ -79,6 +79,7 @@ export default class TrailEdit extends React.Component {
                } else {
                    localStorage.setItem('flash-error', `Trail could not be updated.`);
                }
+
                browserHistory.push('/admin/trails');
            }.bind(this),
            error: function(xhr, status, err) {
@@ -95,6 +96,7 @@ export default class TrailEdit extends React.Component {
     }
 
     componentDidMount() {
+        window.scrollTo(0, 0);
         $.ajax({
            url: '/admin/trails/' + this.state.id,
            type: "GET",

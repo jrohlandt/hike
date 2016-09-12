@@ -27901,10 +27901,13 @@
 	                    )
 	                ));
 	            });
+	            console.log('dark: ' + this.props.dark);
 
 	            return _react2.default.createElement(
 	                'tr',
-	                { className: 'listing-component-body-row' },
+	                {
+	                    className: "listing-component-body-row " + (this.props.dark ? "dark" : "")
+	                },
 	                columns
 	            );
 	        }
@@ -27937,10 +27940,18 @@
 	            var _this7 = this;
 
 	            var rows = [];
+	            var dark = false;
 	            this.props.items.forEach(function (item) {
+	                if (rows.length === 0) {
+	                    dark = false;
+	                } else {
+	                    dark = !dark;
+	                }
+	                // console.log('dark: ' + dark);
 	                rows.push(_react2.default.createElement(ItemRow, {
 	                    key: item.id,
 	                    item: item,
+	                    dark: dark,
 	                    columnsToDisplay: _this7.props.columnsToDisplay,
 	                    baseUrl: _this7.props.baseUrl
 	                }));
@@ -42455,6 +42466,11 @@
 	    }
 
 	    _createClass(TrailsListing, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            window.scrollTo(0, 0);
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var props = {
@@ -42622,6 +42638,7 @@
 	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
+	            window.scrollTo(0, 0);
 	            $.ajax({
 	                url: '/admin/trails/create',
 	                type: "GET",
@@ -43442,6 +43459,7 @@
 	    _createClass(TrailShow, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
+	            window.scrollTo(0, 0);
 	            $.ajax({
 	                url: '/admin/trails/' + this.state.id,
 	                type: "GET",
@@ -43632,6 +43650,7 @@
 	                    } else {
 	                        localStorage.setItem('flash-error', 'Trail could not be updated.');
 	                    }
+
 	                    _reactRouter.browserHistory.push('/admin/trails');
 	                }.bind(this),
 	                error: function (xhr, status, err) {
@@ -43649,6 +43668,7 @@
 	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
+	            window.scrollTo(0, 0);
 	            $.ajax({
 	                url: '/admin/trails/' + this.state.id,
 	                type: "GET",

@@ -92,6 +92,7 @@ export default class TrailCreate extends React.Component {
     }
 
     componentDidMount() {
+        window.scrollTo(0, 0);
         $.ajax({
            url: '/admin/trails/create',
            type: "GET",

@@ -24,6 +24,7 @@ export default class TrailShow extends React.Component {
     }
 
     componentDidMount() {
+        window.scrollTo(0, 0);
         $.ajax({
            url: `/admin/trails/${this.state.id}`,
            type: "GET",

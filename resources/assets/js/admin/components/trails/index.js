@@ -8,6 +8,10 @@ export default class TrailsListing extends React.Component {
         super(props);
     }
 
+    componentDidMount() {
+        window.scrollTo(0, 0);
+    }
+
     render() {
         var props = {
             itemType: 'trail',

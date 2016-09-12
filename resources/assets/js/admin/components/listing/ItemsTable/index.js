@@ -60,8 +60,15 @@ class ItemRow extends React.Component {
                 </Column>
             );
         });
+            console.log('dark: ' + this.props.dark);
 
-        return (<tr className="listing-component-body-row">{columns}</tr>);
+        return (
+            <tr
+                className={"listing-component-body-row " + (this.props.dark ? "dark" : "")}
+            >
+                {columns}
+            </tr>
+        );
     }
 }
 
@@ -78,11 +85,19 @@ export default class ItemsTable extends React.Component {
 
     render() {
         var rows = [];
+        var dark = false;
         this.props.items.forEach((item) => {
+            if (rows.length === 0) {
+                dark = false;
+            } else {
+                dark = !dark;
+            }
+            // console.log('dark: ' + dark);
             rows.push(
                 <ItemRow
                     key={item.id}
                     item={item}
+                    dark={dark}
                     columnsToDisplay={this.props.columnsToDisplay}
                     baseUrl={this.props.baseUrl}
                 />
