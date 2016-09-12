@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>@yield('title')</title>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700" rel="stylesheet">
         <link rel="stylesheet" href="/css/style.css" charset="utf-8">
     </head>
     <body>

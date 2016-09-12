@@ -9,15 +9,21 @@ export default class SideNav extends React.Component {
     return (
       <div id="side-nav">
           <div id="logo-container">HIKE</div>
-          <ul>
+          <ul className="side-nav-links">
               <li>
-                  <IndexLink to="/admin" activeClassName="side-nav-link-active">dashboard</IndexLink>
+                  <IndexLink to="/admin" activeClassName="side-nav-link-active" >dashboard</IndexLink>
               </li>
               <li>
-                  <Link to="/admin/hikes" activeClassName="side-nav-link-active">hikes</Link>
+                  <Link to="/admin/hikes" activeClassName="side-nav-link-active" >hikes</Link>
               </li>
               <li>
-                  <Link to="/admin/trails" activeClassName="side-nav-link-active">trails</Link>
+                  <Link to="/admin/trails" activeClassName="side-nav-link-active" >trails</Link>
+              </li>
+              <li>
+                  <a href="#" >exposures</a>
+              </li>
+              <li>
+                  <a href="#" >severities</a>
               </li>
           </ul>
       </div>

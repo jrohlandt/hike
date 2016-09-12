@@ -1,13 +1,43 @@
 #side-nav {
+    height: 650px;
     float: left;
     width: 20%;
-    background: #ccc;
+    background: #2B2F3E;
+}
+
+#side-nav ul {
+    padding: 0;
 }
 
 #logo-container {
     text-align: center;
     padding: 1.5em;
+    font-size: 1.5em;
+    color: #9C9C9C;
 }
+
+.side-nav-links {
+    font-weight: 400;
+    list-style: none;
+}
+
+.side-nav-links li {
+    border-bottom: 1px solid rgba(107,111,126, .2);
+}
+
+.side-nav-links li:last-child {
+    border-bottom: 1px solid rgba(107,111,126, .15);
+}
+
+.side-nav-links a {
+    display: inline-block;
+    width: 100%;
+    color: rgb(107,111,126);
+    padding: 1em 2em;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
 
 .side-nav-link-active {
     color: white;

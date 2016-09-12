@@ -27262,7 +27262,7 @@
 	                ),
 	                _react2.default.createElement(
 	                    'ul',
-	                    null,
+	                    { className: 'side-nav-links' },
 	                    _react2.default.createElement(
 	                        'li',
 	                        null,
@@ -27288,6 +27288,24 @@
 	                            _reactRouter.Link,
 	                            { to: '/admin/trails', activeClassName: 'side-nav-link-active' },
 	                            'trails'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'li',
+	                        null,
+	                        _react2.default.createElement(
+	                            'a',
+	                            { href: '#' },
+	                            'exposures'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'li',
+	                        null,
+	                        _react2.default.createElement(
+	                            'a',
+	                            { href: '#' },
+	                            'severities'
 	                        )
 	                    )
 	                )
