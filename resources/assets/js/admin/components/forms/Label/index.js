@@ -15,7 +15,10 @@ export default class FormInput extends React.Component {
 
     render() {
         return (
-            <label htmlFor={this.props.for}>
+            <label
+                htmlFor={this.props.for}
+                className="form-label"
+            >
                 {this.props.text}
             </label>
         );

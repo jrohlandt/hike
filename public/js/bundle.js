@@ -42175,7 +42175,7 @@
 	        return Number.isNaN(Number(val)) === false;
 	    },
 	    isNumberNoZero: function isNumberNoZero(val) {
-	        if (this.isNumber(val) && val !== 0 && val !== "") return true;
+	        if (this.isNumber(val) && val !== 0 && parseFloat(val) !== 0) return true;
 
 	        return false;
 	    },
@@ -42732,128 +42732,168 @@
 	            var errors = props.validationErrors;
 
 	            return _react2.default.createElement(
-	                'form',
-	                null,
+	                'div',
+	                { className: 'form-container' },
 	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-row' },
-	                    _react2.default.createElement(_Input2.default, {
-	                        id: 'trail-name',
-	                        labelText: 'Nddame',
-	                        name: 'name',
-	                        value: props.name,
-	                        error: errors.name,
-	                        handleChange: props.handleChange
-	                    })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-row' },
-	                    _react2.default.createElement(_Select2.default, {
-	                        id: 'trail-severity',
-	                        labelText: 'Severity',
-	                        name: 'severity_id',
-	                        options: props.severities,
-	                        selected: props.severity_id,
-	                        error: errors.severity_id,
-	                        handleSelect: props.handleSelect
-	                    }),
-	                    _react2.default.createElement(_Select2.default, {
-	                        id: 'trail-exposure',
-	                        labelText: 'Exposure',
-	                        name: 'exposure_id',
-	                        options: props.exposures,
-	                        selected: props.exposure_id,
-	                        error: errors.exposure_id,
-	                        handleSelect: props.handleSelect
-	                    })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-row' },
-	                    _react2.default.createElement(_Input2.default, {
-	                        id: 'trail-distance',
-	                        labelText: 'Distance (meters)',
-	                        name: 'distance',
-	                        value: props.distance,
-	                        error: errors.distance,
-	                        handleChange: props.handleChange
-	                    }),
-	                    _react2.default.createElement(_Input2.default, {
-	                        id: 'trail-elevation_min',
-	                        labelText: 'Min Elevation (meters)',
-	                        name: 'elevation_min',
-	                        value: props.elevation_min,
-	                        error: errors.elevation_min,
-	                        handleChange: props.handleChange
-	                    }),
-	                    _react2.default.createElement(_Input2.default, {
-	                        id: 'trail-elevation_max',
-	                        labelText: 'Max Elevation (meters)',
-	                        name: 'elevation_max',
-	                        value: props.elevation_max,
-	                        error: errors.elevation_max,
-	                        handleChange: props.handleChange
-	                    })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-row' },
-	                    _react2.default.createElement(_Input2.default, {
-	                        id: 'trail-latitude-start',
-	                        labelText: 'Latitude',
-	                        name: 'latitude_start',
-	                        value: props.latitude_start,
-	                        error: errors.latitude_start,
-	                        handleChange: props.handleChange
-	                    }),
-	                    _react2.default.createElement(_Input2.default, {
-	                        id: 'trail-longitude-start',
-	                        labelText: 'Longitude',
-	                        name: 'longitude_start',
-	                        value: props.longitude_start,
-	                        error: errors.longitude_start,
-	                        handleChange: props.handleChange
-	                    })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-row' },
+	                    'form',
+	                    null,
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'input-group' },
-	                        _react2.default.createElement(
-	                            'label',
-	                            { htmlFor: 'trail-description' },
-	                            'Description '
-	                        ),
-	                        _react2.default.createElement('textarea', {
-	                            name: 'description',
-	                            id: 'trail-description',
-	                            value: props.description,
-	                            onChange: props.handleChange
-	                        }),
+	                        { className: 'form-row' },
 	                        _react2.default.createElement(
 	                            'div',
-	                            { className: 'validation-error' },
-	                            errors.description ? errors.description : ''
-	                        )
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-row' },
-	                    _react2.default.createElement(_CoordinatesMap2.default, {
-	                        lat: props.latitude_start,
-	                        lng: props.longitude_start,
-	                        handleChange: props.handleCoordinates })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-row' },
+	                            { className: 'form-row-heading' },
+	                            _react2.default.createElement(
+	                                'h4',
+	                                null,
+	                                'Details'
+	                            )
+	                        ),
+	                        _react2.default.createElement(_Input2.default, {
+	                            id: 'trail-name',
+	                            labelText: 'Name',
+	                            name: 'name',
+	                            value: props.name,
+	                            error: errors.name,
+	                            handleChange: props.handleChange
+	                        })
+	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'input-group' },
+	                        { className: 'form-row' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'form-row-heading' },
+	                            _react2.default.createElement(
+	                                'h4',
+	                                null,
+	                                'Coordinates'
+	                            )
+	                        ),
+	                        _react2.default.createElement(_Input2.default, {
+	                            id: 'trail-latitude-start',
+	                            labelText: 'Latitude',
+	                            name: 'latitude_start',
+	                            value: props.latitude_start,
+	                            error: errors.latitude_start,
+	                            handleChange: props.handleChange
+	                        }),
+	                        _react2.default.createElement(_Input2.default, {
+	                            id: 'trail-longitude-start',
+	                            labelText: 'Longitude',
+	                            name: 'longitude_start',
+	                            value: props.longitude_start,
+	                            error: errors.longitude_start,
+	                            handleChange: props.handleChange
+	                        })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-row map' },
+	                        _react2.default.createElement(_CoordinatesMap2.default, {
+	                            lat: props.latitude_start,
+	                            lng: props.longitude_start,
+	                            handleChange: props.handleCoordinates })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-row' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'form-row-heading' },
+	                            _react2.default.createElement(
+	                                'h4',
+	                                null,
+	                                'Effort and Exposure'
+	                            )
+	                        ),
+	                        _react2.default.createElement(_Select2.default, {
+	                            id: 'trail-severity',
+	                            labelText: 'Effort',
+	                            name: 'severity_id',
+	                            options: props.severities,
+	                            selected: props.severity_id,
+	                            error: errors.severity_id,
+	                            handleSelect: props.handleSelect
+	                        }),
+	                        _react2.default.createElement(_Select2.default, {
+	                            id: 'trail-exposure',
+	                            labelText: 'Exposure',
+	                            name: 'exposure_id',
+	                            options: props.exposures,
+	                            selected: props.exposure_id,
+	                            error: errors.exposure_id,
+	                            handleSelect: props.handleSelect
+	                        })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-row' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'form-row-heading' },
+	                            _react2.default.createElement(
+	                                'h4',
+	                                null,
+	                                'Distance and Elevation'
+	                            )
+	                        ),
+	                        _react2.default.createElement(_Input2.default, {
+	                            id: 'trail-distance',
+	                            labelText: 'Distance (meters)',
+	                            name: 'distance',
+	                            value: props.distance,
+	                            error: errors.distance,
+	                            handleChange: props.handleChange
+	                        }),
+	                        _react2.default.createElement(_Input2.default, {
+	                            id: 'trail-elevation_min',
+	                            labelText: 'Min Elevation (meters)',
+	                            name: 'elevation_min',
+	                            value: props.elevation_min,
+	                            error: errors.elevation_min,
+	                            handleChange: props.handleChange
+	                        }),
+	                        _react2.default.createElement(_Input2.default, {
+	                            id: 'trail-elevation_max',
+	                            labelText: 'Max Elevation (meters)',
+	                            name: 'elevation_max',
+	                            value: props.elevation_max,
+	                            error: errors.elevation_max,
+	                            handleChange: props.handleChange
+	                        })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-row' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'input-group', style: { width: '100%' } },
+	                            _react2.default.createElement(
+	                                'label',
+	                                {
+	                                    htmlFor: 'trail-description',
+	                                    className: 'form-label'
+	                                },
+	                                'Description'
+	                            ),
+	                            _react2.default.createElement('textarea', {
+	                                name: 'description',
+	                                id: 'trail-description',
+	                                value: props.description,
+	                                onChange: props.handleChange,
+	                                className: 'form-control'
+	                            }),
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'validation-error' },
+	                                errors.description ? errors.description : ''
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-row form-bottom-buttons' },
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'input-group' },
@@ -43063,7 +43103,10 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'label',
-	                { htmlFor: this.props.for },
+	                {
+	                    htmlFor: this.props.for,
+	                    className: 'form-label'
+	                },
 	                this.props.text
 	            );
 	        }
