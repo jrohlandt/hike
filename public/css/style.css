@@ -451,6 +451,7 @@ a {
   color: rgba(43, 47, 62, 0.5); }
 
 .form-row-heading small {
+  font-weight: 400;
   color: rgba(43, 47, 62, 0.3);
   margin-left: .5em; }
 
@@ -480,6 +481,11 @@ textarea.form-control {
   display: block;
   color: #79CDCD;
   padding: 0 .5em .5em .1em; }
+
+.form-label small {
+  font-weight: 400;
+  color: rgba(43, 47, 62, 0.3);
+  margin-left: .5em; }
 
 .form-row.form-bottom-buttons {
   border: none; }
@@ -598,8 +604,12 @@ table.listing-component {
 a.first-link-of-row {
   color: rgba(43, 47, 62, 0.9); }
 
+.listing-component-body-row {
+  border-bottom: thin solid rgba(43, 47, 62, 0.05); }
+
 .listing-component-body-row:hover {
-  background: rgba(43, 47, 62, 0.06); }
+  background: rgba(43, 47, 62, 0.06);
+  border-bottom: thin solid rgba(43, 47, 62, 0.06); }
 
 .dark {
   background: rgba(43, 47, 62, 0.03); }

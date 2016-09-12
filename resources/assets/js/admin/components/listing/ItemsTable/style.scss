@@ -35,12 +35,13 @@ a.first-link-of-row {
     color: rgba(43,47,62, .9);
 }
 
-// .listing-component-body-row {
-//     border-bottom: thin solid rgba(43,47,62, .05);
-// }
+.listing-component-body-row {
+    border-bottom: thin solid rgba(43,47,62, .05);
+}
 
 .listing-component-body-row:hover {
     background: rgba(43,47,62, .06);
+    border-bottom: thin solid rgba(43,47,62, .06);
 }
 
 .dark {

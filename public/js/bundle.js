@@ -27942,11 +27942,11 @@
 	            var rows = [];
 	            var dark = false;
 	            this.props.items.forEach(function (item) {
-	                if (rows.length === 0) {
-	                    dark = false;
-	                } else {
-	                    dark = !dark;
-	                }
+	                // if (rows.length === 0) {
+	                //     dark = false;
+	                // } else {
+	                //     dark = !dark;
+	                // }
 	                // console.log('dark: ' + dark);
 	                rows.push(_react2.default.createElement(ItemRow, {
 	                    key: item.id,
@@ -42845,7 +42845,8 @@
 	                        ),
 	                        _react2.default.createElement(_Input2.default, {
 	                            id: 'trail-distance',
-	                            labelText: 'Distance (meters)',
+	                            labelText: 'Distance',
+	                            smallText: '(meters)',
 	                            name: 'distance',
 	                            value: props.distance,
 	                            error: errors.distance,
@@ -42853,7 +42854,8 @@
 	                        }),
 	                        _react2.default.createElement(_Input2.default, {
 	                            id: 'trail-elevation_min',
-	                            labelText: 'Min Elevation (meters)',
+	                            labelText: 'Min Elevation',
+	                            smallText: '(meters)',
 	                            name: 'elevation_min',
 	                            value: props.elevation_min,
 	                            error: errors.elevation_min,
@@ -42861,7 +42863,8 @@
 	                        }),
 	                        _react2.default.createElement(_Input2.default, {
 	                            id: 'trail-elevation_max',
-	                            labelText: 'Max Elevation (meters)',
+	                            labelText: 'Max Elevation',
+	                            smallText: '(meters)',
 	                            name: 'elevation_max',
 	                            value: props.elevation_max,
 	                            error: errors.elevation_max,
@@ -42973,7 +42976,11 @@
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'input-group' },
-	                _react2.default.createElement(_Label2.default, { 'for': this.props.id, text: this.props.labelText }),
+	                _react2.default.createElement(_Label2.default, {
+	                    'for': this.props.id,
+	                    text: this.props.labelText,
+	                    smallText: this.props.smallText
+	                }),
 	                _react2.default.createElement('input', {
 	                    name: this.props.name,
 	                    id: this.props.id,
@@ -43112,7 +43119,12 @@
 	                    htmlFor: this.props.for,
 	                    className: 'form-label'
 	                },
-	                this.props.text
+	                this.props.text,
+	                _react2.default.createElement(
+	                    'small',
+	                    null,
+	                    this.props.smallText
+	                )
 	            );
 	        }
 	    }]);

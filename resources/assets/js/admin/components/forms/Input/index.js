@@ -17,7 +17,11 @@ export default class FormInput extends React.Component {
     render() {
         return (
             <div className="input-group">
-                <Label for={this.props.id} text={this.props.labelText} />
+                <Label
+                    for={this.props.id}
+                    text={this.props.labelText}
+                    smallText={this.props.smallText}
+                />
                 <input
                     name={this.props.name}
                     id={this.props.id}

@@ -87,11 +87,11 @@ export default class ItemsTable extends React.Component {
         var rows = [];
         var dark = false;
         this.props.items.forEach((item) => {
-            if (rows.length === 0) {
-                dark = false;
-            } else {
-                dark = !dark;
-            }
+            // if (rows.length === 0) {
+            //     dark = false;
+            // } else {
+            //     dark = !dark;
+            // }
             // console.log('dark: ' + dark);
             rows.push(
                 <ItemRow

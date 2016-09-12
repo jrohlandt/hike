@@ -93,7 +93,8 @@ export default class TrailForm extends React.Component {
                         </div>
                         <FormInput
                             id="trail-distance"
-                            labelText="Distance (meters)"
+                            labelText="Distance"
+                            smallText="(meters)"
                             name="distance"
                             value={props.distance}
                             error={errors.distance}
@@ -101,7 +102,8 @@ export default class TrailForm extends React.Component {
                         />
                         <FormInput
                             id="trail-elevation_min"
-                            labelText="Min Elevation (meters)"
+                            labelText="Min Elevation"
+                            smallText="(meters)"
                             name="elevation_min"
                             value={props.elevation_min}
                             error={errors.elevation_min}
@@ -109,7 +111,8 @@ export default class TrailForm extends React.Component {
                         />
                         <FormInput
                             id="trail-elevation_max"
-                            labelText="Max Elevation (meters)"
+                            labelText="Max Elevation"
+                            smallText="(meters)"
                             name="elevation_max"
                             value={props.elevation_max}
                             error={errors.elevation_max}

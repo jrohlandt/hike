@@ -20,6 +20,7 @@ export default class FormInput extends React.Component {
                 className="form-label"
             >
                 {this.props.text}
+                <small>{this.props.smallText}</small>
             </label>
         );
     }
