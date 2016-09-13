@@ -7,9 +7,9 @@
     background: white;
     padding: 0;
     width: 100%;
-    border: thin solid rgba(43,47,62, .3);
+    border: thin solid rgba(43,47,62, .1);
     border-top: none;
-    border-radius: .1em;
+    border-radius: .3em;
 }
 
 .form-select-component li {
@@ -17,9 +17,16 @@
     color: rgba(43,47,62, .9);
     font-size: .9em;
     padding: .5em;
-    border-bottom: thin solid rgba(43,47,62, .1);
+    border-bottom: thin solid rgba(43,47,62, .2);
     cursor: pointer;
 }
+
+.form-select-component li:hover {
+    background: rgba(43,47,62, .1);
+}
+
+
+
 
 .form-select-component .selected {
     background: rgba(43,47,62, .1);
