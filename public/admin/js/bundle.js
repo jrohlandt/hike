@@ -42632,6 +42632,7 @@
 	                        }
 	                    }
 	                    this.setState({ validationErrors: validationErrors });
+	                    window.scrollTo(0, 0);
 	                }.bind(this)
 	            });
 	        }

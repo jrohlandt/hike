@@ -65,30 +65,31 @@ export default class TrailCreate extends React.Component {
 
     submitForm() {
         $.ajax({
-           url: '/admin/trails',
-           type: "POST",
-           dataType: 'json',
-           data: this.state,
-           cache: false,
+            url: '/admin/trails',
+            type: "POST",
+            dataType: 'json',
+            data: this.state,
+            cache: false,
             success: function(res) {
-               if (res.response_status.code === 200) {
-                   localStorage.setItem('flash-success', 'Trail has been created.');
-               } else {
-                   localStorage.setItem('flash-error', `Trail could not be created.`);
-               }
-               browserHistory.push('/admin/trails');
-           }.bind(this),
-           error: function(xhr, status, err) {
-               var errors = $.parseJSON(xhr.responseText);
-               var validationErrors = {};
-               for (var key in errors) {
-                   if (errors.hasOwnProperty(key)) {
-                       validationErrors[key] = errors[key][0];
-                   }
-               }
-               this.setState({validationErrors});
-           }.bind(this)
-       });
+                if (res.response_status.code === 200) {
+                    localStorage.setItem('flash-success', 'Trail has been created.');
+                } else {
+                    localStorage.setItem('flash-error', `Trail could not be created.`);
+                }
+                browserHistory.push('/admin/trails');
+            }.bind(this),
+            error: function(xhr, status, err) {
+                var errors = $.parseJSON(xhr.responseText);
+                var validationErrors = {};
+                for (var key in errors) {
+                    if (errors.hasOwnProperty(key)) {
+                        validationErrors[key] = errors[key][0];
+                    }
+                }
+                this.setState({validationErrors});
+                window.scrollTo(0, 0);
+            }.bind(this)
+        });
     }
 
     componentDidMount() {

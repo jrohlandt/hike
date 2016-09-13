@@ -5,21 +5,31 @@
 .form-select-component ul {
     position: absolute;
     background: white;
+    padding: 0;
+    width: 100%;
+    border: thin solid rgba(43,47,62, .3);
+    border-top: none;
+    border-radius: .1em;
 }
 
 .form-select-component li {
+    list-style: none;
+    color: rgba(43,47,62, .9);
+    font-size: .9em;
     padding: .5em;
+    border-bottom: thin solid rgba(43,47,62, .1);
+    cursor: pointer;
 }
 
 .form-select-component .selected {
-    background: gray;
+    background: rgba(43,47,62, .1);
 }
 
 .selected-value {
-    border-bottom: thin solid rgba(43,47,62, .3);
     color: rgba(43,47,62, .6);
     font-size: .9em;
     padding: .5em;
+    border-bottom: thin solid rgba(43,47,62, .3);
 }
 
 div[tabindex="-1"]:focus {
