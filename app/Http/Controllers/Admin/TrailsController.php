@@ -155,6 +155,40 @@ class TrailsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Not found
+        if (!$item = $this->model->find($id)) {
+            return response()->json([
+                'response_status' => [
+                    'code' => 404,
+                    'text' => 'not found',
+                    'message' => 'The requested resource was not found',
+                ],
+                'body' => [],
+            ]);
+        }
+
+        // Delete Success
+        if ($item->delete()) {
+            $response = [
+                'response_status' => [
+                    'code' => 200,
+                    'text' => 'ok',
+                    'message' => 'success',
+                ],
+                'body' => [],
+            ];
+            return response()->json($response);
+        }
+
+        // Delete failed
+        $response = [
+            'response_status' => [
+                'code' => 504,
+                'text' => 'ok',
+                'message' => 'The server is up but, the delete failed',
+            ],
+            'body' => $item,
+        ];
+
     }
 }

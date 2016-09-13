@@ -42671,7 +42671,24 @@
 	                    handleSelect: this.handleSelect,
 	                    handleCoordinates: this.handleCoordinates,
 	                    submitForm: this.submitForm
-	                }))
+	                })),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-row form-bottom-buttons' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-buttons' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            {
+	                                className: 'submit-button',
+	                                onClick: this.submitForm
+	                            },
+	                            'Submit'
+	                        )
+	                    ),
+	                    _react2.default.createElement('div', { style: { clear: 'both' } })
+	                )
 	            );
 	        }
 	    }]);
@@ -42901,23 +42918,6 @@
 	                                'div',
 	                                { className: 'validation-error' },
 	                                errors.description ? errors.description : ''
-	                            )
-	                        ),
-	                        _react2.default.createElement('div', { style: { clear: 'both' } })
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'form-row form-bottom-buttons' },
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'input-group' },
-	                            _react2.default.createElement(
-	                                'div',
-	                                {
-	                                    className: 'submit-button',
-	                                    onClick: props.submitForm
-	                                },
-	                                'Submit'
 	                            )
 	                        ),
 	                        _react2.default.createElement('div', { style: { clear: 'both' } })
@@ -43659,6 +43659,7 @@
 	        _this.handleChange = _this.handleChange.bind(_this);
 	        _this.handleSelect = _this.handleSelect.bind(_this);
 	        _this.handleCoordinates = _this.handleCoordinates.bind(_this);
+	        _this.handleDestroy = _this.handleDestroy.bind(_this);
 	        _this.submitForm = _this.submitForm.bind(_this);
 	        _this.clearValidationError = _this.clearValidationError.bind(_this);
 	        return _this;
@@ -43733,6 +43734,40 @@
 	            });
 	        }
 	    }, {
+	        key: 'handleDestroy',
+	        value: function handleDestroy() {
+	            if (!window.confirm("Do you really want to delete " + this.state.name + "?")) {
+	                return false;
+	            }
+	            $.ajax({
+	                url: '/admin/trails/' + this.state.id,
+	                type: "DELETE",
+	                dataType: 'json',
+	                data: this.state,
+	                cache: false,
+	                success: function (res) {
+	                    if (res.response_status.code === 200) {
+	                        localStorage.setItem('flash-success', 'Trail ' + this.state.name + ' has been deleted.');
+	                    } else if (res.response_status.code === 404) {
+	                        localStorage.setItem('flash-error', 'Trail with id ' + this.state.id + ' could not be found.');
+	                    } else {
+	                        localStorage.setItem('flash-error', 'Trail could not be deleted.');
+	                    }
+	                    _reactRouter.browserHistory.push('/admin/trails');
+	                }.bind(this),
+	                error: function (xhr, status, err) {
+	                    var errors = $.parseJSON(xhr.responseText);
+	                    var validationErrors = {};
+	                    for (var key in errors) {
+	                        if (errors.hasOwnProperty(key)) {
+	                            validationErrors[key] = errors[key][0];
+	                        }
+	                    }
+	                    this.setState({ validationErrors: validationErrors });
+	                }.bind(this)
+	            });
+	        }
+	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            window.scrollTo(0, 0);
@@ -43779,7 +43814,32 @@
 	                    handleSelect: this.handleSelect,
 	                    handleCoordinates: this.handleCoordinates,
 	                    submitForm: this.submitForm
-	                }))
+	                })),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-row form-bottom-buttons' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-buttons' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            {
+	                                className: 'submit-button',
+	                                onClick: this.submitForm
+	                            },
+	                            'Submit'
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            {
+	                                className: 'form-delete-button',
+	                                onClick: this.handleDestroy
+	                            },
+	                            'Delete'
+	                        )
+	                    ),
+	                    _react2.default.createElement('div', { style: { clear: 'both' } })
+	                )
 	            );
 	        }
 	    }]);

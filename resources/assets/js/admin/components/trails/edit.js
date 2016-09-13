@@ -28,6 +28,7 @@ export default class TrailEdit extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
         this.handleCoordinates = this.handleCoordinates.bind(this);
+        this.handleDestroy = this.handleDestroy.bind(this);
         this.submitForm = this.submitForm.bind(this);
         this.clearValidationError = this.clearValidationError.bind(this);
     }
@@ -95,6 +96,39 @@ export default class TrailEdit extends React.Component {
        });
     }
 
+    handleDestroy() {
+        if (!window.confirm("Do you really want to delete " + this.state.name + "?")) {
+            return false;
+        }
+        $.ajax({
+           url: '/admin/trails/' + this.state.id,
+           type: "DELETE",
+           dataType: 'json',
+           data: this.state,
+           cache: false,
+           success: function(res) {
+               if (res.response_status.code === 200) {
+                   localStorage.setItem('flash-success', `Trail ${this.state.name} has been deleted.`);
+               } else if (res.response_status.code === 404 ){
+                   localStorage.setItem('flash-error', `Trail with id ${this.state.id} could not be found.`);
+               } else {
+                   localStorage.setItem('flash-error', `Trail could not be deleted.`);
+               }
+               browserHistory.push('/admin/trails');
+           }.bind(this),
+           error: function(xhr, status, err) {
+               var errors = $.parseJSON(xhr.responseText);
+               var validationErrors = {};
+               for (var key in errors) {
+                   if (errors.hasOwnProperty(key)) {
+                       validationErrors[key] = errors[key][0];
+                   }
+               }
+               this.setState({validationErrors});
+           }.bind(this)
+       });
+    }
+
     componentDidMount() {
         window.scrollTo(0, 0);
         $.ajax({
@@ -141,6 +175,24 @@ export default class TrailEdit extends React.Component {
                     handleCoordinates={this.handleCoordinates}
                     submitForm={this.submitForm}
                 />
+                <div className="form-row form-bottom-buttons">
+                    <div className="form-buttons">
+                        <div
+                            className="submit-button"
+                            onClick={this.submitForm}
+                            >
+                            Submit
+                        </div>
+                        <div
+                            className="form-delete-button"
+                            onClick={this.handleDestroy}
+                            >
+                            Delete
+                        </div>
+                    </div>
+
+                    <div style={{clear: 'both'}}></div>
+                </div>
             </div>
         );
     }

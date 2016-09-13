@@ -146,17 +146,7 @@ export default class TrailForm extends React.Component {
                         <div style={{clear: 'both'}}></div>
                     </div>
 
-                    <div className="form-row form-bottom-buttons">
-                        <div className="input-group">
-                            <div
-                                className="submit-button"
-                                onClick={props.submitForm}
-                                >
-                                Submit
-                            </div>
-                        </div>
-                        <div style={{clear: 'both'}}></div>
-                    </div>
+                    
 
                 </form>
             </div>

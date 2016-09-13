@@ -125,6 +125,17 @@ export default class TrailCreate extends React.Component {
                     handleCoordinates={this.handleCoordinates}
                     submitForm={this.submitForm}
                 />
+                <div className="form-row form-bottom-buttons">
+                    <div className="form-buttons">
+                        <div
+                            className="submit-button"
+                            onClick={this.submitForm}
+                            >
+                            Submit
+                        </div>
+                    </div>
+                    <div style={{clear: 'both'}}></div>
+                </div>
             </div>
         );
     }
