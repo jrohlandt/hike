@@ -1,9 +1,9 @@
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: './resources/assets/js/admin/index.js',
+  entry: './resources/assets/js/admin/routes.js',
   output: {
-    path: './public/js',
+    path: './public/admin/js',
     filename: 'bundle.js'
   },
   module: {
