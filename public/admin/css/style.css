@@ -564,13 +564,22 @@ a.side-nav-link-active {
   color: #a7abba;
   background: #272b3a; }
 .alert {
+  position: relative;
   padding: 1em;
+  margin: 1em;
   border-radius: .5em; }
 
+.alert-close {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  float: right;
+  cursor: pointer; }
+
 .flash-success {
-  background: #9CBA7F;
-  color: #488214;
-  border: thin solid #659D32; }
+  background: rgba(206, 241, 173, 0.89);
+  color: #8abb5f;
+  border: thin solid #d1efb6; }
 
 .flash-error {
   background: #EEB4B4;

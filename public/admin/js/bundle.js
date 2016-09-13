@@ -27644,12 +27644,19 @@
 
 	        _this.state = {
 	            message: '',
-	            class: 'alert-none'
+	            class: 'alert-none',
+	            show: true
 	        };
+	        _this.toggleShow = _this.toggleShow.bind(_this);
 	        return _this;
 	    }
 
 	    _createClass(Alert, [{
+	        key: 'toggleShow',
+	        value: function toggleShow() {
+	            this.setState({ show: !this.state.show });
+	        }
+	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            if (this.storageAvailable('localStorage')) {
@@ -27667,6 +27674,8 @@
 	                // for now we only display one alert
 	                if (typeof alerts[0] != 'undefined') {
 	                    this.setState(alerts[0]);
+	                } else {
+	                    this.setState({ show: false });
 	                }
 	            }
 	        }
@@ -27686,10 +27695,26 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var show = this.state.show ? 'block' : 'none';
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'alert ' + this.state.class },
-	                this.state.message
+	                { style: { display: show } },
+	                _react2.default.createElement(
+	                    'div',
+	                    {
+	                        className: 'alert ' + this.state.class
+	                    },
+	                    _react2.default.createElement(
+	                        'div',
+	                        null,
+	                        'gjhgh'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'alert-close', onClick: this.toggleShow },
+	                        'x'
+	                    )
+	                )
 	            );
 	        }
 	    }]);

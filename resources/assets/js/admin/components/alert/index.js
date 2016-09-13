@@ -6,8 +6,14 @@ export default class Alert extends React.Component {
         super(props);
         this.state = {
             message: '',
-            class: 'alert-none'
+            class: 'alert-none',
+            show: true
         }
+        this.toggleShow = this.toggleShow.bind(this);
+    }
+
+    toggleShow() {
+        this.setState({show: !this.state.show});
     }
 
     componentDidMount() {
@@ -26,6 +32,8 @@ export default class Alert extends React.Component {
             // for now we only display one alert
             if (typeof alerts[0] != 'undefined') {
                 this.setState(alerts[0]);
+            } else {
+                this.setState({show: false});
             }
         }
     }
@@ -44,9 +52,15 @@ export default class Alert extends React.Component {
     }
 
     render() {
+        var show = this.state.show ? 'block' : 'none';
         return (
-            <div className={'alert ' + this.state.class}>
-                {this.state.message}
+            <div style={{display: show}}>
+                <div
+                    className={'alert ' + this.state.class}
+                    >
+                    <div>gjhgh</div>
+                    <div className="alert-close" onClick={this.toggleShow}>x</div>
+                </div>
             </div>
         );
     }
