@@ -28,6 +28,7 @@ export default class TrailForm extends React.Component {
                             error={errors.name}
                             handleChange={props.handleChange}
                         />
+                        <div style={{clear: 'both'}}></div>
                     </div>
 
                     <div className="form-row">
@@ -37,7 +38,6 @@ export default class TrailForm extends React.Component {
                                     <small> (click map below to get coordinates)</small>
                                 </h4>
                         </div>
-
                         <FormInput
                             id="trail-latitude-start"
                             labelText="Latitude"
@@ -54,6 +54,7 @@ export default class TrailForm extends React.Component {
                             error={errors.longitude_start}
                             handleChange={props.handleChange}
                         />
+                        <div style={{clear: 'both'}}></div>
                     </div>
 
                     <div className="form-row map">
@@ -85,6 +86,7 @@ export default class TrailForm extends React.Component {
                             error={errors.exposure_id}
                             handleSelect={props.handleSelect}
                         />
+                        <div style={{clear: 'both'}}></div>
                     </div>
 
                     <div className="form-row">
@@ -118,6 +120,7 @@ export default class TrailForm extends React.Component {
                             error={errors.elevation_max}
                             handleChange={props.handleChange}
                         />
+                        <div style={{clear: 'both'}}></div>
                     </div>
 
                     <div className="form-row">
@@ -139,8 +142,8 @@ export default class TrailForm extends React.Component {
                             <div className="validation-error" >
                                 { errors.description ? errors.description : '' }
                             </div>
-
                         </div>
+                        <div style={{clear: 'both'}}></div>
                     </div>
 
                     <div className="form-row form-bottom-buttons">
@@ -152,6 +155,7 @@ export default class TrailForm extends React.Component {
                                 Submit
                             </div>
                         </div>
+                        <div style={{clear: 'both'}}></div>
                     </div>
 
                 </form>

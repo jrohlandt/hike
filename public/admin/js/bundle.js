@@ -42756,7 +42756,8 @@
 	                            value: props.name,
 	                            error: errors.name,
 	                            handleChange: props.handleChange
-	                        })
+	                        }),
+	                        _react2.default.createElement('div', { style: { clear: 'both' } })
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
@@ -42790,7 +42791,8 @@
 	                            value: props.longitude_start,
 	                            error: errors.longitude_start,
 	                            handleChange: props.handleChange
-	                        })
+	                        }),
+	                        _react2.default.createElement('div', { style: { clear: 'both' } })
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
@@ -42829,7 +42831,8 @@
 	                            selected: props.exposure_id,
 	                            error: errors.exposure_id,
 	                            handleSelect: props.handleSelect
-	                        })
+	                        }),
+	                        _react2.default.createElement('div', { style: { clear: 'both' } })
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
@@ -42869,7 +42872,8 @@
 	                            value: props.elevation_max,
 	                            error: errors.elevation_max,
 	                            handleChange: props.handleChange
-	                        })
+	                        }),
+	                        _react2.default.createElement('div', { style: { clear: 'both' } })
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
@@ -42897,7 +42901,8 @@
 	                                { className: 'validation-error' },
 	                                errors.description ? errors.description : ''
 	                            )
-	                        )
+	                        ),
+	                        _react2.default.createElement('div', { style: { clear: 'both' } })
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
@@ -42913,7 +42918,8 @@
 	                                },
 	                                'Submit'
 	                            )
-	                        )
+	                        ),
+	                        _react2.default.createElement('div', { style: { clear: 'both' } })
 	                    )
 	                )
 	            );
