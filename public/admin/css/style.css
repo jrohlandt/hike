@@ -527,7 +527,7 @@ textarea.form-control {
 #side-nav {
   height: 2000px;
   float: left;
-  width: 20%;
+  overflow: hidden;
   background: #2b2f3e; }
 
 #side-nav ul {
@@ -538,6 +538,23 @@ textarea.form-control {
   padding: 1.5em;
   font-size: 1.5em;
   color: #9C9C9C; }
+
+.side-nav-expand {
+  width: 20%;
+  transition: width .5s ease-in; }
+
+.side-nav-expand ul {
+  opacity: 1;
+  transition-delay: .5s;
+  transition: opacity .5s ease-in; }
+
+.side-nav-shrink {
+  width: 3%;
+  transition: width .5s ease-out; }
+
+.side-nav-shrink ul {
+  opacity: 0;
+  transition: opacity .5s ease-out; }
 
 .side-nav-links {
   font-weight: 400;
