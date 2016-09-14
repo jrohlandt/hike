@@ -1,4 +1,5 @@
 #side-nav {
+    position: relative;
     height: 2000px;
     float: left;
     overflow: hidden;
@@ -7,6 +8,16 @@
 
 #side-nav ul {
     padding: 0;
+}
+
+#side-nav-toggle-button {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    height: 1em;
+    width: 1em;
+    color: red;
+    cursor: pointer;
 }
 
 #logo-container {

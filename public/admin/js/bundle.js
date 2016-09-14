@@ -27279,8 +27279,13 @@
 	                { id: 'side-nav', className: this.props.className },
 	                _react2.default.createElement(
 	                    'div',
-	                    { id: 'logo-container', onClick: this.props.toggleDisplay },
+	                    { id: 'logo-container' },
 	                    'HIKE'
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { id: 'side-nav-toggle-button', onClick: this.props.toggleDisplay },
+	                    'x'
 	                ),
 	                _react2.default.createElement(
 	                    'ul',

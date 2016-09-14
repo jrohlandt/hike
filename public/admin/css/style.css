@@ -435,8 +435,7 @@ body * {
 
 .content-size-expand {
   width: 97%;
-  transition-delay: .6s;
-  transition: width .7s ease-in; }
+  transition: width .5s ease-in; }
 
 .content-size-shrink {
   width: 80%;
@@ -536,6 +535,7 @@ textarea.form-control {
   padding: 1em .5em;
   min-height: 1.5em; }
 #side-nav {
+  position: relative;
   height: 2000px;
   float: left;
   overflow: hidden;
@@ -543,6 +543,15 @@ textarea.form-control {
 
 #side-nav ul {
   padding: 0; }
+
+#side-nav-toggle-button {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  height: 1em;
+  width: 1em;
+  color: red;
+  cursor: pointer; }
 
 #logo-container {
   text-align: center;

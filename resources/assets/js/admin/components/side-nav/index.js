@@ -13,7 +13,10 @@ export default class SideNav extends React.Component {
     render() {
         return (
             <div id="side-nav" className={this.props.className} >
-                <div id="logo-container" onClick={this.props.toggleDisplay}>HIKE</div>
+                <div id="logo-container" >HIKE</div>
+                <div id="side-nav-toggle-button" onClick={this.props.toggleDisplay}>
+                    x
+                </div>
                 <ul className="side-nav-links">
                     <li>
                         <IndexLink to="/admin" activeClassName="side-nav-link-active" >dashboard</IndexLink>
