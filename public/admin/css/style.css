@@ -586,9 +586,9 @@ a.side-nav-link-active {
   border: thin solid #d1efb6; }
 
 .flash-error {
-  background: #EEB4B4;
-  color: #FF4040;
-  border: thin solid #DB2929; }
+  background: #fbe4e4;
+  color: #dc6060;
+  border: thin solid #f9bdbd; }
 .breadcrumbs-component {
   width: 95%;
   margin: auto;
