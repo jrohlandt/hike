@@ -1,4 +1,5 @@
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var WebpackNotifierPlugin = require('webpack-notifier');
 
 module.exports = {
   entry: './resources/assets/js/admin/routes.js',
@@ -21,6 +22,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new WebpackNotifierPlugin(),
     new ExtractTextPlugin('../css/style.css', {
         allChunks: true
     })

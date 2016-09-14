@@ -566,8 +566,12 @@ a.side-nav-link-active {
 .alert {
   position: relative;
   padding: 1em;
-  margin: 1em;
-  border-radius: .5em; }
+  border-radius: .5em;
+  opacity: 1; }
+
+.alert-hide {
+  transition: opacity 3s ease-out;
+  opacity: 0; }
 
 .alert-close {
   position: absolute;

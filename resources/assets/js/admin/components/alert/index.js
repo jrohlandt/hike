@@ -1,5 +1,6 @@
 import React from 'react';
 import style from './style.scss';
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 export default class Alert extends React.Component {
     constructor(props) {
@@ -52,13 +53,13 @@ export default class Alert extends React.Component {
     }
 
     render() {
-        var show = this.state.show ? 'block' : 'none';
+        var show = this.state.show ? '' : 'alert-hide';
         return (
-            <div style={{display: show}}>
+            <div className={'alert ' + show}>
                 <div
                     className={'alert ' + this.state.class}
                     >
-                    <div>gjhgh</div>
+                    <div>{this.state.message}</div>
                     <div className="alert-close" onClick={this.toggleShow}>x</div>
                 </div>
             </div>

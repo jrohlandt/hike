@@ -16,12 +16,14 @@
     "nodemon": "^1.9.2",
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.1",
-    "webpack": "^1.13.1"
+    "webpack": "^1.13.1",
+    "webpack-notifier": "^1.4.1"
   },
   "dependencies": {
     "moment": "^2.14.1",
     "normalize.css": "^4.1.1",
     "react": "^15.1.0",
+    "react-addons-css-transition-group": "^15.3.1",
     "react-dom": "^15.1.0",
     "react-router": "^2.4.1"
   }

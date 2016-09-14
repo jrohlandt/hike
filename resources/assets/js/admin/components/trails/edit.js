@@ -162,11 +162,11 @@ export default class TrailEdit extends React.Component {
         var errors = this.state.validationErrors;
         return (
             <div>
+                <BreadCrumbs heading={`Edit Trail - ${this.state.name}`}/>
                 <Alert
                     message={this.state.message}
                     class={this.state.class}
                 />
-                <BreadCrumbs heading={`Edit Trail - ${this.state.name}`}/>
 
                 <TrailForm
                     {...this.state}
