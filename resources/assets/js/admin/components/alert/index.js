@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './style.scss';
-var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+
 
 export default class Alert extends React.Component {
     constructor(props) {

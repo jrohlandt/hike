@@ -570,7 +570,7 @@ a.side-nav-link-active {
   opacity: 1; }
 
 .alert-hide {
-  transition: opacity 3s ease-out;
+  transition: opacity .5s ease-out;
   opacity: 0; }
 
 .alert-close {
