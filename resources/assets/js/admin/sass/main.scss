@@ -6,9 +6,23 @@ body {
 body * {
     box-sizing: border-box;
 }
-.content {
+#app-wrapper {
+    width: 100%;
+}
+
+#content {
     float: right;
+}
+
+.content-size-expand {
+    width: 97%;
+    transition-delay: .6s;
+    transition: width .7s ease-in;
+}
+
+.content-size-shrink {
     width: 80%;
+    transition: width .5s ease-out;
 }
 
 a {

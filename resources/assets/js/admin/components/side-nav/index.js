@@ -8,27 +8,12 @@ export default class SideNav extends React.Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {
-            display: true,
-            className: 'side-nav-expand'
-        }
-
-        this.toggleDisplay = this.toggleDisplay.bind(this);
-    }
-
-    toggleDisplay() {
-        if (this.state.display === true) {
-            this.setState({display: false, className: 'side-nav-shrink'});
-        } else {
-            this.setState({display: true, className: 'side-nav-expand'});
-        }
     }
 
     render() {
         return (
-            <div id="side-nav" className={this.state.className} >
-                <div id="logo-container" onClick={this.toggleDisplay}>HIKE</div>
+            <div id="side-nav" className={this.props.className} >
+                <div id="logo-container" onClick={this.props.toggleDisplay}>HIKE</div>
                 <ul className="side-nav-links">
                     <li>
                         <IndexLink to="/admin" activeClassName="side-nav-link-active" >dashboard</IndexLink>

@@ -27148,7 +27148,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -27178,31 +27178,53 @@
 	var RouteHandler = _reactRouter.Router.RouteHandler;
 
 	var App = function (_React$Component) {
-	  _inherits(App, _React$Component);
+	    _inherits(App, _React$Component);
 
-	  function App() {
-	    _classCallCheck(this, App);
+	    function App(props) {
+	        _classCallCheck(this, App);
 
-	    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
-	  }
+	        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-	  _createClass(App, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(_sideNav2.default, null),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'content' },
-	          this.props.children
-	        )
-	      );
+	        _this.state = {
+	            sideNavClassName: 'side-nav-expand',
+	            contentSize: 'content-size-shrink'
+	        };
+
+	        _this.toggleSideNav = _this.toggleSideNav.bind(_this);
+	        return _this;
 	    }
-	  }]);
 
-	  return App;
+	    _createClass(App, [{
+	        key: 'toggleSideNav',
+	        value: function toggleSideNav() {
+	            if (this.state.sideNavClassName === 'side-nav-expand') {
+	                this.setState({ sideNavClassName: 'side-nav-shrink' });
+	                this.setState({ contentSize: 'content-size-expand' });
+	            } else {
+	                this.setState({ sideNavClassName: 'side-nav-expand' });
+	                this.setState({ contentSize: 'content-size-shrink' });
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { id: 'app-wrapper' },
+	                _react2.default.createElement(_sideNav2.default, {
+	                    className: this.state.sideNavClassName,
+	                    toggleDisplay: this.toggleSideNav
+	                }),
+	                _react2.default.createElement(
+	                    'div',
+	                    { id: 'content', className: this.state.contentSize },
+	                    this.props.children
+	                )
+	            );
+	        }
+	    }]);
+
+	    return App;
 	}(_react2.default.Component);
 
 	exports.default = App;
@@ -27246,35 +27268,18 @@
 	    function SideNav(props) {
 	        _classCallCheck(this, SideNav);
 
-	        var _this = _possibleConstructorReturn(this, (SideNav.__proto__ || Object.getPrototypeOf(SideNav)).call(this, props));
-
-	        _this.state = {
-	            display: true,
-	            className: 'side-nav-expand'
-	        };
-
-	        _this.toggleDisplay = _this.toggleDisplay.bind(_this);
-	        return _this;
+	        return _possibleConstructorReturn(this, (SideNav.__proto__ || Object.getPrototypeOf(SideNav)).call(this, props));
 	    }
 
 	    _createClass(SideNav, [{
-	        key: 'toggleDisplay',
-	        value: function toggleDisplay() {
-	            if (this.state.display === true) {
-	                this.setState({ display: false, className: 'side-nav-shrink' });
-	            } else {
-	                this.setState({ display: true, className: 'side-nav-expand' });
-	            }
-	        }
-	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                { id: 'side-nav', className: this.state.className },
+	                { id: 'side-nav', className: this.props.className },
 	                _react2.default.createElement(
 	                    'div',
-	                    { id: 'logo-container', onClick: this.toggleDisplay },
+	                    { id: 'logo-container', onClick: this.props.toggleDisplay },
 	                    'HIKE'
 	                ),
 	                _react2.default.createElement(
