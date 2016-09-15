@@ -26,10 +26,10 @@ var routes = (
       <Route path="trails/create" component={TrailCreate} />
       <Route path="trails/:id" component={TrailShow} />
       <Route path="trails/:id/edit" component={TrailEdit} />
-      <Route path="parking" component={PeaksListing} />
-      <Route path="parking/create" component={PeakCreate} />
-      <Route path="parking/:id" component={PeakShow} />
-      <Route path="parking/:id/edit" component={PeakEdit} />
+      <Route path="peaks" component={PeaksListing} />
+      <Route path="peaks/create" component={PeakCreate} />
+      <Route path="peaks/:id" component={PeakShow} />
+      <Route path="peaks/:id/edit" component={PeakEdit} />
     </Route>
   </Router>
 );

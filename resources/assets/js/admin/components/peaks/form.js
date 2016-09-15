@@ -21,7 +21,7 @@ export default class PeakForm extends React.Component {
                             <h4>Details</h4>
                         </div>
                         <FormInput
-                            id="trail-name"
+                            id="peak-name"
                             labelText="Name"
                             name="name"
                             value={props.name}
@@ -39,19 +39,19 @@ export default class PeakForm extends React.Component {
                                 </h4>
                         </div>
                         <FormInput
-                            id="trail-latitude-start"
+                            id="peak-latitude"
                             labelText="Latitude"
-                            name="latitude_start"
-                            value={props.latitude_start}
-                            error={errors.latitude_start}
+                            name="latitude"
+                            value={props.latitude}
+                            error={errors.latitude}
                             handleChange={props.handleChange}
                         />
                         <FormInput
-                            id="trail-longitude-start"
+                            id="peak-longitude"
                             labelText="Longitude"
-                            name="longitude_start"
-                            value={props.longitude_start}
-                            error={errors.longitude_start}
+                            name="longitude"
+                            value={props.longitude}
+                            error={errors.longitude}
                             handleChange={props.handleChange}
                         />
                         <div style={{clear: 'both'}}></div>
@@ -59,26 +59,26 @@ export default class PeakForm extends React.Component {
 
                     <div className="form-row map">
                         <CoordinatesMap
-                            lat={props.latitude_start}
-                            lng={props.longitude_start}
+                            lat={props.latitude}
+                            lng={props.longitude}
                             handleChange={props.handleCoordinates} />
                     </div>
 
                     <div className="form-row">
                         <div className="form-row-heading">
-                            <h4>Effort and Exposure</h4>
+                            <h4>Elevation and Exposure</h4>
                         </div>
-                        <FormSelect
-                            id="trail-severity"
-                            labelText="Effort"
-                            name="severity_id"
-                            options={props.severities}
-                            selected={props.severity_id}
-                            error={errors.severity_id}
-                            handleSelect={props.handleSelect}
+                        <FormInput
+                            id="peak-elevation"
+                            labelText="Elevation"
+                            smallText="(meters)"
+                            name="elevation"
+                            value={props.elevation}
+                            error={errors.elevation}
+                            handleChange={props.handleChange}
                         />
                         <FormSelect
-                            id="trail-exposure"
+                            id="peak-exposure"
                             labelText="Exposure"
                             name="exposure_id"
                             options={props.exposures}
@@ -90,50 +90,16 @@ export default class PeakForm extends React.Component {
                     </div>
 
                     <div className="form-row">
-                        <div className="form-row-heading">
-                            <h4>Distance and Elevation</h4>
-                        </div>
-                        <FormInput
-                            id="trail-distance"
-                            labelText="Distance"
-                            smallText="(meters)"
-                            name="distance"
-                            value={props.distance}
-                            error={errors.distance}
-                            handleChange={props.handleChange}
-                        />
-                        <FormInput
-                            id="trail-elevation_min"
-                            labelText="Min Elevation"
-                            smallText="(meters)"
-                            name="elevation_min"
-                            value={props.elevation_min}
-                            error={errors.elevation_min}
-                            handleChange={props.handleChange}
-                        />
-                        <FormInput
-                            id="trail-elevation_max"
-                            labelText="Max Elevation"
-                            smallText="(meters)"
-                            name="elevation_max"
-                            value={props.elevation_max}
-                            error={errors.elevation_max}
-                            handleChange={props.handleChange}
-                        />
-                        <div style={{clear: 'both'}}></div>
-                    </div>
-
-                    <div className="form-row">
                         <div className="input-group" style={{width: '100%'}}>
                             <label
-                                htmlFor="trail-description"
+                                htmlFor="peak-description"
                                 className="form-label"
                             >
                                 Description
                             </label>
                             <textarea
                                 name="description"
-                                id="trail-description"
+                                id="peak-description"
                                 value={props.description}
                                 onChange={props.handleChange}
                                 className="form-control"

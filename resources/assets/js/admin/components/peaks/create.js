@@ -12,14 +12,11 @@ export default class PeakCreate extends React.Component {
         this.state = {
             name: '',
             distance: '',
-            severity_id: '',
             exposure_id: '',
-            elevation_min: '',
-            elevation_max: '',
+            elevation: '',
             description: '',
-            latitude_start: '',
-            longitude_start: '',
-            severities: [],
+            latitude: '',
+            longitude: '',
             exposures: [],
             validationErrors: {}
         };
@@ -52,7 +49,7 @@ export default class PeakCreate extends React.Component {
     }
 
     handleCoordinates(latitude, longitude) {
-        this.setState({latitude_start: latitude, longitude_start: longitude});
+        this.setState({latitude: latitude, longitude: longitude});
     }
 
     clearValidationError(inputName) {
@@ -65,18 +62,18 @@ export default class PeakCreate extends React.Component {
 
     submitForm() {
         $.ajax({
-            url: '/admin/trails',
+            url: '/admin/peaks',
             type: "POST",
             dataType: 'json',
             data: this.state,
             cache: false,
             success: function(res) {
                 if (res.response_status.code === 200) {
-                    localStorage.setItem('flash-success', 'Trail has been created.');
+                    localStorage.setItem('flash-success', 'Peak has been created.');
                 } else {
-                    localStorage.setItem('flash-error', `Trail could not be created.`);
+                    localStorage.setItem('flash-error', `Peak could not be created.`);
                 }
-                browserHistory.push('/admin/trails');
+                browserHistory.push('/admin/peaks');
             }.bind(this),
             error: function(xhr, status, err) {
                 var errors = $.parseJSON(xhr.responseText);
@@ -95,13 +92,12 @@ export default class PeakCreate extends React.Component {
     componentDidMount() {
         window.scrollTo(0, 0);
         $.ajax({
-           url: '/admin/trails/create',
+           url: '/admin/peaks/create',
            type: "GET",
            dataType: 'json',
            cache: false,
            success: function(res) {
               this.setState({
-                severities: res.severities,
                 exposures: res.exposures
               });
            }.bind(this),
@@ -116,7 +112,7 @@ export default class PeakCreate extends React.Component {
         return (
             <div>
                 <Alert />
-                <BreadCrumbs heading="Create Trail"/>
+                <BreadCrumbs heading="Create Peak"/>
                 <TrailForm
                     {...this.state}
                     handleChange={this.handleChange}

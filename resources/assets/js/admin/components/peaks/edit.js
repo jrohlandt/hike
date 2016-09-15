@@ -4,7 +4,7 @@ import { browserHistory } from 'react-router';
 
 import Alert from '../alert';
 import BreadCrumbs from '../breadcrumbs';
-import TrailForm from './form.js';
+import PeakForm from './form.js';
 
 export default class PeakEdit extends React.Component {
     constructor(props) {
@@ -12,15 +12,11 @@ export default class PeakEdit extends React.Component {
         this.state = {
             id: props.params.id,
             name: '',
-            distance: '',
-            severity_id: '',
             exposure_id: '',
-            elevation_min: '',
-            elevation_max: '',
+            elevation: '',
             description: '',
-            latitude_start: '',
-            longitude_start: '',
-            severities: [],
+            latitude: '',
+            longitude: '',
             exposures: [],
             validationErrors: {}
         };
@@ -54,7 +50,7 @@ export default class PeakEdit extends React.Component {
     }
 
     handleCoordinates(latitude, longitude) {
-        this.setState({latitude_start: latitude, longitude_start: longitude});
+        this.setState({latitude: latitude, longitude: longitude});
     }
 
     clearValidationError(inputName) {
@@ -67,21 +63,21 @@ export default class PeakEdit extends React.Component {
 
     submitForm() {
         $.ajax({
-           url: '/admin/trails/' + this.state.id,
+           url: '/admin/peaks/' + this.state.id,
            type: "PATCH",
            dataType: 'json',
            data: this.state,
            cache: false,
            success: function(res) {
                if (res.response_status.code === 200) {
-                   localStorage.setItem('flash-success', 'Trail has been saved.');
+                   localStorage.setItem('flash-success', 'Peak has been saved.');
                } else if (res.response_status.code === 404 ){
-                   localStorage.setItem('flash-error', `Trail with id ${this.state.id} could not be found.`);
+                   localStorage.setItem('flash-error', `Peak with id ${this.state.id} could not be found.`);
                } else {
-                   localStorage.setItem('flash-error', `Trail could not be updated.`);
+                   localStorage.setItem('flash-error', `Peak could not be updated.`);
                }
 
-               browserHistory.push('/admin/trails');
+               browserHistory.push('/admin/peaks');
            }.bind(this),
            error: function(xhr, status, err) {
                var errors = $.parseJSON(xhr.responseText);
@@ -101,20 +97,20 @@ export default class PeakEdit extends React.Component {
             return false;
         }
         $.ajax({
-           url: '/admin/trails/' + this.state.id,
+           url: '/admin/peaks/' + this.state.id,
            type: "DELETE",
            dataType: 'json',
            data: this.state,
            cache: false,
            success: function(res) {
                if (res.response_status.code === 200) {
-                   localStorage.setItem('flash-success', `Trail ${this.state.name} has been deleted.`);
+                   localStorage.setItem('flash-success', `Peak ${this.state.name} has been deleted.`);
                } else if (res.response_status.code === 404 ){
-                   localStorage.setItem('flash-error', `Trail with id ${this.state.id} could not be found.`);
+                   localStorage.setItem('flash-error', `Peak with id ${this.state.id} could not be found.`);
                } else {
-                   localStorage.setItem('flash-error', `Trail could not be deleted.`);
+                   localStorage.setItem('flash-error', `Peak could not be deleted.`);
                }
-               browserHistory.push('/admin/trails');
+               browserHistory.push('/admin/peaks');
            }.bind(this),
            error: function(xhr, status, err) {
                var errors = $.parseJSON(xhr.responseText);
@@ -132,22 +128,18 @@ export default class PeakEdit extends React.Component {
     componentDidMount() {
         window.scrollTo(0, 0);
         $.ajax({
-           url: '/admin/trails/' + this.state.id,
+           url: '/admin/peaks/' + this.state.id,
            type: "GET",
            dataType: 'json',
            cache: false,
            success: function(res) {
               this.setState({
                 name: res.items.name,
-                distance: res.items.distance,
-                severity_id: res.items.severity_id,
                 exposure_id: res.items.exposure_id,
-                elevation_min: res.items.elevation_min,
-                elevation_max: res.items.elevation_max,
+                elevation: res.items.elevation,
                 description: res.items.description,
-                latitude_start: res.items.latitude_start,
-                longitude_start: res.items.longitude_start,
-                severities: res.severities,
+                latitude: res.items.latitude,
+                longitude: res.items.longitude,
                 exposures: res.exposures
 
               });
@@ -162,13 +154,13 @@ export default class PeakEdit extends React.Component {
         var errors = this.state.validationErrors;
         return (
             <div>
-                <BreadCrumbs heading={`Edit Trail - ${this.state.name}`}/>
+                <BreadCrumbs heading={`Edit Peak - ${this.state.name}`}/>
                 <Alert
                     message={this.state.message}
                     class={this.state.class}
                 />
 
-                <TrailForm
+            <PeakForm
                     {...this.state}
                     handleChange={this.handleChange}
                     handleSelect={this.handleSelect}

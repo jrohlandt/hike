@@ -86,19 +86,19 @@
 
 	var _edit2 = _interopRequireDefault(_edit);
 
-	var _index7 = __webpack_require__(384);
+	var _index7 = __webpack_require__(378);
 
 	var _index8 = _interopRequireDefault(_index7);
 
-	var _create3 = __webpack_require__(386);
+	var _create3 = __webpack_require__(380);
 
 	var _create4 = _interopRequireDefault(_create3);
 
-	var _show3 = __webpack_require__(388);
+	var _show3 = __webpack_require__(382);
 
 	var _show4 = _interopRequireDefault(_show3);
 
-	var _edit3 = __webpack_require__(389);
+	var _edit3 = __webpack_require__(383);
 
 	var _edit4 = _interopRequireDefault(_edit3);
 
@@ -116,10 +116,10 @@
 	    _react2.default.createElement(_reactRouter.Route, { path: 'trails/create', component: _create2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'trails/:id', component: _show2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'trails/:id/edit', component: _edit2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: 'parking', component: _index8.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: 'parking/create', component: _create4.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: 'parking/:id', component: _show4.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: 'parking/:id/edit', component: _edit4.default })
+	    _react2.default.createElement(_reactRouter.Route, { path: 'peaks', component: _index8.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: 'peaks/create', component: _create4.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: 'peaks/:id', component: _show4.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: 'peaks/:id/edit', component: _edit4.default })
 	  )
 	);
 
@@ -43813,13 +43813,7 @@
 	exports.default = TrailEdit;
 
 /***/ },
-/* 378 */,
-/* 379 */,
-/* 380 */,
-/* 381 */,
-/* 382 */,
-/* 383 */,
-/* 384 */
+/* 378 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43834,7 +43828,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _style = __webpack_require__(385);
+	var _style = __webpack_require__(379);
 
 	var _style2 = _interopRequireDefault(_style);
 
@@ -43868,9 +43862,9 @@
 	        key: 'render',
 	        value: function render() {
 	            var props = {
-	                itemType: 'trail',
-	                heading: 'Trails',
-	                columnsToDisplay: ['name', 'created_at'],
+	                itemType: 'peak',
+	                heading: 'Peaks',
+	                columnsToDisplay: ['name', 'elevation', 'created_at'],
 	                baseUrl: this.props.location.pathname
 	            };
 
@@ -43884,13 +43878,13 @@
 	exports.default = PeaksListing;
 
 /***/ },
-/* 385 */
+/* 379 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 386 */
+/* 380 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43907,7 +43901,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _style = __webpack_require__(385);
+	var _style = __webpack_require__(379);
 
 	var _style2 = _interopRequireDefault(_style);
 
@@ -43921,7 +43915,7 @@
 
 	var _breadcrumbs2 = _interopRequireDefault(_breadcrumbs);
 
-	var _form = __webpack_require__(387);
+	var _form = __webpack_require__(381);
 
 	var _form2 = _interopRequireDefault(_form);
 
@@ -43944,14 +43938,11 @@
 	        _this.state = {
 	            name: '',
 	            distance: '',
-	            severity_id: '',
 	            exposure_id: '',
-	            elevation_min: '',
-	            elevation_max: '',
+	            elevation: '',
 	            description: '',
-	            latitude_start: '',
-	            longitude_start: '',
-	            severities: [],
+	            latitude: '',
+	            longitude: '',
 	            exposures: [],
 	            validationErrors: {}
 	        };
@@ -43989,7 +43980,7 @@
 	    }, {
 	        key: 'handleCoordinates',
 	        value: function handleCoordinates(latitude, longitude) {
-	            this.setState({ latitude_start: latitude, longitude_start: longitude });
+	            this.setState({ latitude: latitude, longitude: longitude });
 	        }
 	    }, {
 	        key: 'clearValidationError',
@@ -44004,18 +43995,18 @@
 	        key: 'submitForm',
 	        value: function submitForm() {
 	            $.ajax({
-	                url: '/admin/trails',
+	                url: '/admin/peaks',
 	                type: "POST",
 	                dataType: 'json',
 	                data: this.state,
 	                cache: false,
 	                success: function (res) {
 	                    if (res.response_status.code === 200) {
-	                        localStorage.setItem('flash-success', 'Trail has been created.');
+	                        localStorage.setItem('flash-success', 'Peak has been created.');
 	                    } else {
-	                        localStorage.setItem('flash-error', 'Trail could not be created.');
+	                        localStorage.setItem('flash-error', 'Peak could not be created.');
 	                    }
-	                    _reactRouter.browserHistory.push('/admin/trails');
+	                    _reactRouter.browserHistory.push('/admin/peaks');
 	                }.bind(this),
 	                error: function (xhr, status, err) {
 	                    var errors = $.parseJSON(xhr.responseText);
@@ -44035,13 +44026,12 @@
 	        value: function componentDidMount() {
 	            window.scrollTo(0, 0);
 	            $.ajax({
-	                url: '/admin/trails/create',
+	                url: '/admin/peaks/create',
 	                type: "GET",
 	                dataType: 'json',
 	                cache: false,
 	                success: function (res) {
 	                    this.setState({
-	                        severities: res.severities,
 	                        exposures: res.exposures
 	                    });
 	                }.bind(this),
@@ -44058,7 +44048,7 @@
 	                'div',
 	                null,
 	                _react2.default.createElement(_alert2.default, null),
-	                _react2.default.createElement(_breadcrumbs2.default, { heading: 'Create Trail' }),
+	                _react2.default.createElement(_breadcrumbs2.default, { heading: 'Create Peak' }),
 	                _react2.default.createElement(_form2.default, _extends({}, this.state, {
 	                    handleChange: this.handleChange,
 	                    handleSelect: this.handleSelect,
@@ -44092,7 +44082,7 @@
 	exports.default = PeakCreate;
 
 /***/ },
-/* 387 */
+/* 381 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44161,7 +44151,7 @@
 	                            )
 	                        ),
 	                        _react2.default.createElement(_Input2.default, {
-	                            id: 'trail-name',
+	                            id: 'peak-name',
 	                            labelText: 'Name',
 	                            name: 'name',
 	                            value: props.name,
@@ -44188,19 +44178,19 @@
 	                            )
 	                        ),
 	                        _react2.default.createElement(_Input2.default, {
-	                            id: 'trail-latitude-start',
+	                            id: 'peak-latitude',
 	                            labelText: 'Latitude',
-	                            name: 'latitude_start',
-	                            value: props.latitude_start,
-	                            error: errors.latitude_start,
+	                            name: 'latitude',
+	                            value: props.latitude,
+	                            error: errors.latitude,
 	                            handleChange: props.handleChange
 	                        }),
 	                        _react2.default.createElement(_Input2.default, {
-	                            id: 'trail-longitude-start',
+	                            id: 'peak-longitude',
 	                            labelText: 'Longitude',
-	                            name: 'longitude_start',
-	                            value: props.longitude_start,
-	                            error: errors.longitude_start,
+	                            name: 'longitude',
+	                            value: props.longitude,
+	                            error: errors.longitude,
 	                            handleChange: props.handleChange
 	                        }),
 	                        _react2.default.createElement('div', { style: { clear: 'both' } })
@@ -44209,8 +44199,8 @@
 	                        'div',
 	                        { className: 'form-row map' },
 	                        _react2.default.createElement(_CoordinatesMap2.default, {
-	                            lat: props.latitude_start,
-	                            lng: props.longitude_start,
+	                            lat: props.latitude,
+	                            lng: props.longitude,
 	                            handleChange: props.handleCoordinates })
 	                    ),
 	                    _react2.default.createElement(
@@ -44222,20 +44212,20 @@
 	                            _react2.default.createElement(
 	                                'h4',
 	                                null,
-	                                'Effort and Exposure'
+	                                'Elevation and Exposure'
 	                            )
 	                        ),
-	                        _react2.default.createElement(_Select2.default, {
-	                            id: 'trail-severity',
-	                            labelText: 'Effort',
-	                            name: 'severity_id',
-	                            options: props.severities,
-	                            selected: props.severity_id,
-	                            error: errors.severity_id,
-	                            handleSelect: props.handleSelect
+	                        _react2.default.createElement(_Input2.default, {
+	                            id: 'peak-elevation',
+	                            labelText: 'Elevation',
+	                            smallText: '(meters)',
+	                            name: 'elevation',
+	                            value: props.elevation,
+	                            error: errors.elevation,
+	                            handleChange: props.handleChange
 	                        }),
 	                        _react2.default.createElement(_Select2.default, {
-	                            id: 'trail-exposure',
+	                            id: 'peak-exposure',
 	                            labelText: 'Exposure',
 	                            name: 'exposure_id',
 	                            options: props.exposures,
@@ -44250,59 +44240,18 @@
 	                        { className: 'form-row' },
 	                        _react2.default.createElement(
 	                            'div',
-	                            { className: 'form-row-heading' },
-	                            _react2.default.createElement(
-	                                'h4',
-	                                null,
-	                                'Distance and Elevation'
-	                            )
-	                        ),
-	                        _react2.default.createElement(_Input2.default, {
-	                            id: 'trail-distance',
-	                            labelText: 'Distance',
-	                            smallText: '(meters)',
-	                            name: 'distance',
-	                            value: props.distance,
-	                            error: errors.distance,
-	                            handleChange: props.handleChange
-	                        }),
-	                        _react2.default.createElement(_Input2.default, {
-	                            id: 'trail-elevation_min',
-	                            labelText: 'Min Elevation',
-	                            smallText: '(meters)',
-	                            name: 'elevation_min',
-	                            value: props.elevation_min,
-	                            error: errors.elevation_min,
-	                            handleChange: props.handleChange
-	                        }),
-	                        _react2.default.createElement(_Input2.default, {
-	                            id: 'trail-elevation_max',
-	                            labelText: 'Max Elevation',
-	                            smallText: '(meters)',
-	                            name: 'elevation_max',
-	                            value: props.elevation_max,
-	                            error: errors.elevation_max,
-	                            handleChange: props.handleChange
-	                        }),
-	                        _react2.default.createElement('div', { style: { clear: 'both' } })
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'form-row' },
-	                        _react2.default.createElement(
-	                            'div',
 	                            { className: 'input-group', style: { width: '100%' } },
 	                            _react2.default.createElement(
 	                                'label',
 	                                {
-	                                    htmlFor: 'trail-description',
+	                                    htmlFor: 'peak-description',
 	                                    className: 'form-label'
 	                                },
 	                                'Description'
 	                            ),
 	                            _react2.default.createElement('textarea', {
 	                                name: 'description',
-	                                id: 'trail-description',
+	                                id: 'peak-description',
 	                                value: props.description,
 	                                onChange: props.handleChange,
 	                                className: 'form-control'
@@ -44326,7 +44275,7 @@
 	exports.default = PeakForm;
 
 /***/ },
-/* 388 */
+/* 382 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44341,7 +44290,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _style = __webpack_require__(385);
+	var _style = __webpack_require__(379);
 
 	var _style2 = _interopRequireDefault(_style);
 
@@ -44456,7 +44405,7 @@
 	exports.default = PeakShow;
 
 /***/ },
-/* 389 */
+/* 383 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44473,7 +44422,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _style = __webpack_require__(385);
+	var _style = __webpack_require__(379);
 
 	var _style2 = _interopRequireDefault(_style);
 
@@ -44487,7 +44436,7 @@
 
 	var _breadcrumbs2 = _interopRequireDefault(_breadcrumbs);
 
-	var _form = __webpack_require__(387);
+	var _form = __webpack_require__(381);
 
 	var _form2 = _interopRequireDefault(_form);
 
@@ -44510,15 +44459,11 @@
 	        _this.state = {
 	            id: props.params.id,
 	            name: '',
-	            distance: '',
-	            severity_id: '',
 	            exposure_id: '',
-	            elevation_min: '',
-	            elevation_max: '',
+	            elevation: '',
 	            description: '',
-	            latitude_start: '',
-	            longitude_start: '',
-	            severities: [],
+	            latitude: '',
+	            longitude: '',
 	            exposures: [],
 	            validationErrors: {}
 	        };
@@ -44557,7 +44502,7 @@
 	    }, {
 	        key: 'handleCoordinates',
 	        value: function handleCoordinates(latitude, longitude) {
-	            this.setState({ latitude_start: latitude, longitude_start: longitude });
+	            this.setState({ latitude: latitude, longitude: longitude });
 	        }
 	    }, {
 	        key: 'clearValidationError',
@@ -44572,21 +44517,21 @@
 	        key: 'submitForm',
 	        value: function submitForm() {
 	            $.ajax({
-	                url: '/admin/trails/' + this.state.id,
+	                url: '/admin/peaks/' + this.state.id,
 	                type: "PATCH",
 	                dataType: 'json',
 	                data: this.state,
 	                cache: false,
 	                success: function (res) {
 	                    if (res.response_status.code === 200) {
-	                        localStorage.setItem('flash-success', 'Trail has been saved.');
+	                        localStorage.setItem('flash-success', 'Peak has been saved.');
 	                    } else if (res.response_status.code === 404) {
-	                        localStorage.setItem('flash-error', 'Trail with id ' + this.state.id + ' could not be found.');
+	                        localStorage.setItem('flash-error', 'Peak with id ' + this.state.id + ' could not be found.');
 	                    } else {
-	                        localStorage.setItem('flash-error', 'Trail could not be updated.');
+	                        localStorage.setItem('flash-error', 'Peak could not be updated.');
 	                    }
 
-	                    _reactRouter.browserHistory.push('/admin/trails');
+	                    _reactRouter.browserHistory.push('/admin/peaks');
 	                }.bind(this),
 	                error: function (xhr, status, err) {
 	                    var errors = $.parseJSON(xhr.responseText);
@@ -44607,20 +44552,20 @@
 	                return false;
 	            }
 	            $.ajax({
-	                url: '/admin/trails/' + this.state.id,
+	                url: '/admin/peaks/' + this.state.id,
 	                type: "DELETE",
 	                dataType: 'json',
 	                data: this.state,
 	                cache: false,
 	                success: function (res) {
 	                    if (res.response_status.code === 200) {
-	                        localStorage.setItem('flash-success', 'Trail ' + this.state.name + ' has been deleted.');
+	                        localStorage.setItem('flash-success', 'Peak ' + this.state.name + ' has been deleted.');
 	                    } else if (res.response_status.code === 404) {
-	                        localStorage.setItem('flash-error', 'Trail with id ' + this.state.id + ' could not be found.');
+	                        localStorage.setItem('flash-error', 'Peak with id ' + this.state.id + ' could not be found.');
 	                    } else {
-	                        localStorage.setItem('flash-error', 'Trail could not be deleted.');
+	                        localStorage.setItem('flash-error', 'Peak could not be deleted.');
 	                    }
-	                    _reactRouter.browserHistory.push('/admin/trails');
+	                    _reactRouter.browserHistory.push('/admin/peaks');
 	                }.bind(this),
 	                error: function (xhr, status, err) {
 	                    var errors = $.parseJSON(xhr.responseText);
@@ -44639,22 +44584,18 @@
 	        value: function componentDidMount() {
 	            window.scrollTo(0, 0);
 	            $.ajax({
-	                url: '/admin/trails/' + this.state.id,
+	                url: '/admin/peaks/' + this.state.id,
 	                type: "GET",
 	                dataType: 'json',
 	                cache: false,
 	                success: function (res) {
 	                    this.setState({
 	                        name: res.items.name,
-	                        distance: res.items.distance,
-	                        severity_id: res.items.severity_id,
 	                        exposure_id: res.items.exposure_id,
-	                        elevation_min: res.items.elevation_min,
-	                        elevation_max: res.items.elevation_max,
+	                        elevation: res.items.elevation,
 	                        description: res.items.description,
-	                        latitude_start: res.items.latitude_start,
-	                        longitude_start: res.items.longitude_start,
-	                        severities: res.severities,
+	                        latitude: res.items.latitude,
+	                        longitude: res.items.longitude,
 	                        exposures: res.exposures
 
 	                    });
@@ -44671,7 +44612,7 @@
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(_breadcrumbs2.default, { heading: 'Edit Trail - ' + this.state.name }),
+	                _react2.default.createElement(_breadcrumbs2.default, { heading: 'Edit Peak - ' + this.state.name }),
 	                _react2.default.createElement(_alert2.default, {
 	                    message: this.state.message,
 	                    'class': this.state.class
