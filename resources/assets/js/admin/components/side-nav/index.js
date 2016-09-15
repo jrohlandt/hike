@@ -28,6 +28,9 @@ export default class SideNav extends React.Component {
                         <Link to="/admin/trails" activeClassName="side-nav-link-active" >trails</Link>
                     </li>
                     <li>
+                        <Link to="/admin/peaks" activeClassName="side-nav-link-active" >peaks</Link>
+                    </li>
+                    <li>
                         <a href="#" >exposures</a>
                     </li>
                     <li>

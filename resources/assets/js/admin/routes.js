@@ -12,6 +12,11 @@ import TrailCreate from './components/trails/create.js';
 import TrailShow from './components/trails/show.js';
 import TrailEdit from './components/trails/edit.js';
 
+import PeaksListing from './components/peaks/index.js';
+import PeakCreate from './components/peaks/create.js';
+import PeakShow from './components/peaks/show.js';
+import PeakEdit from './components/peaks/edit.js';
+
 var routes = (
   <Router history={browserHistory} >
     <Route path="/admin" component={App} >
@@ -21,6 +26,10 @@ var routes = (
       <Route path="trails/create" component={TrailCreate} />
       <Route path="trails/:id" component={TrailShow} />
       <Route path="trails/:id/edit" component={TrailEdit} />
+      <Route path="parking" component={PeaksListing} />
+      <Route path="parking/create" component={PeakCreate} />
+      <Route path="parking/:id" component={PeakShow} />
+      <Route path="parking/:id/edit" component={PeakEdit} />
     </Route>
   </Router>
 );

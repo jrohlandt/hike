@@ -86,6 +86,22 @@
 
 	var _edit2 = _interopRequireDefault(_edit);
 
+	var _index7 = __webpack_require__(384);
+
+	var _index8 = _interopRequireDefault(_index7);
+
+	var _create3 = __webpack_require__(386);
+
+	var _create4 = _interopRequireDefault(_create3);
+
+	var _show3 = __webpack_require__(388);
+
+	var _show4 = _interopRequireDefault(_show3);
+
+	var _edit3 = __webpack_require__(389);
+
+	var _edit4 = _interopRequireDefault(_edit3);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var routes = _react2.default.createElement(
@@ -99,7 +115,11 @@
 	    _react2.default.createElement(_reactRouter.Route, { path: 'trails', component: _index6.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'trails/create', component: _create2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'trails/:id', component: _show2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: 'trails/:id/edit', component: _edit2.default })
+	    _react2.default.createElement(_reactRouter.Route, { path: 'trails/:id/edit', component: _edit2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: 'parking', component: _index8.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: 'parking/create', component: _create4.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: 'parking/:id', component: _show4.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: 'parking/:id/edit', component: _edit4.default })
 	  )
 	);
 
@@ -27212,6 +27232,15 @@
 	                        'li',
 	                        null,
 	                        _react2.default.createElement(
+	                            _reactRouter.Link,
+	                            { to: '/admin/peaks', activeClassName: 'side-nav-link-active' },
+	                            'peaks'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'li',
+	                        null,
+	                        _react2.default.createElement(
 	                            'a',
 	                            { href: '#' },
 	                            'exposures'
@@ -43782,6 +43811,910 @@
 	}(_react2.default.Component);
 
 	exports.default = TrailEdit;
+
+/***/ },
+/* 378 */,
+/* 379 */,
+/* 380 */,
+/* 381 */,
+/* 382 */,
+/* 383 */,
+/* 384 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _style = __webpack_require__(385);
+
+	var _style2 = _interopRequireDefault(_style);
+
+	var _Page = __webpack_require__(244);
+
+	var _Page2 = _interopRequireDefault(_Page);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var PeaksListing = function (_React$Component) {
+	    _inherits(PeaksListing, _React$Component);
+
+	    function PeaksListing(props) {
+	        _classCallCheck(this, PeaksListing);
+
+	        return _possibleConstructorReturn(this, (PeaksListing.__proto__ || Object.getPrototypeOf(PeaksListing)).call(this, props));
+	    }
+
+	    _createClass(PeaksListing, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            window.scrollTo(0, 0);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var props = {
+	                itemType: 'trail',
+	                heading: 'Trails',
+	                columnsToDisplay: ['name', 'created_at'],
+	                baseUrl: this.props.location.pathname
+	            };
+
+	            return _react2.default.createElement(_Page2.default, props);
+	        }
+	    }]);
+
+	    return PeaksListing;
+	}(_react2.default.Component);
+
+	exports.default = PeaksListing;
+
+/***/ },
+/* 385 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 386 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _style = __webpack_require__(385);
+
+	var _style2 = _interopRequireDefault(_style);
+
+	var _reactRouter = __webpack_require__(172);
+
+	var _alert = __webpack_require__(246);
+
+	var _alert2 = _interopRequireDefault(_alert);
+
+	var _breadcrumbs = __webpack_require__(248);
+
+	var _breadcrumbs2 = _interopRequireDefault(_breadcrumbs);
+
+	var _form = __webpack_require__(387);
+
+	var _form2 = _interopRequireDefault(_form);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var PeakCreate = function (_React$Component) {
+	    _inherits(PeakCreate, _React$Component);
+
+	    function PeakCreate(props) {
+	        _classCallCheck(this, PeakCreate);
+
+	        var _this = _possibleConstructorReturn(this, (PeakCreate.__proto__ || Object.getPrototypeOf(PeakCreate)).call(this, props));
+
+	        _this.state = {
+	            name: '',
+	            distance: '',
+	            severity_id: '',
+	            exposure_id: '',
+	            elevation_min: '',
+	            elevation_max: '',
+	            description: '',
+	            latitude_start: '',
+	            longitude_start: '',
+	            severities: [],
+	            exposures: [],
+	            validationErrors: {}
+	        };
+
+	        _this.handleChange = _this.handleChange.bind(_this);
+	        _this.handleSelect = _this.handleSelect.bind(_this);
+	        _this.handleCoordinates = _this.handleCoordinates.bind(_this);
+	        _this.submitForm = _this.submitForm.bind(_this);
+	        _this.clearValidationError = _this.clearValidationError.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(PeakCreate, [{
+	        key: 'handleChange',
+	        value: function handleChange(event) {
+	            var inputName = event.target.name;
+	            var inputValue = event.target.value;
+	            if (this.state.hasOwnProperty(inputName)) {
+	                var state = {};
+	                state[inputName] = inputValue;
+	                this.setState(state);
+	                this.clearValidationError(inputName);
+	            }
+	        }
+	    }, {
+	        key: 'handleSelect',
+	        value: function handleSelect(inputName, inputValue) {
+	            if (this.state.hasOwnProperty(inputName)) {
+	                var state = {};
+	                state[inputName] = inputValue;
+	                this.setState(state);
+	                this.clearValidationError(inputName);
+	            }
+	        }
+	    }, {
+	        key: 'handleCoordinates',
+	        value: function handleCoordinates(latitude, longitude) {
+	            this.setState({ latitude_start: latitude, longitude_start: longitude });
+	        }
+	    }, {
+	        key: 'clearValidationError',
+	        value: function clearValidationError(inputName) {
+	            var validationErrors = this.state.validationErrors;
+	            if (validationErrors.hasOwnProperty(inputName)) {
+	                delete validationErrors[inputName];
+	                this.setState({ validationErrors: validationErrors });
+	            }
+	        }
+	    }, {
+	        key: 'submitForm',
+	        value: function submitForm() {
+	            $.ajax({
+	                url: '/admin/trails',
+	                type: "POST",
+	                dataType: 'json',
+	                data: this.state,
+	                cache: false,
+	                success: function (res) {
+	                    if (res.response_status.code === 200) {
+	                        localStorage.setItem('flash-success', 'Trail has been created.');
+	                    } else {
+	                        localStorage.setItem('flash-error', 'Trail could not be created.');
+	                    }
+	                    _reactRouter.browserHistory.push('/admin/trails');
+	                }.bind(this),
+	                error: function (xhr, status, err) {
+	                    var errors = $.parseJSON(xhr.responseText);
+	                    var validationErrors = {};
+	                    for (var key in errors) {
+	                        if (errors.hasOwnProperty(key)) {
+	                            validationErrors[key] = errors[key][0];
+	                        }
+	                    }
+	                    this.setState({ validationErrors: validationErrors });
+	                    window.scrollTo(0, 0);
+	                }.bind(this)
+	            });
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            window.scrollTo(0, 0);
+	            $.ajax({
+	                url: '/admin/trails/create',
+	                type: "GET",
+	                dataType: 'json',
+	                cache: false,
+	                success: function (res) {
+	                    this.setState({
+	                        severities: res.severities,
+	                        exposures: res.exposures
+	                    });
+	                }.bind(this),
+	                error: function (xhr, status, err) {
+	                    console.log(xhr);
+	                }.bind(this)
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var errors = this.state.validationErrors;
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(_alert2.default, null),
+	                _react2.default.createElement(_breadcrumbs2.default, { heading: 'Create Trail' }),
+	                _react2.default.createElement(_form2.default, _extends({}, this.state, {
+	                    handleChange: this.handleChange,
+	                    handleSelect: this.handleSelect,
+	                    handleCoordinates: this.handleCoordinates,
+	                    submitForm: this.submitForm
+	                })),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-row form-bottom-buttons' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-buttons' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            {
+	                                className: 'submit-button',
+	                                onClick: this.submitForm
+	                            },
+	                            'Submit'
+	                        )
+	                    ),
+	                    _react2.default.createElement('div', { style: { clear: 'both' } })
+	                )
+	            );
+	        }
+	    }]);
+
+	    return PeakCreate;
+	}(_react2.default.Component);
+
+	exports.default = PeakCreate;
+
+/***/ },
+/* 387 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Input = __webpack_require__(366);
+
+	var _Input2 = _interopRequireDefault(_Input);
+
+	var _Select = __webpack_require__(372);
+
+	var _Select2 = _interopRequireDefault(_Select);
+
+	var _CoordinatesMap = __webpack_require__(374);
+
+	var _CoordinatesMap2 = _interopRequireDefault(_CoordinatesMap);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var PeakForm = function (_React$Component) {
+	    _inherits(PeakForm, _React$Component);
+
+	    function PeakForm(props) {
+	        _classCallCheck(this, PeakForm);
+
+	        return _possibleConstructorReturn(this, (PeakForm.__proto__ || Object.getPrototypeOf(PeakForm)).call(this, props));
+	    }
+
+	    _createClass(PeakForm, [{
+	        key: 'render',
+	        value: function render() {
+	            var props = this.props;
+	            var errors = props.validationErrors;
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'form-container' },
+	                _react2.default.createElement(
+	                    'form',
+	                    null,
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-row' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'form-row-heading' },
+	                            _react2.default.createElement(
+	                                'h4',
+	                                null,
+	                                'Details'
+	                            )
+	                        ),
+	                        _react2.default.createElement(_Input2.default, {
+	                            id: 'trail-name',
+	                            labelText: 'Name',
+	                            name: 'name',
+	                            value: props.name,
+	                            error: errors.name,
+	                            handleChange: props.handleChange
+	                        }),
+	                        _react2.default.createElement('div', { style: { clear: 'both' } })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-row' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'form-row-heading' },
+	                            _react2.default.createElement(
+	                                'h4',
+	                                null,
+	                                'Coordinates',
+	                                _react2.default.createElement(
+	                                    'small',
+	                                    null,
+	                                    ' (click map below to get coordinates)'
+	                                )
+	                            )
+	                        ),
+	                        _react2.default.createElement(_Input2.default, {
+	                            id: 'trail-latitude-start',
+	                            labelText: 'Latitude',
+	                            name: 'latitude_start',
+	                            value: props.latitude_start,
+	                            error: errors.latitude_start,
+	                            handleChange: props.handleChange
+	                        }),
+	                        _react2.default.createElement(_Input2.default, {
+	                            id: 'trail-longitude-start',
+	                            labelText: 'Longitude',
+	                            name: 'longitude_start',
+	                            value: props.longitude_start,
+	                            error: errors.longitude_start,
+	                            handleChange: props.handleChange
+	                        }),
+	                        _react2.default.createElement('div', { style: { clear: 'both' } })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-row map' },
+	                        _react2.default.createElement(_CoordinatesMap2.default, {
+	                            lat: props.latitude_start,
+	                            lng: props.longitude_start,
+	                            handleChange: props.handleCoordinates })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-row' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'form-row-heading' },
+	                            _react2.default.createElement(
+	                                'h4',
+	                                null,
+	                                'Effort and Exposure'
+	                            )
+	                        ),
+	                        _react2.default.createElement(_Select2.default, {
+	                            id: 'trail-severity',
+	                            labelText: 'Effort',
+	                            name: 'severity_id',
+	                            options: props.severities,
+	                            selected: props.severity_id,
+	                            error: errors.severity_id,
+	                            handleSelect: props.handleSelect
+	                        }),
+	                        _react2.default.createElement(_Select2.default, {
+	                            id: 'trail-exposure',
+	                            labelText: 'Exposure',
+	                            name: 'exposure_id',
+	                            options: props.exposures,
+	                            selected: props.exposure_id,
+	                            error: errors.exposure_id,
+	                            handleSelect: props.handleSelect
+	                        }),
+	                        _react2.default.createElement('div', { style: { clear: 'both' } })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-row' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'form-row-heading' },
+	                            _react2.default.createElement(
+	                                'h4',
+	                                null,
+	                                'Distance and Elevation'
+	                            )
+	                        ),
+	                        _react2.default.createElement(_Input2.default, {
+	                            id: 'trail-distance',
+	                            labelText: 'Distance',
+	                            smallText: '(meters)',
+	                            name: 'distance',
+	                            value: props.distance,
+	                            error: errors.distance,
+	                            handleChange: props.handleChange
+	                        }),
+	                        _react2.default.createElement(_Input2.default, {
+	                            id: 'trail-elevation_min',
+	                            labelText: 'Min Elevation',
+	                            smallText: '(meters)',
+	                            name: 'elevation_min',
+	                            value: props.elevation_min,
+	                            error: errors.elevation_min,
+	                            handleChange: props.handleChange
+	                        }),
+	                        _react2.default.createElement(_Input2.default, {
+	                            id: 'trail-elevation_max',
+	                            labelText: 'Max Elevation',
+	                            smallText: '(meters)',
+	                            name: 'elevation_max',
+	                            value: props.elevation_max,
+	                            error: errors.elevation_max,
+	                            handleChange: props.handleChange
+	                        }),
+	                        _react2.default.createElement('div', { style: { clear: 'both' } })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-row' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'input-group', style: { width: '100%' } },
+	                            _react2.default.createElement(
+	                                'label',
+	                                {
+	                                    htmlFor: 'trail-description',
+	                                    className: 'form-label'
+	                                },
+	                                'Description'
+	                            ),
+	                            _react2.default.createElement('textarea', {
+	                                name: 'description',
+	                                id: 'trail-description',
+	                                value: props.description,
+	                                onChange: props.handleChange,
+	                                className: 'form-control'
+	                            }),
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'validation-error' },
+	                                errors.description ? errors.description : ''
+	                            )
+	                        ),
+	                        _react2.default.createElement('div', { style: { clear: 'both' } })
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return PeakForm;
+	}(_react2.default.Component);
+
+	exports.default = PeakForm;
+
+/***/ },
+/* 388 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _style = __webpack_require__(385);
+
+	var _style2 = _interopRequireDefault(_style);
+
+	var _reactRouter = __webpack_require__(172);
+
+	var _alert = __webpack_require__(246);
+
+	var _alert2 = _interopRequireDefault(_alert);
+
+	var _breadcrumbs = __webpack_require__(248);
+
+	var _breadcrumbs2 = _interopRequireDefault(_breadcrumbs);
+
+	var _CoordinatesMap = __webpack_require__(374);
+
+	var _CoordinatesMap2 = _interopRequireDefault(_CoordinatesMap);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var PeakShow = function (_React$Component) {
+	    _inherits(PeakShow, _React$Component);
+
+	    function PeakShow(props) {
+	        _classCallCheck(this, PeakShow);
+
+	        var _this = _possibleConstructorReturn(this, (PeakShow.__proto__ || Object.getPrototypeOf(PeakShow)).call(this, props));
+
+	        _this.state = {
+	            id: props.params.id,
+	            name: '',
+	            distance: '',
+	            severity_id: '',
+	            exposure_id: '',
+	            elevation_min: '',
+	            elevation_max: '',
+	            description: '',
+	            latitude_start: '',
+	            longitude_start: ''
+	        };
+	        return _this;
+	    }
+
+	    _createClass(PeakShow, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            window.scrollTo(0, 0);
+	            $.ajax({
+	                url: '/admin/trails/' + this.state.id,
+	                type: "GET",
+	                dataType: 'json',
+	                cache: false,
+	                success: function (res) {
+	                    this.setState({
+	                        name: res.items.name,
+	                        distance: res.items.distance,
+	                        severity_id: res.items.severity_id,
+	                        exposure_id: res.items.exposure_id,
+	                        elevation_min: res.items.elevation_min,
+	                        elevation_max: res.items.elevation_max,
+	                        description: res.items.description,
+	                        latitude_start: res.items.latitude_start,
+	                        longitude_start: res.items.longitude_start,
+	                        severities: res.severities,
+	                        exposures: res.exposures
+
+	                    });
+	                }.bind(this),
+	                error: function (xhr, status, err) {
+	                    console.log(xhr);
+	                }.bind(this)
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var errors = this.state.validationErrors;
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(_alert2.default, {
+	                    message: this.state.message,
+	                    'class': this.state.class
+	                }),
+	                _react2.default.createElement(_breadcrumbs2.default, { heading: 'Trail Preview - ' + this.state.name }),
+	                _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    _react2.default.createElement(
+	                        'h1',
+	                        null,
+	                        this.state.name
+	                    ),
+	                    _react2.default.createElement(_CoordinatesMap2.default, {
+	                        lat: this.state.latitude_start,
+	                        lng: this.state.longitude_start,
+	                        allowAddMarker: false
+	                    })
+	                )
+	            );
+	        }
+	    }]);
+
+	    return PeakShow;
+	}(_react2.default.Component);
+
+	exports.default = PeakShow;
+
+/***/ },
+/* 389 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _style = __webpack_require__(385);
+
+	var _style2 = _interopRequireDefault(_style);
+
+	var _reactRouter = __webpack_require__(172);
+
+	var _alert = __webpack_require__(246);
+
+	var _alert2 = _interopRequireDefault(_alert);
+
+	var _breadcrumbs = __webpack_require__(248);
+
+	var _breadcrumbs2 = _interopRequireDefault(_breadcrumbs);
+
+	var _form = __webpack_require__(387);
+
+	var _form2 = _interopRequireDefault(_form);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var PeakEdit = function (_React$Component) {
+	    _inherits(PeakEdit, _React$Component);
+
+	    function PeakEdit(props) {
+	        _classCallCheck(this, PeakEdit);
+
+	        var _this = _possibleConstructorReturn(this, (PeakEdit.__proto__ || Object.getPrototypeOf(PeakEdit)).call(this, props));
+
+	        _this.state = {
+	            id: props.params.id,
+	            name: '',
+	            distance: '',
+	            severity_id: '',
+	            exposure_id: '',
+	            elevation_min: '',
+	            elevation_max: '',
+	            description: '',
+	            latitude_start: '',
+	            longitude_start: '',
+	            severities: [],
+	            exposures: [],
+	            validationErrors: {}
+	        };
+
+	        _this.handleChange = _this.handleChange.bind(_this);
+	        _this.handleSelect = _this.handleSelect.bind(_this);
+	        _this.handleCoordinates = _this.handleCoordinates.bind(_this);
+	        _this.handleDestroy = _this.handleDestroy.bind(_this);
+	        _this.submitForm = _this.submitForm.bind(_this);
+	        _this.clearValidationError = _this.clearValidationError.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(PeakEdit, [{
+	        key: 'handleChange',
+	        value: function handleChange(event) {
+	            var inputName = event.target.name;
+	            var inputValue = event.target.value;
+	            if (this.state.hasOwnProperty(inputName)) {
+	                var state = {};
+	                state[inputName] = inputValue;
+	                this.setState(state);
+	                this.clearValidationError(inputName);
+	            }
+	        }
+	    }, {
+	        key: 'handleSelect',
+	        value: function handleSelect(inputName, inputValue) {
+	            if (this.state.hasOwnProperty(inputName)) {
+	                var state = {};
+	                state[inputName] = inputValue;
+	                this.setState(state);
+	                this.clearValidationError(inputName);
+	            }
+	        }
+	    }, {
+	        key: 'handleCoordinates',
+	        value: function handleCoordinates(latitude, longitude) {
+	            this.setState({ latitude_start: latitude, longitude_start: longitude });
+	        }
+	    }, {
+	        key: 'clearValidationError',
+	        value: function clearValidationError(inputName) {
+	            var validationErrors = this.state.validationErrors;
+	            if (validationErrors.hasOwnProperty(inputName)) {
+	                delete validationErrors[inputName];
+	                this.setState({ validationErrors: validationErrors });
+	            }
+	        }
+	    }, {
+	        key: 'submitForm',
+	        value: function submitForm() {
+	            $.ajax({
+	                url: '/admin/trails/' + this.state.id,
+	                type: "PATCH",
+	                dataType: 'json',
+	                data: this.state,
+	                cache: false,
+	                success: function (res) {
+	                    if (res.response_status.code === 200) {
+	                        localStorage.setItem('flash-success', 'Trail has been saved.');
+	                    } else if (res.response_status.code === 404) {
+	                        localStorage.setItem('flash-error', 'Trail with id ' + this.state.id + ' could not be found.');
+	                    } else {
+	                        localStorage.setItem('flash-error', 'Trail could not be updated.');
+	                    }
+
+	                    _reactRouter.browserHistory.push('/admin/trails');
+	                }.bind(this),
+	                error: function (xhr, status, err) {
+	                    var errors = $.parseJSON(xhr.responseText);
+	                    var validationErrors = {};
+	                    for (var key in errors) {
+	                        if (errors.hasOwnProperty(key)) {
+	                            validationErrors[key] = errors[key][0];
+	                        }
+	                    }
+	                    this.setState({ validationErrors: validationErrors });
+	                }.bind(this)
+	            });
+	        }
+	    }, {
+	        key: 'handleDestroy',
+	        value: function handleDestroy() {
+	            if (!window.confirm("Do you really want to delete " + this.state.name + "?")) {
+	                return false;
+	            }
+	            $.ajax({
+	                url: '/admin/trails/' + this.state.id,
+	                type: "DELETE",
+	                dataType: 'json',
+	                data: this.state,
+	                cache: false,
+	                success: function (res) {
+	                    if (res.response_status.code === 200) {
+	                        localStorage.setItem('flash-success', 'Trail ' + this.state.name + ' has been deleted.');
+	                    } else if (res.response_status.code === 404) {
+	                        localStorage.setItem('flash-error', 'Trail with id ' + this.state.id + ' could not be found.');
+	                    } else {
+	                        localStorage.setItem('flash-error', 'Trail could not be deleted.');
+	                    }
+	                    _reactRouter.browserHistory.push('/admin/trails');
+	                }.bind(this),
+	                error: function (xhr, status, err) {
+	                    var errors = $.parseJSON(xhr.responseText);
+	                    var validationErrors = {};
+	                    for (var key in errors) {
+	                        if (errors.hasOwnProperty(key)) {
+	                            validationErrors[key] = errors[key][0];
+	                        }
+	                    }
+	                    this.setState({ validationErrors: validationErrors });
+	                }.bind(this)
+	            });
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            window.scrollTo(0, 0);
+	            $.ajax({
+	                url: '/admin/trails/' + this.state.id,
+	                type: "GET",
+	                dataType: 'json',
+	                cache: false,
+	                success: function (res) {
+	                    this.setState({
+	                        name: res.items.name,
+	                        distance: res.items.distance,
+	                        severity_id: res.items.severity_id,
+	                        exposure_id: res.items.exposure_id,
+	                        elevation_min: res.items.elevation_min,
+	                        elevation_max: res.items.elevation_max,
+	                        description: res.items.description,
+	                        latitude_start: res.items.latitude_start,
+	                        longitude_start: res.items.longitude_start,
+	                        severities: res.severities,
+	                        exposures: res.exposures
+
+	                    });
+	                }.bind(this),
+	                error: function (xhr, status, err) {
+	                    console.log(xhr);
+	                }.bind(this)
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var errors = this.state.validationErrors;
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(_breadcrumbs2.default, { heading: 'Edit Trail - ' + this.state.name }),
+	                _react2.default.createElement(_alert2.default, {
+	                    message: this.state.message,
+	                    'class': this.state.class
+	                }),
+	                _react2.default.createElement(_form2.default, _extends({}, this.state, {
+	                    handleChange: this.handleChange,
+	                    handleSelect: this.handleSelect,
+	                    handleCoordinates: this.handleCoordinates,
+	                    submitForm: this.submitForm
+	                })),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-row form-bottom-buttons' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-buttons' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            {
+	                                className: 'submit-button',
+	                                onClick: this.submitForm
+	                            },
+	                            'Submit'
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            {
+	                                className: 'form-delete-button',
+	                                onClick: this.handleDestroy
+	                            },
+	                            'Delete'
+	                        )
+	                    ),
+	                    _react2.default.createElement('div', { style: { clear: 'both' } })
+	                )
+	            );
+	        }
+	    }]);
+
+	    return PeakEdit;
+	}(_react2.default.Component);
+
+	exports.default = PeakEdit;
 
 /***/ }
 /******/ ]);

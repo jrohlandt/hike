@@ -26,7 +26,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     });
 
     Route::resource('/hikes', 'Admin\HikesController');
-
     Route::resource('/trails', 'Admin\TrailsController');
+    Route::resource('/peaks', 'Admin\PeaksController');
 
 });
