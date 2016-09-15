@@ -27844,7 +27844,6 @@
 	                    )
 	                ));
 	            });
-	            console.log('dark: ' + this.props.dark);
 
 	            return _react2.default.createElement(
 	                'tr',
@@ -27885,12 +27884,7 @@
 	            var rows = [];
 	            var dark = false;
 	            this.props.items.forEach(function (item) {
-	                // if (rows.length === 0) {
-	                //     dark = false;
-	                // } else {
-	                //     dark = !dark;
-	                // }
-	                // console.log('dark: ' + dark);
+
 	                rows.push(_react2.default.createElement(ItemRow, {
 	                    key: item.id,
 	                    item: item,
@@ -42589,7 +42583,6 @@
 	                dataType: 'json',
 	                cache: false,
 	                success: function (res) {
-	                    console.log(res);
 	                    this.setState({
 	                        severities: res.severities,
 	                        exposures: res.exposures
@@ -43189,7 +43182,6 @@
 	            // setTimeout: allows this.handleClick to run first
 	            setTimeout(function () {
 	                if (!_this2.focusInCurrentTarget(e)) {
-	                    console.log('blur');
 	                    _this2.setState({ show: false });
 	                }
 	            }, 0);
@@ -43354,7 +43346,6 @@
 	                        var options = {
 	                            latLng: { lat: parseFloat(_this2.props.lat), lng: parseFloat(_this2.props.lng) }
 	                        };
-	                        console.log(_this2.props.lat, options);
 	                        _this2.addMarker(map, options);
 	                        map.setCenter(options.latLng);
 	                    }

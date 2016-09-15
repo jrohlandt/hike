@@ -100,7 +100,6 @@ export default class TrailCreate extends React.Component {
            dataType: 'json',
            cache: false,
            success: function(res) {
-               console.log(res);
               this.setState({
                 severities: res.severities,
                 exposures: res.exposures

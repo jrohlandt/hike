@@ -55,7 +55,6 @@ export default class FormSelect extends React.Component {
         // setTimeout: allows this.handleClick to run first
         setTimeout(() => {
             if (!this.focusInCurrentTarget(e)) {
-                console.log('blur');
                 this.setState({show: false});
             }
         }, 0);

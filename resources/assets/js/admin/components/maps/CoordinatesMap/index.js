@@ -42,7 +42,6 @@ export default class CoordinatesMap extends React.Component {
                     var options = {
                         latLng: {lat: parseFloat(this.props.lat), lng: parseFloat(this.props.lng)}
                     }
-                    console.log(this.props.lat, options);
                     this.addMarker(map, options);
                     map.setCenter(options.latLng);
                 }
