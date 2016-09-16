@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Storage;
 use Illuminate\Http\Request;
 
 use App\Http\Requests\PeakDefaultRequest as DefaultRequest;
@@ -44,7 +45,7 @@ class PeaksController extends Controller
     public function store(DefaultRequest $request)
     {
         // Create Success
-        $exclude = ['id', 'exposures', 'validationErrors'];
+        $exclude = ['id', 'exposures', 'thumbnailPath', 'validationErrors'];
         if ($item = $this->model->create($request->except($exclude))) {
             $response = [
                 'response_status' => [
@@ -96,6 +97,50 @@ class PeaksController extends Controller
         return view('admin.index');
     }
 
+    public function uploadThumbnail(Request $request, $id)
+    {
+        if (!$request->hasFile('thumbnail') || !$request->file('thumbnail')->isValid()) {
+            return response()->json([
+                'response_status' => [
+                    'code' => 404,
+                    'text' => 'not found',
+                    'message' => 'The image is either invalid or does not exist',
+                ],
+                'body' => [],
+            ]);
+        }
+
+        if (!$item = $this->model->find($id)) {
+            return response()->json([
+                'response_status' => [
+                    'code' => 404,
+                    'text' => 'not found',
+                    'message' => 'a Peak with id '.$id.' could not be found.',
+                ],
+                'body' => [],
+            ]);
+        }
+
+        $thumbnail = $request->file('thumbnail');
+        if (in_array($thumbnail->getClientMimeType(), ['image/png', 'image/jpeg', 'image/gif'])) {
+            $ext = $thumbnail->extension();
+            $filename = md5(str_random(30));
+            $storagePath = public_path().'/images/peaks/thumbnails';
+            $thumbnail->move($storagePath, $filename.'.'.$ext);
+            $item->thumbnail = $filename.'.'.$ext;
+            $item->save();
+            $response = [
+                'response_status' => [
+                    'code' => 200,
+                    'text' => 'ok',
+                    'message' => 'success',
+                ],
+                'body' => ['thumbnail' => $filename.'.'.$ext],
+            ];
+            return response()->json($response);
+        }
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -105,6 +150,7 @@ class PeaksController extends Controller
      */
     public function update(DefaultRequest $request, $id)
     {
+
         // Not found
         if (!$item = $this->model->find($id)) {
             return response()->json([
@@ -118,7 +164,7 @@ class PeaksController extends Controller
         }
 
         // Update Success
-        $exclude = ['id', 'exposures', 'validationErrors'];
+        $exclude = ['id', 'exposures' ,'thumbnail', 'thumbnailPath', 'validationErrors'];
         if ($this->model->where('id', $id)->update($request->except($exclude))) {
             $updatedItem = $this->model->find($id);
             $response = [

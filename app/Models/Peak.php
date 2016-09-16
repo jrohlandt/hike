@@ -16,6 +16,7 @@ class Peak extends Model
     	'elevation',
     	'latitude',
     	'longitude',
+        'thumbnail'
     	];
 
     protected $dates = ['deleted_at'];

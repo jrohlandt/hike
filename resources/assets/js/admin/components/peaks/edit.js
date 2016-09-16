@@ -9,6 +9,7 @@ import PeakForm from './form.js';
 export default class PeakEdit extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
             id: props.params.id,
             name: '',
@@ -17,6 +18,8 @@ export default class PeakEdit extends React.Component {
             description: '',
             latitude: '',
             longitude: '',
+            thumbnail: '',
+            thumbnailPath: '/images/peaks/thumbnails/',
             exposures: [],
             validationErrors: {}
         };
@@ -25,6 +28,7 @@ export default class PeakEdit extends React.Component {
         this.handleSelect = this.handleSelect.bind(this);
         this.handleCoordinates = this.handleCoordinates.bind(this);
         this.handleDestroy = this.handleDestroy.bind(this);
+        this.uploadThumbnail = this.uploadThumbnail.bind(this);
         this.submitForm = this.submitForm.bind(this);
         this.clearValidationError = this.clearValidationError.bind(this);
     }
@@ -51,6 +55,48 @@ export default class PeakEdit extends React.Component {
 
     handleCoordinates(latitude, longitude) {
         this.setState({latitude: latitude, longitude: longitude});
+    }
+
+    uploadThumbnail(event) {
+        var files = event.target.files;
+
+        if (!files[0]) {
+            return false;
+        }
+
+        var formData = new FormData();
+        formData.append('thumbnail', files[0]);
+
+        $.ajax({
+           url: '/admin/peaks/uploadThumbnail/' + this.state.id,
+           type: "POST",
+           data: formData,
+           cache: false,
+           processData: false,
+           contentType: false,
+           success: function(res) {
+               if (res.response_status.code === 200) {
+                   localStorage.setItem('flash-success', 'Thumbnail has been uploaded.');
+                   this.setState({thumbnail: res.body.thumbnail});
+               } else if (res.response_status.code === 404 ){
+                   localStorage.setItem('flash-error', `Peak with id ${this.state.id} could not be found.`);
+               } else {
+                   localStorage.setItem('flash-error', `Thumbnail could not be uploaded.`);
+               }
+
+               browserHistory.push('/admin/peaks/' + this.state.id + '/edit');
+           }.bind(this),
+           error: function(xhr, status, err) {
+               var errors = $.parseJSON(xhr.responseText);
+               var validationErrors = {};
+               for (var key in errors) {
+                   if (errors.hasOwnProperty(key)) {
+                       validationErrors[key] = errors[key][0];
+                   }
+               }
+               this.setState({validationErrors});
+           }.bind(this)
+       });
     }
 
     clearValidationError(inputName) {
@@ -140,6 +186,7 @@ export default class PeakEdit extends React.Component {
                 description: res.items.description,
                 latitude: res.items.latitude,
                 longitude: res.items.longitude,
+                thumbnail: res.items.thumbnail,
                 exposures: res.exposures
 
               });
@@ -160,11 +207,12 @@ export default class PeakEdit extends React.Component {
                     class={this.state.class}
                 />
 
-            <PeakForm
+                <PeakForm
                     {...this.state}
                     handleChange={this.handleChange}
                     handleSelect={this.handleSelect}
                     handleCoordinates={this.handleCoordinates}
+                    uploadThumbnail={this.uploadThumbnail}
                     submitForm={this.submitForm}
                 />
                 <div className="form-row form-bottom-buttons">

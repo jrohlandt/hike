@@ -17,6 +17,7 @@ export default class PeakCreate extends React.Component {
             description: '',
             latitude: '',
             longitude: '',
+            thumbnailPath: '/images/peaks/thumbnails/',
             exposures: [],
             validationErrors: {}
         };

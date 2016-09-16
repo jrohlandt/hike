@@ -15,7 +15,7 @@ export default class PeakForm extends React.Component {
 
         return (
             <div className="form-container">
-                <form>
+                <form encType="multipart/form-data">
                     <div className="form-row">
                         <div className="form-row-heading">
                             <h4>Details</h4>
@@ -86,6 +86,23 @@ export default class PeakForm extends React.Component {
                             error={errors.exposure_id}
                             handleSelect={props.handleSelect}
                         />
+                        <div style={{clear: 'both'}}></div>
+                    </div>
+
+                    <div className="form-row">
+                        <div className="input-group">
+                            <label
+                                htmlFor="peak-thumbnail"
+                                className="form-label"
+                            >
+                                Thumbnail
+                            </label>
+                            <img src={props.thumbnail ? props.thumbnailPath + props.thumbnail : props.thumbnailPath + 'no-image.png'} />
+                            <input onChange={props.uploadThumbnail} type="file" name="thumbnail" id="peak-thumbnail" />
+                            <div className="validation-error" >
+                                { errors.thumbnail ? errors.thumbnail : '' }
+                            </div>
+                        </div>
                         <div style={{clear: 'both'}}></div>
                     </div>
 
