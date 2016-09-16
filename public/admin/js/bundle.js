@@ -43943,6 +43943,7 @@
 	            description: '',
 	            latitude: '',
 	            longitude: '',
+	            thumbnailPath: '/images/peaks/thumbnails/',
 	            exposures: [],
 	            validationErrors: {}
 	        };
@@ -44137,7 +44138,7 @@
 	                { className: 'form-container' },
 	                _react2.default.createElement(
 	                    'form',
-	                    null,
+	                    { encType: 'multipart/form-data' },
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'form-row' },
@@ -44233,6 +44234,30 @@
 	                            error: errors.exposure_id,
 	                            handleSelect: props.handleSelect
 	                        }),
+	                        _react2.default.createElement('div', { style: { clear: 'both' } })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-row' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'input-group' },
+	                            _react2.default.createElement(
+	                                'label',
+	                                {
+	                                    htmlFor: 'peak-thumbnail',
+	                                    className: 'form-label'
+	                                },
+	                                'Thumbnail'
+	                            ),
+	                            _react2.default.createElement('img', { src: props.thumbnail ? props.thumbnailPath + props.thumbnail : props.thumbnailPath + 'no-image.png' }),
+	                            _react2.default.createElement('input', { onChange: props.uploadThumbnail, type: 'file', name: 'thumbnail', id: 'peak-thumbnail' }),
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'validation-error' },
+	                                errors.thumbnail ? errors.thumbnail : ''
+	                            )
+	                        ),
 	                        _react2.default.createElement('div', { style: { clear: 'both' } })
 	                    ),
 	                    _react2.default.createElement(
@@ -44464,6 +44489,8 @@
 	            description: '',
 	            latitude: '',
 	            longitude: '',
+	            thumbnail: '',
+	            thumbnailPath: '/images/peaks/thumbnails/',
 	            exposures: [],
 	            validationErrors: {}
 	        };
@@ -44472,6 +44499,7 @@
 	        _this.handleSelect = _this.handleSelect.bind(_this);
 	        _this.handleCoordinates = _this.handleCoordinates.bind(_this);
 	        _this.handleDestroy = _this.handleDestroy.bind(_this);
+	        _this.uploadThumbnail = _this.uploadThumbnail.bind(_this);
 	        _this.submitForm = _this.submitForm.bind(_this);
 	        _this.clearValidationError = _this.clearValidationError.bind(_this);
 	        return _this;
@@ -44503,6 +44531,49 @@
 	        key: 'handleCoordinates',
 	        value: function handleCoordinates(latitude, longitude) {
 	            this.setState({ latitude: latitude, longitude: longitude });
+	        }
+	    }, {
+	        key: 'uploadThumbnail',
+	        value: function uploadThumbnail(event) {
+	            var files = event.target.files;
+
+	            if (!files[0]) {
+	                return false;
+	            }
+
+	            var formData = new FormData();
+	            formData.append('thumbnail', files[0]);
+
+	            $.ajax({
+	                url: '/admin/peaks/uploadThumbnail/' + this.state.id,
+	                type: "POST",
+	                data: formData,
+	                cache: false,
+	                processData: false,
+	                contentType: false,
+	                success: function (res) {
+	                    if (res.response_status.code === 200) {
+	                        localStorage.setItem('flash-success', 'Thumbnail has been uploaded.');
+	                        this.setState({ thumbnail: res.body.thumbnail });
+	                    } else if (res.response_status.code === 404) {
+	                        localStorage.setItem('flash-error', 'Peak with id ' + this.state.id + ' could not be found.');
+	                    } else {
+	                        localStorage.setItem('flash-error', 'Thumbnail could not be uploaded.');
+	                    }
+
+	                    _reactRouter.browserHistory.push('/admin/peaks/' + this.state.id + '/edit');
+	                }.bind(this),
+	                error: function (xhr, status, err) {
+	                    var errors = $.parseJSON(xhr.responseText);
+	                    var validationErrors = {};
+	                    for (var key in errors) {
+	                        if (errors.hasOwnProperty(key)) {
+	                            validationErrors[key] = errors[key][0];
+	                        }
+	                    }
+	                    this.setState({ validationErrors: validationErrors });
+	                }.bind(this)
+	            });
 	        }
 	    }, {
 	        key: 'clearValidationError',
@@ -44596,6 +44667,7 @@
 	                        description: res.items.description,
 	                        latitude: res.items.latitude,
 	                        longitude: res.items.longitude,
+	                        thumbnail: res.items.thumbnail,
 	                        exposures: res.exposures
 
 	                    });
@@ -44621,6 +44693,7 @@
 	                    handleChange: this.handleChange,
 	                    handleSelect: this.handleSelect,
 	                    handleCoordinates: this.handleCoordinates,
+	                    uploadThumbnail: this.uploadThumbnail,
 	                    submitForm: this.submitForm
 	                })),
 	                _react2.default.createElement(
