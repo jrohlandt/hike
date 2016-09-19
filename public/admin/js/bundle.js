@@ -42138,7 +42138,7 @@
 	        // console.log(val, parseFloat(val), Number(val), Number.isNaN(Number(val)));
 	        if (val === "") return false;
 
-	        return Number.isNaN(Number(val)) === false;
+	        return isNaN(Number(val)) === false;
 	    },
 	    isNumberNoZero: function isNumberNoZero(val) {
 	        if (this.isNumber(val) && val !== 0 && parseFloat(val) !== 0) return true;
