@@ -11,7 +11,7 @@ var Type = {
         if (val === "")
             return false;
 
-        return Number.isNaN(Number(val)) === false;
+        return isNaN(Number(val)) === false;
     },
 
     isNumberNoZero(val) {
