@@ -42255,8 +42255,6 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -42301,18 +42299,27 @@
 	            var numberOfButtons = props.last_page <= maxButtons ? props.last_page : maxButtons;
 
 	            // TODO fix pagination will only start from 1 not for example from 2
-	            var range = [].concat(_toConsumableArray(Array(numberOfButtons).keys()));
+	            // var range = [...Array(numberOfButtons).keys()];
 	            var buttonsData = [];
 
-	            range.forEach(function (i) {
-	                var i = i + 1;
+	            // range.forEach((i) => {
+	            //     var i = i + 1;
+	            //     buttonsData.push({
+	            //         name: i,
+	            //         pageNum: i,
+	            //         text: i,
+	            //         class: (i == props.current_page ? 'current' : '')
+	            //     });
+	            // });
+
+	            for (var i = 1; i <= numberOfButtons; i++) {
 	                buttonsData.push({
 	                    name: i,
 	                    pageNum: i,
 	                    text: i,
 	                    class: i == props.current_page ? 'current' : ''
 	                });
-	            });
+	            }
 
 	            buttonsData = this.addPrevAndNextButtons(props, buttonsData);
 

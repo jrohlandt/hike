@@ -5,7 +5,7 @@ class PaginationButtons extends React.Component {
     constructor(props) {
         super(props);
     }
-    
+
     addPrevAndNextButtons(props, buttonsData) {
         buttonsData.unshift({
             name: 'previous',
@@ -30,18 +30,17 @@ class PaginationButtons extends React.Component {
         var numberOfButtons = (props.last_page <= maxButtons ? props.last_page : maxButtons);
 
         // TODO fix pagination will only start from 1 not for example from 2
-        var range = [...Array(numberOfButtons).keys()];
+
         var buttonsData = [];
 
-        range.forEach((i) => {
-            var i = i + 1;
+        for (var i = 1; i <= numberOfButtons; i++) {
             buttonsData.push({
                 name: i,
                 pageNum: i,
                 text: i,
                 class: (i == props.current_page ? 'current' : '')
             });
-        });
+        }
 
         buttonsData = this.addPrevAndNextButtons(props, buttonsData);
 
