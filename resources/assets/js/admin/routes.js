@@ -21,6 +21,7 @@ var routes = (
   <Router history={browserHistory} >
     <Route path="/admin" component={App} >
       <IndexRoute component={Dashboard} />
+      <Route path="dashboard" component={Dashboard} />
       <Route path="hikes" component={HikesListing} />
       <Route path="trails" component={TrailsListing} />
       <Route path="trails/create" component={TrailCreate} />

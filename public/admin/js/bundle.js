@@ -111,6 +111,7 @@
 	    _reactRouter.Route,
 	    { path: '/admin', component: _app2.default },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _index2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: 'dashboard', component: _index2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'hikes', component: _index4.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'trails', component: _index6.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'trails/create', component: _create2.default }),
@@ -27638,17 +27639,8 @@
 	                        null,
 	                        _react2.default.createElement(
 	                            _reactRouter.IndexLink,
-	                            { to: '/admin', activeClassName: 'side-nav-link-active' },
+	                            { to: '/admin/dashboard', activeClassName: 'side-nav-link-active' },
 	                            'dashboard'
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'li',
-	                        null,
-	                        _react2.default.createElement(
-	                            _reactRouter.Link,
-	                            { to: '/admin/hikes', activeClassName: 'side-nav-link-active' },
-	                            'hikes'
 	                        )
 	                    ),
 	                    _react2.default.createElement(
